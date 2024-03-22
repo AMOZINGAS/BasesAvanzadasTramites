@@ -5,12 +5,12 @@
 package main;
 
 import DAOS.IPersonaDAO;
-import Entidades.LicenciaEntidad;
-import Entidades.PersonaEntidad;
-import Entidades.PlacaEntidad;
-import Entidades.TramiteEntidad;
-import Entidades.VehiculoEntidad;
-import Entidades.VehiculoTieneCliente;
+//import Entidades.LicenciaEntidad;
+//import Entidades.PersonaEntidad;
+//import Entidades.PlacaEntidad;
+//import Entidades.TramiteEntidad;
+//import Entidades.VehiculoEntidad;
+//import Entidades.VehiculoTieneCliente;
 import DAOS.LicenciaDAO;
 import DAOS.PersonaDAO;
 import java.sql.SQLException;

@@ -4,9 +4,12 @@
  */
 package DAOS;
 
-import Entidades.LicenciaEntidad;
-import Entidades.PersonaEntidad;
-import Entidades.VehiculoEntidad;
+//import Entidades.LicenciaEntidad;
+//import Entidades.PersonaEntidad;
+//import Entidades.VehiculoEntidad;
+import entidades.LicenciaEntidad;
+import entidades.PersonaEntidad;
+import entidades.VehiculoEntidad;
 import java.util.List;
 
 /**

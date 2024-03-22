@@ -4,8 +4,10 @@
  */
 package DAOS;
 
-import Entidades.PlacaEntidad;
-import Entidades.VehiculoEntidad;
+//import Entidades.PlacaEntidad;
+//import Entidades.VehiculoEntidad;
+import entidades.PlacaEntidad;
+import entidades.VehiculoEntidad;
 import java.util.List;
 
 /**

@@ -4,8 +4,10 @@
  */
 package DAOS;
 
-import Entidades.LicenciaEntidad;
-import Entidades.PlacaEntidad;
+//import Entidades.LicenciaEntidad;
+//import Entidades.PlacaEntidad;
+import entidades.LicenciaEntidad;
+import entidades.PlacaEntidad;
 import java.util.List;
 
 /**

@@ -1,7 +1,7 @@
 package DAOS;
 
-import Entidades.LicenciaEntidad;
-import Entidades.PersonaEntidad;
+//import Entidades.LicenciaEntidad;
+//import Entidades.PersonaEntidad;
 import DAOS.IConexionBD;
 import excepciones.PersistenciaException;
 import java.sql.SQLException;
@@ -15,6 +15,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import DAOS.ILicenciaDAO;
+import entidades.LicenciaEntidad;
+import entidades.PersonaEntidad;
 
 public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {
 
