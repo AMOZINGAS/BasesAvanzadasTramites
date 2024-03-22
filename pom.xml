@@ -28,6 +28,16 @@
                         <groupId>com.mycompany</groupId>
                         <artifactId>AgenciaTrafico</artifactId>
                         <version>1.0-SNAPSHOT</version>
+                        <exclusions>
+                                <exclusion>
+                                        <groupId>com.mycompany</groupId>
+                                        <artifactId>agenciatransito</artifactId>
+                                </exclusion>
+                                <exclusion>
+                                        <groupId>banco.itson.edu</groupId>
+                                        <artifactId>PersistenciaAgenciaTransito</artifactId>
+                                </exclusion>
+                        </exclusions>
                 </dependency>
         </dependencies>
 
