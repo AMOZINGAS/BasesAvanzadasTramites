@@ -31,6 +31,9 @@ public class PersonaEntidad implements Serializable {
     
     @Column(name = "rfc", nullable = false, length = 13)
     private String rfc;
+    
+    @Column(name = "curp", nullable = false, length = 18)
+    private String curp;
 
     @Column(name = "telefono", nullable = false, length = 15)
     private String telefono;
@@ -57,9 +60,10 @@ public class PersonaEntidad implements Serializable {
     public PersonaEntidad() {
     }
 
-    public PersonaEntidad(Calendar fechaNacimiento, String rfc, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
+    public PersonaEntidad(Calendar fechaNacimiento, String rfc, String curp, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
         this.fechaNacimiento = fechaNacimiento;
         this.rfc = rfc;
+        this.curp = curp;
         this.telefono = telefono;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -98,13 +102,14 @@ public class PersonaEntidad implements Serializable {
         this.tramites = tramites;
     }
     
-    public List<VehiculoEntidad> getVehiculoCliente() {
+    public List<VehiculoEntidad> getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculoCliente(List<VehiculoEntidad> vehiculo) {
+    public void setVehiculo(List<VehiculoEntidad> vehiculo) {
         this.vehiculo = vehiculo;
     }
+    
 
     public Long getIdPersona() {
         return idPersona;
@@ -112,6 +117,14 @@ public class PersonaEntidad implements Serializable {
     
     public String getRfc() {
         return rfc;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 
     public void setRfc(String rfc) {
