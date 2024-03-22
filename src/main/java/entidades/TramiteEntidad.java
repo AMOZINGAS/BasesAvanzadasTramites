@@ -1,6 +1,5 @@
 package entidades;
 
-//import controladores.ControladoresTipoCobro;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.CascadeType;

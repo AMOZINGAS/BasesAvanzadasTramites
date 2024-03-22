@@ -33,8 +33,8 @@ public class VehiculoEntidad implements Serializable {
     @Column(name = "modelo", nullable = false, length = 4)
     private String modelo;
     
-    @Column(name = "numSerie", nullable = false)
-    private int numSerie;
+    @Column(name = "numSerie", nullable = false, unique = true)
+    private String numSerie;
     
     @OneToMany(mappedBy = "vehiculo", cascade = {CascadeType.PERSIST})
     private List <PlacaEntidad> placas;
@@ -43,10 +43,21 @@ public class VehiculoEntidad implements Serializable {
     @JoinColumn(name = "idPersona")
     private PersonaEntidad persona;
 
+    /**
+     * constructor por defecto
+     */
     public VehiculoEntidad() {
     }
 
-    public VehiculoEntidad(String color, String linea, String marca, String modelo, int numSerie) {
+    /**
+     * Metodo que inicializa la entidad con los datos necesarios
+     * @param color
+     * @param linea
+     * @param marca
+     * @param modelo
+     * @param numSerie 
+     */
+    public VehiculoEntidad(String color, String linea, String marca, String modelo, String numSerie) {
         this.color = color;
         this.linea = linea;
         this.marca = marca;
@@ -86,11 +97,11 @@ public class VehiculoEntidad implements Serializable {
         this.modelo = modelo;
     }
 
-    public int getNumSerie() {
+    public String getNumSerie() {
         return numSerie;
     }
 
-    public void setNumSerie(int numSerie) {
+    public void setNumSerie(String numSerie) {
         this.numSerie = numSerie;
     }
 
@@ -113,8 +124,12 @@ public class VehiculoEntidad implements Serializable {
     public Long getIdVehiculo() {
         return idVehiculo;
     }
-    
 
+    /**
+     * Metodo que genera una lista de string con los valores que contiene el 
+     * mismo
+     * @return string con datos
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
