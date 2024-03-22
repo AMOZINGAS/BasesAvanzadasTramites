@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,9 +45,8 @@ public class PersonaEntidad implements Serializable {
     @Column(name = "apellidoMaterno", nullable = false, length = 25)
     private String apellidoMaterno;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST})
-    @JoinColumn(name = "idLicencia")
-    private LicenciaEntidad licencia;
+    @OneToMany(mappedBy = "idLicencia", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    private List<LicenciaEntidad> licencia;
     
     @OneToMany(mappedBy = "persona", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<TramiteEntidad> tramites;
@@ -57,9 +54,22 @@ public class PersonaEntidad implements Serializable {
     @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<VehiculoEntidad> vehiculo;
 
+    /**
+     * constructor por defecto
+     */
     public PersonaEntidad() {
     }
 
+    /**
+     * Metodo que inicializa a persona para utilizar sus datos
+     * @param fechaNacimiento
+     * @param rfc
+     * @param curp
+     * @param telefono
+     * @param nombres
+     * @param apellidoPaterno
+     * @param apellidoMaterno 
+     */
     public PersonaEntidad(Calendar fechaNacimiento, String rfc, String curp, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
         this.fechaNacimiento = fechaNacimiento;
         this.rfc = rfc;
@@ -86,11 +96,11 @@ public class PersonaEntidad implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public LicenciaEntidad getLicencia() {
+    public List<LicenciaEntidad> getLicencia() {
         return licencia;
     }
 
-    public void setLicencia(LicenciaEntidad licencia) {
+    public void setLicencia(List<LicenciaEntidad> licencia) {
         this.licencia = licencia;
     }
 
@@ -109,7 +119,6 @@ public class PersonaEntidad implements Serializable {
     public void setVehiculo(List<VehiculoEntidad> vehiculo) {
         this.vehiculo = vehiculo;
     }
-    
 
     public Long getIdPersona() {
         return idPersona;
@@ -155,7 +164,6 @@ public class PersonaEntidad implements Serializable {
         this.nombres = nombres;
     }
 
-
     public String getApellido_paterno() {
         return apellidoPaterno;
     }
@@ -172,6 +180,10 @@ public class PersonaEntidad implements Serializable {
         this.apellidoMaterno = apellido_materno;
     }
 
+    /**
+     * metodo que regresa el hash de esta entidad
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -179,6 +191,11 @@ public class PersonaEntidad implements Serializable {
         return hash;
     }
 
+    /**
+     * metodo que compra objetos e identifica si son el mismo
+     * @param obj
+     * @return true en caso de ser diferentes false en caso contrario
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -220,9 +237,11 @@ public class PersonaEntidad implements Serializable {
         }
         return Objects.equals(this.vehiculo, other.vehiculo);
     }
-
     
-
+    /**
+     * metodo que regresa una lista de los valores de la entidad
+     * @return lista de string
+     */
     @Override
     public String toString() {
         
@@ -239,7 +258,5 @@ public class PersonaEntidad implements Serializable {
         sb.append('}');
         return sb.toString();
     }
-
-    
 
 }
