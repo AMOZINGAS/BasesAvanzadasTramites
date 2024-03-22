@@ -29,13 +29,13 @@ public class PersonaEntidad implements Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar fechaNacimiento;
     
-    @Column(name = "rfc", nullable = false, length = 13)
+    @Column(name = "rfc", nullable = false, length = 13, unique = true)
     private String rfc;
     
-    @Column(name = "curp", nullable = false, length = 18)
+    @Column(name = "curp", nullable = false, length = 18, unique = true)
     private String curp;
 
-    @Column(name = "telefono", nullable = false, length = 15)
+    @Column(name = "telefono", nullable = false, length = 15, unique = true)
     private String telefono;
 
     @Column(name = "nombre", nullable = false, length = 50)
