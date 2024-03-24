@@ -15,6 +15,8 @@ import entidades.VehiculoEntidad;
 //import Entidades.VehiculoEntidad;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.swing.JOptionPane;
 import modificadores.Convertidor;
 
 /**
@@ -60,12 +62,22 @@ public class PersonaConsulta {
      * @param id
      * @return personaGeneradaDTO
      */
-    public PersonaGeneradaDTO personaPorID(Long id){
+    public PersonaGeneradaDTO personaPorID(Long id) throws NoResultException{
         
-        PersonaEntidad personaEntidad = personaDAO.buscarPorId(id);
-        Convertidor convertidor = new Convertidor();
-        PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
-        return personaGeneradaDTO;
+        try{
+            
+            PersonaEntidad personaEntidad = personaDAO.buscarPorId(id);
+            Convertidor convertidor = new Convertidor();
+            PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
+            return personaGeneradaDTO;
+            
+        }catch(NoResultException nre){
+            
+            JOptionPane.showMessageDialog(null, "No se encontró una persona con ese id");
+            return null;
+            
+        }
+        
        
     }
     
@@ -94,7 +106,7 @@ public class PersonaConsulta {
         fechaNacimiento.set(2004, 3, 1);
         for(int i = 0; i < 20; i ++){
             fechaNacimiento.add(Calendar.DAY_OF_MONTH, 1);
-            PersonaNuevaDTO personaNueva = new PersonaNuevaDTO(fechaNacimiento, "ABD02" + (i + 1), "64426211" + (i + 1), "Nombre numero " + (i + 1), "Apellido paterno " + (i + 1), "Apellido materno " + (i + 1));
+            PersonaNuevaDTO personaNueva = new PersonaNuevaDTO(fechaNacimiento, "ABD02" + (i + 1), "OUQA" + (i + 1), "64426211" + (i + 1), "Nombre numero " + (i + 1), "Apellido paterno " + (i + 1), "Apellido materno " + (i + 1));
             agregarPersona(personaNueva);
             
         }
@@ -104,16 +116,23 @@ public class PersonaConsulta {
     /**
      * Metodo que agrega un vehiculo a la lista de vehiculos de una persona
      * @param vehiculoDTO
-     * @param personaEntidad
+     * @param personaGeneradaDTO
      * @return persona generada con el vehiculo en su lista
      */
-    public PersonaGeneradaDTO agregarVehiculo(VehiculoDTO vehiculoDTO, PersonaEntidad personaEntidad){
+    public PersonaGeneradaDTO agregarVehiculo(VehiculoDTO vehiculoDTO, PersonaGeneradaDTO personaGeneradaDTO){
         
         Convertidor convertidor = new Convertidor();
+        System.out.println("aaaaaa");
         VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoDTO, new VehiculoEntidad());
+        System.out.println("aaaaaa");
+        PersonaEntidad personaEntidad = convertidor.DTOToEntidad(personaGeneradaDTO, new PersonaEntidad());
+        System.out.println("aaaaaa");
         PersonaDAO personaDAO = new PersonaDAO();
+        System.out.println("aaaaaa");
         personaEntidad = personaDAO.agregarVehiculo(vehiculoEntidad, personaEntidad);
-        PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
+        System.out.println("aaaaaa");
+        personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
+        System.out.println("aaaaaa");
         return personaGeneradaDTO;
     }
     

@@ -14,6 +14,7 @@ public class PersonaNuevaDTO {
     
     private Calendar fechaNacimiento;
     private String rfc;
+    private String curp;
     private String telefono;
     private String nombres;
     private String apellidoPaterno;
@@ -22,9 +23,10 @@ public class PersonaNuevaDTO {
     public PersonaNuevaDTO() {
     }
 
-    public PersonaNuevaDTO(Calendar fechaNacimiento, String rfc, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
+    public PersonaNuevaDTO(Calendar fechaNacimiento, String rfc, String curp, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
         this.fechaNacimiento = fechaNacimiento;
         this.rfc = rfc;
+        this.curp = curp;
         this.telefono = telefono;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -37,6 +39,14 @@ public class PersonaNuevaDTO {
 
     public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 
     public String getRfc() {

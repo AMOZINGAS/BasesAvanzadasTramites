@@ -27,10 +27,10 @@ public class NegocioAgenciaTransito {
     public static void main(String[] args) {
         
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenciatransito");
-        EntityManager em = emf.createEntityManager();
-//        
-        em.getTransaction().begin();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistencia");
+//        EntityManager em = emf.createEntityManager();
+////        
+//        em.getTransaction().begin();
 //        
 //             Calendar fechaNacimineto = Calendar.getInstance();
 //        fechaNacimineto.set(2004, 3, 9);
@@ -39,17 +39,22 @@ public class NegocioAgenciaTransito {
 //        PersonaGeneradaDTO personaGeneradaDTO = personaConsulta.agregarPersona(personaNueva);
 //        System.out.println(personaGeneradaDTO.getNombre());
         
-        //AGREGAR VEHICULO A PERSONA EXIXSTENTE
-        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
         PersonaConsulta personaConsulta = new PersonaConsulta();
-        PersonaGeneradaDTO personaGeneradaDTO1 = personaConsulta.agregarVehiculo(new VehiculoDTO("Rojo", "CHARGER SRT", "DODGE", "2012", 122312), persona);
-        System.out.println(personaGeneradaDTO1.getNombre());
+        PersonaGeneradaDTO persona = personaConsulta.personaPorID(1L);
+        VehiculoDTO vehiculoDTO = new VehiculoDTO("Acero inoxidable", "DeLorean", "DMC DeLorean", "1982", "ANJYWS6");
+        personaConsulta.agregarVehiculo(vehiculoDTO, persona);
+        
+        //AGREGAR VEHICULO A PERSONA EXIXSTENTE
+//        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
+//        PersonaConsulta personaConsulta = new PersonaConsulta();
+//        PersonaGeneradaDTO personaGeneradaDTO1 = personaConsulta.agregarVehiculo(new VehiculoDTO("Rojo", "CHARGER SRT", "DODGE", "2012", 122312), persona);
+//        System.out.println(personaGeneradaDTO1.getNombre());
         
 //        
-        em.getTransaction().commit();
-        
-        em.close();
-        emf.close();
+//        em.getTransaction().commit();
+//        
+//        em.close();
+//        emf.close();
         
     }
 }
