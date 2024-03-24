@@ -11,6 +11,7 @@ import DTO.PersonaNuevaDTO;
 import DTO.VehiculoDTO;
 import entidades.PersonaEntidad;
 import entidades.VehiculoEntidad;
+import java.util.ArrayList;
 //import Entidades.PersonaEntidad;
 //import Entidades.VehiculoEntidad;
 import java.util.Calendar;
@@ -38,10 +39,19 @@ public class PersonaConsulta {
      * Metodo que llama a persistencia por una lista de las entidades persona
      * @return listaPersona
      */
-    public List<PersonaEntidad> listaPersonas(){
+    public List<PersonaGeneradaDTO> listaPersonas(){
         
         List<PersonaEntidad> listaPersonas = personaDAO.listaPersonas();
-        return listaPersonas;
+        List<PersonaGeneradaDTO> listaPersonasDTO = new ArrayList<>();
+        for(int i = 0; i < listaPersonas.size(); i ++){
+            
+            PersonaEntidad persona = listaPersonas.get(i);
+            Convertidor convertidor = new Convertidor();
+            PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(persona, new PersonaGeneradaDTO());
+            listaPersonasDTO.add(personaGeneradaDTO);
+            
+        }
+        return listaPersonasDTO;
         
     }
     
@@ -50,10 +60,19 @@ public class PersonaConsulta {
      * @param nombres
      * @return listaPersonasNombre
      */
-    public List<PersonaEntidad> listaPersonasNombre(String nombres){
+    public List<PersonaGeneradaDTO> listaPersonasNombre(String nombres){
         
         List<PersonaEntidad> listaPersonasNombre = personaDAO.buscarPorNombre(nombres);
-        return listaPersonasNombre;
+        List<PersonaGeneradaDTO> listaPersonasDTO = new ArrayList<>();
+        for(int i = 0; i < listaPersonasNombre.size(); i ++){
+            
+            PersonaEntidad persona = listaPersonasNombre.get(i);
+            Convertidor convertidor = new Convertidor();
+            PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(persona, new PersonaGeneradaDTO());
+            listaPersonasDTO.add(personaGeneradaDTO);
+            
+        }
+        return listaPersonasDTO;
         
     }
     
@@ -122,17 +141,11 @@ public class PersonaConsulta {
     public PersonaGeneradaDTO agregarVehiculo(VehiculoDTO vehiculoDTO, PersonaGeneradaDTO personaGeneradaDTO){
         
         Convertidor convertidor = new Convertidor();
-        System.out.println("aaaaaa");
         VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoDTO, new VehiculoEntidad());
-        System.out.println("aaaaaa");
         PersonaEntidad personaEntidad = convertidor.DTOToEntidad(personaGeneradaDTO, new PersonaEntidad());
-        System.out.println("aaaaaa");
         PersonaDAO personaDAO = new PersonaDAO();
-        System.out.println("aaaaaa");
         personaEntidad = personaDAO.agregarVehiculo(vehiculoEntidad, personaEntidad);
-        System.out.println("aaaaaa");
         personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
-        System.out.println("aaaaaa");
         return personaGeneradaDTO;
     }
     
