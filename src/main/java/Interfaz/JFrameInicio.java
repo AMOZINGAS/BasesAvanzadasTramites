@@ -97,6 +97,11 @@ public class JFrameInicio extends javax.swing.JFrame {
         btnPersona.setBackground(new java.awt.Color(204, 204, 204));
         btnPersona.setForeground(new java.awt.Color(51, 102, 255));
         btnPersona.setText("Persona");
+        btnPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 105, 25));
 
         btnTransaccion.setBackground(new java.awt.Color(204, 204, 204));
@@ -156,6 +161,15 @@ public class JFrameInicio extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
+        // TODO add your handling code here:
+        
+        JFrameAgregarPersona personas = new JFrameAgregarPersona();
+        personas.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnPersonaActionPerformed
 
 //    /**
 //     * @param args the command line arguments
