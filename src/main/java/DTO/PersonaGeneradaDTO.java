@@ -105,17 +105,15 @@ public class PersonaGeneradaDTO {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("PersonaGeneradaDTO{");
-        sb.append("idPersona=").append(idPersona);
-        sb.append(", rfc=").append(rfc);
-        sb.append(", nombre=").append(nombres);
-        sb.append(", apellidoPaterno=").append(apellidoPaterno);
-        sb.append(", apellidoMaterno=").append(apellidoMaterno);
-        sb.append(", fechaNacimiento=").append(fechaNacimiento);
-        sb.append(", telefono=").append(telefono);
-        sb.append('}');
-        return sb.toString();
+        
+        return "Nombre: " + nombres +
+               "Apellido paterno: " + apellidoPaterno +
+               "Apellido materno: " + apellidoMaterno +
+               "RFC: " + rfc +
+               "CURP: " + curp +
+               "Fecha de nacimiento: " + fechaNacimiento.get(Calendar.DAY_OF_MONTH) + "/" + fechaNacimiento.get(Calendar.MONTH) + "/" + fechaNacimiento.get(Calendar.YEAR) +
+               "Telefono: " + telefono +
+               "Discapacitado: " + discapacidad;
     }
 
     
