@@ -17,13 +17,13 @@ public class PersonaGeneradaDTO {
     public PersonaGeneradaDTO() {
     }
 
-    public PersonaGeneradaDTO(Long idPersona, String rfc, String curp, boolean discapacidad, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaNacimiento, String telefono) {
+    public PersonaGeneradaDTO(Long idPersona, String rfc, String curp, boolean discapacidad, String nombres, String apellidoPaterno, String apellidoMaterno, Calendar fechaNacimiento, String telefono) {
         
         this.idPersona = idPersona;
         this.rfc = rfc;
         this.curp = curp;
         this.discapacidad = discapacidad;
-        this.nombres = nombre;
+        this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
@@ -69,14 +69,6 @@ public class PersonaGeneradaDTO {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
-    }
-
-    public String getNombre() {
-        return nombres;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombres = nombre;
     }
 
     public String getApellidoPaterno() {
