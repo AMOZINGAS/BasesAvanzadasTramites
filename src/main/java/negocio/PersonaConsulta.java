@@ -8,7 +8,7 @@ import DAOS.IPersonaDAO;
 import DAOS.PersonaDAO;
 import DTO.PersonaGeneradaDTO;
 import DTO.PersonaNuevaDTO;
-import DTO.VehiculoDTO;
+import DTO.VehiculoNuevoDTO;
 import entidades.PersonaEntidad;
 import entidades.VehiculoEntidad;
 import java.util.ArrayList;
@@ -138,7 +138,7 @@ public class PersonaConsulta {
      * @param personaGeneradaDTO
      * @return persona generada con el vehiculo en su lista
      */
-    public PersonaGeneradaDTO agregarVehiculo(VehiculoDTO vehiculoDTO, PersonaGeneradaDTO personaGeneradaDTO){
+    public PersonaGeneradaDTO agregarVehiculo(VehiculoNuevoDTO vehiculoDTO, PersonaGeneradaDTO personaGeneradaDTO){
         
         Convertidor convertidor = new Convertidor();
         VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoDTO, new VehiculoEntidad());

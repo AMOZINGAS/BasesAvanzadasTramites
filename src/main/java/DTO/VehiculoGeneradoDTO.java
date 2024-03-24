@@ -1,18 +1,40 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DTO;
 
-public class VehiculoDTO {
-
+/**
+ *
+ * @author Amos Heli Olguin Quiroz
+ */
+public class VehiculoGeneradoDTO {
+    
+    private Long id;
     private String color;
     private String linea;
     private String marca;
     private String modelo;
     private String numSerie;
-    private Long idVehiculo;
+    
 
-    public VehiculoDTO() {
+    /**
+     * contrsuctor por defecto
+     */
+    public VehiculoGeneradoDTO() {
     }
 
-    public VehiculoDTO(String color, String linea, String marca, String modelo, String numSerie) {
+    /**
+     * Metodo que inicializa el vehiculo con los datos necesarios
+     * @param id
+     * @param color
+     * @param linea
+     * @param marca
+     * @param modelo
+     * @param numSerie 
+     */
+    public VehiculoGeneradoDTO(Long id, String color, String linea, String marca, String modelo, String numSerie) {
+        this.id = id;
         this.color = color;
         this.linea = linea;
         this.marca = marca;
@@ -20,12 +42,8 @@ public class VehiculoDTO {
         this.numSerie = numSerie;
     }
 
-    public Long getIdVehiculo() {
-        return idVehiculo;
-    }
-
-    public void setIdVehiculo(Long idVehiculo) {
-        this.idVehiculo = idVehiculo;
+    public Long getId() {
+        return id;
     }
 
     public String getColor() {
@@ -67,5 +85,5 @@ public class VehiculoDTO {
     public void setNumSerie(String numSerie) {
         this.numSerie = numSerie;
     }
-
+    
 }

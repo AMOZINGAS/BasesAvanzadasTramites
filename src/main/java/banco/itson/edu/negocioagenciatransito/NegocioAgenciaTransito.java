@@ -8,7 +8,7 @@ import DAOS.IPersonaDAO;
 import DAOS.PersonaDAO;
 import DTO.PersonaGeneradaDTO;
 import DTO.PersonaNuevaDTO;
-import DTO.VehiculoDTO;
+import DTO.VehiculoNuevoDTO;
 import entidades.PersonaEntidad;
 //import Entidades.PersonaEntidad;
 //import Entidades.VehiculoEntidad;
@@ -41,13 +41,13 @@ public class NegocioAgenciaTransito {
         
         PersonaConsulta personaConsulta = new PersonaConsulta();
         PersonaGeneradaDTO persona = personaConsulta.personaPorID(1L);
-        VehiculoDTO vehiculoDTO = new VehiculoDTO("Acero inoxidable", "DeLorean", "DMC DeLorean", "1982", "ANJYWS6");
+        VehiculoNuevoDTO vehiculoDTO = new VehiculoNuevoDTO("Acero inoxidable", "DeLorean", "DMC DeLorean", "1982", "ANJYWS6");
         personaConsulta.agregarVehiculo(vehiculoDTO, persona);
         
         //AGREGAR VEHICULO A PERSONA EXIXSTENTE
 //        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
 //        PersonaConsulta personaConsulta = new PersonaConsulta();
-//        PersonaGeneradaDTO personaGeneradaDTO1 = personaConsulta.agregarVehiculo(new VehiculoDTO("Rojo", "CHARGER SRT", "DODGE", "2012", 122312), persona);
+//        PersonaGeneradaDTO personaGeneradaDTO1 = personaConsulta.agregarVehiculo(new VehiculoNuevoDTO("Rojo", "CHARGER SRT", "DODGE", "2012", 122312), persona);
 //        System.out.println(personaGeneradaDTO1.getNombre());
         
 //        
