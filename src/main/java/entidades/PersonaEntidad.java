@@ -33,6 +33,9 @@ public class PersonaEntidad implements Serializable {
     @Column(name = "curp", nullable = false, length = 18, unique = true)
     private String curp;
 
+    @Column(name = "discapacidad", nullable = false)
+    private boolean discapacidad;
+    
     @Column(name = "telefono", nullable = false, length = 15, unique = true)
     private String telefono;
 
@@ -70,10 +73,11 @@ public class PersonaEntidad implements Serializable {
      * @param apellidoPaterno
      * @param apellidoMaterno 
      */
-    public PersonaEntidad(Calendar fechaNacimiento, String rfc, String curp, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
+    public PersonaEntidad(Calendar fechaNacimiento, String rfc, String curp, boolean discapacidad, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
         this.fechaNacimiento = fechaNacimiento;
         this.rfc = rfc;
         this.curp = curp;
+        this.discapacidad = discapacidad;
         this.telefono = telefono;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -82,6 +86,14 @@ public class PersonaEntidad implements Serializable {
 
     public String getApellidoPaterno() {
         return apellidoPaterno;
+    }
+
+    public boolean isDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
