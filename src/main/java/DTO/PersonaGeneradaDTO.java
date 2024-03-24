@@ -8,6 +8,7 @@ public class PersonaGeneradaDTO {
     private Calendar fechaNacimiento;
     private String rfc;
     private String curp;
+    private boolean discapacidad;
     private String telefono;
     private String nombres;
     private String apellidoPaterno;
@@ -16,11 +17,12 @@ public class PersonaGeneradaDTO {
     public PersonaGeneradaDTO() {
     }
 
-    public PersonaGeneradaDTO(Long idPersona, String rfc, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaNacimiento, String telefono) {
+    public PersonaGeneradaDTO(Long idPersona, String rfc, String curp, boolean discapacidad, String nombre, String apellidoPaterno, String apellidoMaterno, Calendar fechaNacimiento, String telefono) {
         
         this.idPersona = idPersona;
         this.rfc = rfc;
         this.curp = curp;
+        this.discapacidad = discapacidad;
         this.nombres = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -35,6 +37,14 @@ public class PersonaGeneradaDTO {
 
     public String getCurp() {
         return curp;
+    }
+
+    public boolean isDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
     }
 
     public void setCurp(String curp) {
