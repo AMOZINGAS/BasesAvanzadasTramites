@@ -6,8 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "idTramite")
 public class LicenciaEntidad extends TramiteEntidad implements Serializable {
     
     @Column(name = "vigencia", nullable = false)
@@ -18,7 +20,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
     
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idPersona")
-    private PersonaEntidad persona;
+    private PersonaEntidad personaLicencia;
 
     /**
      * Constructor por defecto
@@ -31,10 +33,10 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
      * @param vigencia
      * @param folio 
      */
-    public LicenciaEntidad(int vigencia, int folio, PersonaEntidad persona) {
+    public LicenciaEntidad(int vigencia, int folio, PersonaEntidad personaLicencia) {
         this.vigencia = vigencia;
         this.folio = folio;
-        this.persona = persona;
+        this.personaLicencia = personaLicencia;
     }
 
     public int getVigencia() {
@@ -53,12 +55,12 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
         return folio;
     }
 
-    public PersonaEntidad getPersona() {
-        return persona;
+    public PersonaEntidad getPersonaLicencia() {
+        return personaLicencia;
     }
 
-    public void setPersona(PersonaEntidad persona) {
-        this.persona = persona;
+    public void setPersonaLicencia(PersonaEntidad personaLicencia) {
+        this.personaLicencia = personaLicencia;
     }
     
     /**

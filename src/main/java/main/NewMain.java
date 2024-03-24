@@ -13,6 +13,8 @@ import DAOS.IPersonaDAO;
 //import Entidades.VehiculoTieneCliente;
 import DAOS.LicenciaDAO;
 import DAOS.PersonaDAO;
+import entidades.LicenciaEntidad;
+import entidades.PersonaEntidad;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,14 +34,24 @@ public class NewMain {
      */
     public static void main(String[] args) throws SQLException {
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenciatransito");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistencia");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-
+        
+//        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
+//        LicenciaEntidad licencia = new LicenciaEntidad(2, 0, persona);
+//        List<LicenciaEntidad> listaLicencias = new ArrayList<>();
+//        listaLicencias.add(licencia);
+//        persona.setLicencia(listaLicencias);
+//        em.persist(persona);
+        
+        
 //        Calendar fechaNacimineto = Calendar.getInstance();
 //        fechaNacimineto.set(2004, 3, 9);
-//        PersonaEntidad persona = new PersonaEntidad(fechaNacimineto, "QJSL309432", "6442621169", "Amos Heli", "Olguin", "Quiroz");
+//        PersonaEntidad persona = new PersonaEntidad(fechaNacimineto, "QJSL309432", "OUQA040309HSRLRMA5", "6442621169", "Amos Heli", "Olguin", "Quiroz");
 //        em.persist(persona);
+        
+        
         //AGREGAR VEHICULO A PERSONA EXIXSTENTE
 //        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
 //        IPersonaDAO personaDAO = new PersonaDAO();

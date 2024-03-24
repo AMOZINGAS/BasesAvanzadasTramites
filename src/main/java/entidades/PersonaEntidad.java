@@ -45,7 +45,7 @@ public class PersonaEntidad implements Serializable {
     @Column(name = "apellidoMaterno", nullable = false, length = 25)
     private String apellidoMaterno;
     
-    @OneToMany(mappedBy = "idLicencia", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "personaLicencia", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     private List<LicenciaEntidad> licencia;
     
     @OneToMany(mappedBy = "persona", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
@@ -246,15 +246,12 @@ public class PersonaEntidad implements Serializable {
     public String toString() {
         
         StringBuilder sb = new StringBuilder();
-        sb.append("ClienteEntidad{");
-        sb.append("idCliente=").append(idPersona);
         sb.append(", fechaNacimiento=").append(fechaNacimiento);
         sb.append(", rfc=").append(rfc);
         sb.append(", telefono=").append(telefono);
         sb.append(", nombres=").append(nombres);
         sb.append(", apellidoPaterno=").append(apellidoPaterno);
         sb.append(", apellidoMaterno=").append(apellidoMaterno);
-        sb.append(", vehiculoCliente=").append(vehiculo);
         sb.append('}');
         return sb.toString();
     }

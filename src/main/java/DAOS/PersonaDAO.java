@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -74,20 +75,18 @@ public class PersonaDAO implements IPersonaDAO {
      */
     @Override
     public PersonaEntidad buscarPorId(Long id) {
-        try {
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<PersonaEntidad> query = criteriaBuilder.createQuery(PersonaEntidad.class);
-            Root<PersonaEntidad> root = query.from(PersonaEntidad.class);
-
-            query.select(root).where(criteriaBuilder.equal(root.get("idPersona"), id));
-
-            return entityManager.createQuery(query).getSingleResult();
-        } catch (PersistenciaException ex) {
-
-            ex.printStackTrace();
-
-        }
-        return null;
+        
+            try{
+                CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+                CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
+                Root<PersonaEntidad> root = consulta.from(PersonaEntidad.class);
+                consulta = consulta.select(root).where(criteria.equal(root.get("idPersona"), id));
+                TypedQuery<PersonaEntidad> query = entityManager.createQuery(consulta);
+                return query.getSingleResult();
+            }catch(NoResultException nre){
+                Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
+                return null;
+            }
 
     }
 
@@ -152,18 +151,30 @@ public class PersonaDAO implements IPersonaDAO {
         }
     }
     
+    /**
+     * Metodo que agrega vehiculo a persona especifica
+     * @param vehiculoEntidad
+     * @param personEntidad
+     * @return personaEntidad
+     */
     @Override
     public PersonaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PersonaEntidad personEntidad) {
         
         List<VehiculoEntidad> listaVehiculos = new ArrayList<>();
         listaVehiculos.add(vehiculoEntidad);
-        personEntidad.setVehiculo(listaVehiculos);
         vehiculoEntidad.setPersona(personEntidad);
-        entityManager.merge(personEntidad);
+        personEntidad.setVehiculo(listaVehiculos);
+        actualizarPersona(personEntidad);
         return personEntidad;
         
     }
 
+    /**
+     * Metodo que agrega licencia nueva a persona
+     * @param licenciaEntidad
+     * @param personEntidad
+     * @return personaentidad
+     */
     @Override
     public PersonaEntidad agregarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personEntidad) {
     

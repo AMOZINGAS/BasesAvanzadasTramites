@@ -134,15 +134,11 @@ public class VehiculoEntidad implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("VehiculoEntidad{");
-        sb.append("idVehiculo=").append(idVehiculo);
         sb.append(", color=").append(color);
         sb.append(", linea=").append(linea);
         sb.append(", marca=").append(marca);
         sb.append(", modelo=").append(modelo);
         sb.append(", numSerie=").append(numSerie);
-        sb.append(", placas=").append(placas);
-        sb.append(", persona=").append(persona);
         sb.append('}');
         return sb.toString();
     }
