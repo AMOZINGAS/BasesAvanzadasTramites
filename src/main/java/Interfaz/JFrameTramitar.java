@@ -39,13 +39,13 @@ public class JFrameTramitar extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        btnLicencia = new javax.swing.JLabel();
+        btnPlaca = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,21 +90,21 @@ public class JFrameTramitar extends javax.swing.JFrame {
         jLabel3.setText("¿Que desea tramitar?");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/licenciaImagen.jpg"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLicencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/licenciaImagen.jpg"))); // NOI18N
+        btnLicencia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                btnLicenciaMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 126, 90));
+        jPanel1.add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 126, 90));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/placaImagen.jpg"))); // NOI18N
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnPlaca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/placaImagen.jpg"))); // NOI18N
+        btnPlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                btnPlacaMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 126, 90));
+        jPanel1.add(btnPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 126, 90));
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
         jPanel6.setForeground(new java.awt.Color(153, 153, 153));
@@ -162,15 +162,15 @@ public class JFrameTramitar extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 126, 25));
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setForeground(new java.awt.Color(51, 102, 255));
-        jButton6.setText("Regresar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegresar.setForeground(new java.awt.Color(51, 102, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 105, 25));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 105, 25));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
@@ -179,7 +179,7 @@ public class JFrameTramitar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void btnPlacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlacaMouseClicked
         // TODO add your handling code here:
         
         JOptionPane panel = new JOptionPane("¿Que tipo de tramite es?", JOptionPane.INFORMATION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, new String[]{"Nuevo", "Renovación"});
@@ -205,36 +205,36 @@ public class JFrameTramitar extends javax.swing.JFrame {
             
         }
         
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_btnPlacaMouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void btnLicenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLicenciaMouseClicked
         // TODO add your handling code here:
         
         JFrameTramitarLicencia licencia = new JFrameTramitarLicencia();
         licencia.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_btnLicenciaMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         
         JFrameInicio inicio = new JFrameInicio();
         inicio.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel btnLicencia;
+    private javax.swing.JLabel btnPlaca;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

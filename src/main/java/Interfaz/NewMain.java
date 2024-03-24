@@ -16,7 +16,7 @@ public class NewMain {
     public static void main(String[] args) {
         // TODO code application logic here
         
-            JFrameInicio inicio = new JFrameInicio();
+            JFrameAgregarVehiculo inicio = new JFrameAgregarVehiculo();
             inicio.setVisible(true);
         
     }

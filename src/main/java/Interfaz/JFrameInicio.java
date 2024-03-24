@@ -43,14 +43,13 @@ public class JFrameInicio extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnPersona = new javax.swing.JButton();
         btnTransaccion = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnHistorial = new javax.swing.JButton();
+        btnReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(620, 390));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
@@ -85,20 +84,20 @@ public class JFrameInicio extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setForeground(new java.awt.Color(255, 0, 51));
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        btnCancelar.setForeground(new java.awt.Color(255, 0, 51));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 105, 25));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 105, 25));
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setForeground(new java.awt.Color(51, 102, 255));
-        jButton2.setText("Persona");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 105, 25));
+        btnPersona.setBackground(new java.awt.Color(204, 204, 204));
+        btnPersona.setForeground(new java.awt.Color(51, 102, 255));
+        btnPersona.setText("Persona");
+        jPanel1.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 105, 25));
 
         btnTransaccion.setBackground(new java.awt.Color(204, 204, 204));
         btnTransaccion.setForeground(new java.awt.Color(51, 102, 255));
@@ -110,20 +109,20 @@ public class JFrameInicio extends javax.swing.JFrame {
         });
         jPanel1.add(btnTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 105, 25));
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setForeground(new java.awt.Color(51, 102, 255));
-        jButton4.setText("Historial");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnHistorial.setBackground(new java.awt.Color(204, 204, 204));
+        btnHistorial.setForeground(new java.awt.Color(51, 102, 255));
+        btnHistorial.setText("Historial");
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnHistorialActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 105, 25));
+        jPanel1.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 105, 25));
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 204));
-        jButton5.setForeground(new java.awt.Color(51, 102, 255));
-        jButton5.setText("Reporte");
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 105, 25));
+        btnReporte.setBackground(new java.awt.Color(204, 204, 204));
+        btnReporte.setForeground(new java.awt.Color(51, 102, 255));
+        btnReporte.setText("Reporte");
+        jPanel1.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 105, 25));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
@@ -133,12 +132,12 @@ public class JFrameInicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         
         dispose();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaccionActionPerformed
         // TODO add your handling code here:
@@ -149,14 +148,14 @@ public class JFrameInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTransaccionActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         // TODO add your handling code here:
         
         JFrameBuscar buscar = new JFrameBuscar();
         buscar.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnHistorialActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -194,11 +193,11 @@ public class JFrameInicio extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnPersona;
+    private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnTransaccion;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

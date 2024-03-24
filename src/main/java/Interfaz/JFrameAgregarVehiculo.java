@@ -4,12 +4,16 @@
  */
 package Interfaz;
 
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author elimo
  */
 public class JFrameAgregarVehiculo extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form JFrameVehiculo
      */
@@ -34,16 +38,18 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtColor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtLinea = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnRegregar = new javax.swing.JButton();
+        btnSIguiente = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtNumeroSerie = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,91 +90,150 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         jPanel12.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setToolTipText("");
-        jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel12.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, 20));
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Año");
+        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
-        jLabel6.setText("Numero de serie");
-        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        txtColor.setBackground(new java.awt.Color(204, 204, 204));
+        txtColor.setForeground(new java.awt.Color(0, 0, 0));
+        txtColor.setToolTipText("");
+        txtColor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, 180, 20));
 
-        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setToolTipText("");
-        jTextField3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel12.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, 180, 20));
-
-        jLabel7.setText("Modelo");
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Color");
         jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 65, -1, -1));
 
-        jTextField4.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField4.setToolTipText("");
-        jTextField4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel12.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 135, 180, 20));
+        txtLinea.setBackground(new java.awt.Color(204, 204, 204));
+        txtLinea.setForeground(new java.awt.Color(0, 0, 0));
+        txtLinea.setToolTipText("");
+        txtLinea.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 135, 180, 20));
 
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Linea");
         jPanel12.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 115, -1, -1));
 
-        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setToolTipText("");
-        jTextField5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel12.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 185, 180, 20));
+        txtMarca.setBackground(new java.awt.Color(204, 204, 204));
+        txtMarca.setForeground(new java.awt.Color(0, 0, 0));
+        txtMarca.setToolTipText("");
+        txtMarca.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 185, 180, 20));
 
+        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Marca");
         jPanel12.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 165, -1, -1));
 
-        jButton7.setBackground(new java.awt.Color(204, 204, 204));
-        jButton7.setForeground(new java.awt.Color(51, 102, 255));
-        jButton7.setText("Regresar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnRegregar.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegregar.setForeground(new java.awt.Color(51, 102, 255));
+        btnRegregar.setText("Regresar");
+        btnRegregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnRegregarActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 105, 25));
+        jPanel12.add(btnRegregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 105, 25));
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setForeground(new java.awt.Color(51, 102, 255));
-        jButton6.setText("Buscar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnSIguiente.setBackground(new java.awt.Color(204, 204, 204));
+        btnSIguiente.setForeground(new java.awt.Color(51, 102, 255));
+        btnSIguiente.setText("Siguiente");
+        btnSIguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnSIguienteActionPerformed(evt);
             }
         });
-        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 105, 25));
+        jPanel12.add(btnSIguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 105, 25));
+
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Numero de serie");
+        jPanel12.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        txtNumeroSerie.setBackground(new java.awt.Color(204, 204, 204));
+        txtNumeroSerie.setForeground(new java.awt.Color(0, 0, 0));
+        txtNumeroSerie.setToolTipText("");
+        txtNumeroSerie.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(txtNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, 20));
+
+        txtAnio.setBackground(new java.awt.Color(204, 204, 204));
+        txtAnio.setForeground(new java.awt.Color(0, 0, 0));
+        txtAnio.setToolTipText("");
+        txtAnio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtAnio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAnioActionPerformed(evt);
+            }
+        });
+        txtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAnioKeyReleased(evt);
+            }
+        });
+        jPanel12.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 100, 20));
 
         jPanel9.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 350));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    
+    private void btnRegregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegregarActionPerformed
         // TODO add your handling code here:
 
         JFrameInicio inicio = new JFrameInicio();
         inicio.setVisible(true);
         this.dispose();
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnRegregarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnSIguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIguienteActionPerformed
         // TODO add your handling code here:
 
         JFrameHistorial historial = new JFrameHistorial();
         historial.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnSIguienteActionPerformed
+
+    private void txtAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAnioActionPerformed
+
+    private void txtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioKeyReleased
+        // TODO add your handling code here:
+        
+        if(!txtAnio.getText().matches("\\d+")){
+            
+            JOptionPane.showMessageDialog(this, "No puedes ingresar letras", "ERROR!!", JOptionPane.INFORMATION_MESSAGE);
+            txtAnio.setText("");
+            
+        }
+        if(txtAnio.getText().length()>4){
+            
+            JOptionPane.showMessageDialog(this, "Solo puedes ingresar hasta 4 digitos", "ERROR!!", JOptionPane.INFORMATION_MESSAGE);
+            txtAnio.setText("");
+            
+        }
+        if(txtAnio.getText().length()==4){
+            
+            if(Integer.parseInt(txtAnio.getText())<1900 || Integer.parseInt(txtAnio.getText())>Calendar.getInstance().get(Calendar.YEAR)){
+            
+                JOptionPane.showMessageDialog(this, "El año ingresado no esta permitido", "ERROR!!", JOptionPane.INFORMATION_MESSAGE);
+                txtAnio.setText("");
+                
+            }
+            
+        }
+        
+        
+    }//GEN-LAST:event_txtAnioKeyReleased
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btnRegregar;
+    private javax.swing.JButton btnSIguiente;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -181,9 +246,10 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtLinea;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtNumeroSerie;
     // End of variables declaration//GEN-END:variables
 }
