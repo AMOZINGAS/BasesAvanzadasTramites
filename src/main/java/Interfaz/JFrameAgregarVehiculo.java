@@ -26,49 +26,164 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel9.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel9.setFocusCycleRoot(true);
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel10.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel10.setMaximumSize(new java.awt.Dimension(600, 60));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/sonoraLogoImagen.png"))); // NOI18N
+        jPanel10.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 94, 40));
+
+        jPanel11.setBackground(new java.awt.Color(51, 204, 255));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel10.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 600, 20));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Transacciones y mas");
+        jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 5, -1, -1));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondoImagen.jpeg"))); // NOI18N
+        jPanel10.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 0, 506, 40));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Transacciones y mas");
+        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 5, -1, -1));
+
+        jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 60));
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setMaximumSize(new java.awt.Dimension(393, 267));
+        jPanel12.setMinimumSize(new java.awt.Dimension(393, 267));
+        jPanel12.setPreferredSize(new java.awt.Dimension(393, 267));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField2.setToolTipText("");
+        jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, 20));
+
+        jLabel6.setText("Numero de serie");
+        jPanel12.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField3.setToolTipText("");
+        jTextField3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, 180, 20));
+
+        jLabel7.setText("Modelo");
+        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 65, -1, -1));
+
+        jTextField4.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField4.setToolTipText("");
+        jTextField4.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 135, 180, 20));
+
+        jLabel8.setText("Linea");
+        jPanel12.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 115, -1, -1));
+
+        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField5.setToolTipText("");
+        jTextField5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jPanel12.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 185, 180, 20));
+
+        jLabel9.setText("Marca");
+        jPanel12.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 165, -1, -1));
+
+        jButton7.setBackground(new java.awt.Color(204, 204, 204));
+        jButton7.setForeground(new java.awt.Color(51, 102, 255));
+        jButton7.setText("Regresar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
+        jPanel12.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 105, 25));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(379, 379, 379)
-                .addComponent(jButton1)
-                .addContainerGap(444, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(236, 236, 236)
-                .addComponent(jButton1)
-                .addContainerGap(237, Short.MAX_VALUE))
-        );
+        jButton6.setBackground(new java.awt.Color(204, 204, 204));
+        jButton6.setForeground(new java.awt.Color(51, 102, 255));
+        jButton6.setText("Buscar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 105, 25));
+
+        jPanel9.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
+
+        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        
+
         JFrameInicio inicio = new JFrameInicio();
         inicio.setVisible(true);
         this.dispose();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        JFrameHistorial historial = new JFrameHistorial();
+        historial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
