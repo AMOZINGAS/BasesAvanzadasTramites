@@ -188,20 +188,24 @@ public class JFrameTramitar extends javax.swing.JFrame {
         
         dialogo.setVisible(true);
             
-        if(panel.getValue().equals(JOptionPane.OK_OPTION)){
+        if(panel.getValue().equals("Nuevo")){
             
             //NUEVO
             JFrameAgregarVehiculo vehiculo = new JFrameAgregarVehiculo();
             vehiculo.setVisible(true);
             this.dispose();
             
-        }else{
+        }else if(panel.getValue().equals("Renovación")){
             
             //RENOVACION
             JFrameTramitePlacas placas = new JFrameTramitePlacas();
             placas.setVisible(true);
             this.dispose();
             
+            
+        }else{
+            
+            this.dispose();
             
         }
         
