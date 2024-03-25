@@ -4,7 +4,11 @@
  */
 package Interfaz;
 
+import DTO.PersonaGeneradaDTO;
+import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import negocio.PersonaConsulta;
 
 /**
@@ -19,6 +23,9 @@ public class JFrameAgregarPersona extends javax.swing.JFrame {
     public JFrameAgregarPersona() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        jtbPersonas.setModel(convertirModel());
+        
     }
 
     /**
@@ -37,8 +44,11 @@ public class JFrameAgregarPersona extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnAgregar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbPersonas = new javax.swing.JTable();
+        btnAgregar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,20 +84,45 @@ public class JFrameAgregarPersona extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnAgregar.setBackground(new java.awt.Color(204, 204, 204));
-        btnAgregar.setForeground(new java.awt.Color(51, 102, 255));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegresar.setForeground(new java.awt.Color(51, 102, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 105, 25));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 105, 25));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Agregar personas de manera masiva");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        jtbPersonas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Apellido paterno", "RFC", "CURP", "Fecha nacimiento"
+            }
+        ));
+        jScrollPane1.setViewportView(jtbPersonas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 370, 150));
+
+        btnAgregar1.setBackground(new java.awt.Color(204, 204, 204));
+        btnAgregar1.setForeground(new java.awt.Color(51, 102, 255));
+        btnAgregar1.setText("Agregar");
+        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 105, 25));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
@@ -97,16 +132,32 @@ public class JFrameAgregarPersona extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         
-        agregarPersonas();
-        JOptionPane.showMessageDialog(this, "Se agregaron correctamente las 20 personas", "EXITO!!", JOptionPane.INFORMATION_MESSAGE);
         JFrameInicio inicio = new JFrameInicio();
         inicio.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel model = (DefaultTableModel)jtbPersonas.getModel();
+        
+        if(model.getRowCount() != 0){
+            
+            JOptionPane.showMessageDialog(this, "Ya cuenta con datos en la base de datos", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            agregarPersonas();
+            JOptionPane.showMessageDialog(this, "Se agregaron correctamente las 20 personas", "EXITO!!", JOptionPane.INFORMATION_MESSAGE);
+            DefaultTableModel modelpro = convertirModel();
+            jtbPersonas.setModel(modelpro);
+        }
+        
+    }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     public void agregarPersonas(){
         
@@ -115,9 +166,37 @@ public class JFrameAgregarPersona extends javax.swing.JFrame {
         
     }
     
+    public DefaultTableModel convertirModel(){
+        
+        DefaultTableModel modelo = (DefaultTableModel) jtbPersonas.getModel();
+        
+        modelo.setRowCount(0);
+
+        for (PersonaGeneradaDTO persona : listaPersonas()) {
+            modelo.addRow(new Object[]{
+                    persona.getNombres(),
+                    persona.getApellidoPaterno(),
+                    persona.getRfc(),
+                    persona.getCurp(),
+                    persona.getFechaNacimiento().get(Calendar.DAY_OF_MONTH) + "/" + persona.getFechaNacimiento().get(Calendar.MONTH) + "/" + persona.getFechaNacimiento().get(Calendar.YEAR),
+            });
+        }
+        
+        return modelo;
+        
+    }
+    
+    public List<PersonaGeneradaDTO> listaPersonas(){
+        
+        PersonaConsulta personaConsulta = new PersonaConsulta();
+        return personaConsulta.listaPersonas();
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -126,5 +205,7 @@ public class JFrameAgregarPersona extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtbPersonas;
     // End of variables declaration//GEN-END:variables
 }
