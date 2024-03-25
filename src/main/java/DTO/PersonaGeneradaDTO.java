@@ -106,14 +106,14 @@ public class PersonaGeneradaDTO {
     @Override
     public String toString() {
         
-        return "Nombre: " + nombres +
-               "Apellido paterno: " + apellidoPaterno +
-               "Apellido materno: " + apellidoMaterno +
-               "RFC: " + rfc +
-               "CURP: " + curp +
-               "Fecha de nacimiento: " + fechaNacimiento.get(Calendar.DAY_OF_MONTH) + "/" + fechaNacimiento.get(Calendar.MONTH) + "/" + fechaNacimiento.get(Calendar.YEAR) +
-               "Telefono: " + telefono +
-               "Discapacitado: " + discapacidad;
+        return nombres + " " +
+               apellidoPaterno + " " +
+               apellidoMaterno + " " +
+               rfc + " " +
+               curp + " " +
+               fechaNacimiento.get(Calendar.DAY_OF_MONTH) + "/" + fechaNacimiento.get(Calendar.MONTH) + "/" + fechaNacimiento.get(Calendar.YEAR) + " " +
+               telefono + " " +
+               discapacidad;
     }
 
     

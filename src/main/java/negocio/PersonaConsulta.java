@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 import modificadores.Convertidor;
 
@@ -101,6 +102,30 @@ public class PersonaConsulta {
     }
     
     /**
+     * Metodo que convierte un dto a entidad para buscar la curp de dicha entidad
+     * @param curp
+     * @return personageneradadto
+     * @throws NoResultException 
+     */
+    public PersonaGeneradaDTO personaPorCurp(String curp) throws NoResultException{
+        
+         try{
+            
+            PersonaEntidad personaEntidad = personaDAO.buscarPorCurp(curp);
+            Convertidor convertidor = new Convertidor();
+            PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
+            return personaGeneradaDTO;
+            
+        }catch(NoResultException nre){
+            
+            JOptionPane.showMessageDialog(null, "No se encontró una persona con esa curp");
+            return null;
+            
+        }
+        
+    }
+    
+    /**
      * Metodo que regresa un dto que fue enviado a persistir
      * @param personaNuevaDTO
      * @return personaGeneradaDTO
@@ -138,15 +163,24 @@ public class PersonaConsulta {
      * @param personaGeneradaDTO
      * @return persona generada con el vehiculo en su lista
      */
-    public PersonaGeneradaDTO agregarVehiculo(VehiculoNuevoDTO vehiculoDTO, PersonaGeneradaDTO personaGeneradaDTO){
+    public PersonaGeneradaDTO agregarVehiculo(VehiculoNuevoDTO vehiculoDTO, PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
         
-        Convertidor convertidor = new Convertidor();
-        VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoDTO, new VehiculoEntidad());
-        PersonaEntidad personaEntidad = convertidor.DTOToEntidad(personaGeneradaDTO, new PersonaEntidad());
-        PersonaDAO personaDAO = new PersonaDAO();
-        personaEntidad = personaDAO.agregarVehiculo(vehiculoEntidad, personaEntidad);
-        personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
-        return personaGeneradaDTO;
+        try{
+            
+            Convertidor convertidor = new Convertidor();
+            VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoDTO, new VehiculoEntidad());
+            PersonaEntidad personaEntidad = convertidor.DTOToEntidad(personaGeneradaDTO, new PersonaEntidad());
+            PersonaDAO personaDAO = new PersonaDAO();
+            personaEntidad = personaDAO.agregarVehiculo(vehiculoEntidad, personaEntidad);
+            personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
+            return personaGeneradaDTO;
+            
+            
+        }catch(PersistenceException ex){
+            
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al agregar vehiculo", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
     
 }
