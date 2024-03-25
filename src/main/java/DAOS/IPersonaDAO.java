@@ -24,6 +24,8 @@ public interface IPersonaDAO {
     
     public PersonaEntidad buscarPorId(Long id);
     
+    public PersonaEntidad buscarPorCurp(String curp);
+    
     public List<PersonaEntidad> buscarPorNombre(String nombre);
     
     public List<PersonaEntidad> listaPersonas();

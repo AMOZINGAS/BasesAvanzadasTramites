@@ -170,6 +170,30 @@ public class PersonaDAO implements IPersonaDAO {
     }
 
     /**
+     * Metodo que busca a una persona por su curp y regresa la entidad encontrada
+     * @param curp
+     * @return personaentidad
+     */
+    @Override
+    public PersonaEntidad buscarPorCurp(String curp) {
+
+        try{
+                CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+                CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
+                Root<PersonaEntidad> root = consulta.from(PersonaEntidad.class);
+                consulta = consulta.select(root).where(criteria.equal(root.get("curp"), curp));
+                TypedQuery<PersonaEntidad> query = entityManager.createQuery(consulta);
+                return query.getSingleResult();
+            }catch(NoResultException nre){
+                Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
+                return null;
+            }
+        
+    }
+
+    
+    
+    /**
      * Metodo que agrega licencia nueva a persona
      * @param licenciaEntidad
      * @param personEntidad
