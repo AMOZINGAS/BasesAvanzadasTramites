@@ -54,7 +54,7 @@ public class PersonaEntidad implements Serializable {
     @OneToMany(mappedBy = "persona", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<TramiteEntidad> tramites;
     
-    @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST})
     private List<VehiculoEntidad> vehiculo;
 
     /**

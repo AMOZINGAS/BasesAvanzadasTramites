@@ -1,6 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,8 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
     public PlacaEntidad() {
     }
 
-    public PlacaEntidad(String numeroPlaca, VehiculoEntidad vehiculo) {
+    public PlacaEntidad(String numeroPlaca, VehiculoEntidad vehiculo, Calendar fechaTramite, int costo, PersonaEntidad persona) {
+        super(costo, fechaTramite, persona);
         this.numeroPlaca = numeroPlaca;
         this.vehiculo = vehiculo;
     }

@@ -5,6 +5,7 @@
 package main;
 
 import DAOS.IPersonaDAO;
+import DAOS.IVehiculoDAO;
 //import Entidades.LicenciaEntidad;
 //import Entidades.PersonaEntidad;
 //import Entidades.PlacaEntidad;
@@ -13,8 +14,10 @@ import DAOS.IPersonaDAO;
 //import Entidades.VehiculoTieneCliente;
 import DAOS.LicenciaDAO;
 import DAOS.PersonaDAO;
+import DAOS.VehiculoDAO;
 import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
+import entidades.VehiculoEntidad;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,9 +37,18 @@ public class NewMain {
      */
     public static void main(String[] args) throws SQLException {
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistencia");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistencia");
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+        
+//        IPersonaDAO personaDAO = new PersonaDAO();
+//        IVehiculoDAO vehiculoDAO = new VehiculoDAO();
+//        PersonaEntidad persona = personaDAO.buscarPorId(1L);
+//        VehiculoEntidad vehiculo = new VehiculoEntidad("Blanco", "Civic", "Honda", "2001", "xs");
+//        personaDAO.agregarVehiculo(vehiculo, persona);
+//        vehiculoDAO.agregarPersona(vehiculo, persona);
+//        personaDAO.actualizarPersona(persona);
+        
         
 //        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
 //        LicenciaEntidad licencia = new LicenciaEntidad(2, 0, persona);
@@ -45,11 +57,12 @@ public class NewMain {
 //        persona.setLicencia(listaLicencias);
 //        em.persist(persona);
         
-        
+//        
 //        Calendar fechaNacimineto = Calendar.getInstance();
 //        fechaNacimineto.set(2004, 3, 9);
-//        PersonaEntidad persona = new PersonaEntidad(fechaNacimineto, "QJSL309432", "OUQA040309HSRLRMA5", "6442621169", "Amos Heli", "Olguin", "Quiroz");
-//        em.persist(persona);
+//        PersonaEntidad persona = new PersonaEntidad(fechaNacimineto, "QJSL309432", "OUQA040309HSRLRMA5", false, "6442621169", "Amos Heli", "Olguin", "Quiroz");
+//        IPersonaDAO personaDAO = new PersonaDAO();
+//        personaDAO.agregarPersona(persona);
         
         
         //AGREGAR VEHICULO A PERSONA EXIXSTENTE
@@ -128,9 +141,9 @@ public class NewMain {
 //            
 //        }
         
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
+//        em.getTransaction().commit();
+//        em.close();
+//        emf.close();
         
         
 //        Calendar fechaNacimiento = Calendar.getInstance();

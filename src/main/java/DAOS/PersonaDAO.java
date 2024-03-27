@@ -160,7 +160,8 @@ public class PersonaDAO implements IPersonaDAO {
     @Override
     public PersonaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PersonaEntidad personEntidad) {
         
-        List<VehiculoEntidad> listaVehiculos = new ArrayList<>();
+        List<VehiculoEntidad> listaVehiculos = personEntidad.getVehiculo();
+        vehiculoEntidad.setPersona(personEntidad);
         listaVehiculos.add(vehiculoEntidad);
         personEntidad.setVehiculo(listaVehiculos);
         return personEntidad;

@@ -39,7 +39,7 @@ public class VehiculoEntidad implements Serializable {
     @OneToMany(mappedBy = "vehiculo", cascade = {CascadeType.PERSIST})
     private List <PlacaEntidad> placas;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "idPersona")
     private PersonaEntidad persona;
 
@@ -57,13 +57,12 @@ public class VehiculoEntidad implements Serializable {
      * @param modelo
      * @param numSerie 
      */
-    public VehiculoEntidad(String color, String linea, String marca, String modelo, String numSerie, PersonaEntidad persona) {
+    public VehiculoEntidad(String color, String linea, String marca, String modelo, String numSerie) {
         this.color = color;
         this.linea = linea;
         this.marca = marca;
         this.modelo = modelo;
         this.numSerie = numSerie;
-        this.persona = persona;
     }
 
     public String getColor() {
