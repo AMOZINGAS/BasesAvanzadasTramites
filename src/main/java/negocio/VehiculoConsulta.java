@@ -4,6 +4,7 @@
  */
 package negocio;
 
+import DAOS.IPersonaDAO;
 import DAOS.IVehiculoDAO;
 import DAOS.PersonaDAO;
 import DAOS.VehiculoDAO;
@@ -13,6 +14,8 @@ import DTO.VehiculoGeneradoDTO;
 import DTO.VehiculoNuevoDTO;
 import entidades.PersonaEntidad;
 import entidades.VehiculoEntidad;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
@@ -29,6 +32,28 @@ public class VehiculoConsulta {
     public VehiculoConsulta(){
         
         vehiculoDAO = new VehiculoDAO();
+        
+    }
+    
+    public List<VehiculoGeneradoDTO> listaVehiculosPersona(String curp){
+        
+        PersonaConsulta personaConsulta = new PersonaConsulta();
+        PersonaGeneradaDTO personaGeneradaDTO = personaConsulta.personaPorCurp(curp);
+        IVehiculoDAO vehiculoDAO = new VehiculoDAO();
+        IPersonaDAO personaDAO = new PersonaDAO();
+        PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
+        List<VehiculoEntidad> listaEntidad = vehiculoDAO.listaVehiculoPersona(personaEntidad);
+        List<VehiculoGeneradoDTO> listaVehiculoDTO = new ArrayList<>();
+        for(int i = 0; i < listaEntidad.size(); i ++){
+            
+            VehiculoEntidad vehiculo = listaEntidad.get(i);
+            Convertidor convertidor = new Convertidor();
+            VehiculoGeneradoDTO vehiculoGeneradoDTO = convertidor.entityToDTO(vehiculo, new VehiculoGeneradoDTO());
+            listaVehiculoDTO.add(vehiculoGeneradoDTO);
+            
+        }
+        
+        return listaVehiculoDTO;
         
     }
     

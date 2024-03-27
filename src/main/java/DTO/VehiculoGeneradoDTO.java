@@ -86,4 +86,11 @@ public class VehiculoGeneradoDTO {
         this.numSerie = numSerie;
     }
     
+    @Override
+    public String toString(){
+        
+        return linea + ".. " + marca + ".. " + numSerie + ".. " + modelo + ".. " + color;
+        
+    }
+    
 }
