@@ -13,6 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import negocio.PersonaConsulta;
+import negocio.PersonaVehiculoAgregar;
 
 /**
  *
@@ -249,8 +250,8 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
             PersonaGeneradaDTO personaGeneradaDTO = (PersonaGeneradaDTO)cbxPersonas.getSelectedItem();
             System.out.println(personaGeneradaDTO.getNombres());
             agregarVehiculoAPersona(vehiculoNuevoDTO, personaGeneradaDTO);
-            JFrameHistorial historial = new JFrameHistorial();
-            historial.setVisible(true);
+            JFrameTramitePlacas tramitarPlaca = new JFrameTramitePlacas();
+            tramitarPlaca.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnSIguienteActionPerformed
@@ -315,9 +316,6 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         for (PersonaGeneradaDTO persona : personas) {
             modeloComboBox.addElement(persona);
         }
-//
-//        // Establecer el modelo de datos en el JComboBox
-//        cbxPersonas.setModel(modeloComboBox);
         
     }
     
@@ -331,8 +329,8 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
 
     public void agregarVehiculoAPersona(VehiculoNuevoDTO vehiculoNuevoDTO, PersonaGeneradaDTO personaGeneradaDTO){
         
-        PersonaConsulta personaConsulta = new PersonaConsulta();
-        personaConsulta.agregarVehiculo(vehiculoNuevoDTO, personaGeneradaDTO);
+        PersonaVehiculoAgregar personaVehiculoConsulta = new PersonaVehiculoAgregar();
+        personaVehiculoConsulta.agregarVehiculoAPersona(personaGeneradaDTO, vehiculoNuevoDTO);
         
     }
     

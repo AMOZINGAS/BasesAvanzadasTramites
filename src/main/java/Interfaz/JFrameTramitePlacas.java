@@ -4,6 +4,14 @@
  */
 package Interfaz;
 
+import DTO.PersonaGeneradaDTO;
+import DTO.VehiculoGeneradoDTO;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import negocio.PersonaConsulta;
+import negocio.VehiculoConsulta;
+
 /**
  *
  * @author elimo
@@ -34,7 +42,12 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtNombrePersona = new javax.swing.JTextField();
+        cbxPersona = new javax.swing.JComboBox<>();
+        cbxVehiculo = new javax.swing.JComboBox<>();
+        btnSeleccionarPersona = new javax.swing.JButton();
+        btnSeleccionarAuto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,8 +88,68 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         jPanel12.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel17.setText("ASISES");
-        jPanel12.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Nombre del dueño");
+        jPanel12.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        txtNombrePersona.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombrePersona.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombrePersona.setToolTipText("");
+        txtNombrePersona.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNombrePersona.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombrePersonaFocusLost(evt);
+            }
+        });
+        txtNombrePersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombrePersonaKeyReleased(evt);
+            }
+        });
+        jPanel12.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 120, 20));
+
+        cbxPersona.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbxPersonaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxPersonaFocusLost(evt);
+            }
+        });
+        cbxPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPersonaActionPerformed(evt);
+            }
+        });
+        cbxPersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cbxPersonaKeyReleased(evt);
+            }
+        });
+        jPanel12.add(cbxPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 230, -1));
+
+        cbxVehiculo.setEnabled(false);
+        jPanel12.add(cbxVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 230, -1));
+
+        btnSeleccionarPersona.setBackground(new java.awt.Color(204, 204, 204));
+        btnSeleccionarPersona.setForeground(new java.awt.Color(51, 102, 255));
+        btnSeleccionarPersona.setText("Seleccionar");
+        btnSeleccionarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarPersonaActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnSeleccionarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 105, 25));
+
+        btnSeleccionarAuto.setBackground(new java.awt.Color(204, 204, 204));
+        btnSeleccionarAuto.setForeground(new java.awt.Color(51, 102, 255));
+        btnSeleccionarAuto.setText("Seleccionar");
+        btnSeleccionarAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarAutoActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnSeleccionarAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 105, 25));
 
         jPanel9.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
@@ -85,6 +158,154 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNombrePersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombrePersonaFocusLost
+        // TODO add your handling code here:
+        
+        
+
+    }//GEN-LAST:event_txtNombrePersonaFocusLost
+
+    
+    public void cargarComboBoxVehiculo(){
+        
+        DefaultComboBoxModel modeloComboBox = new DefaultComboBoxModel();
+        cbxVehiculo.setModel(modeloComboBox);
+        if(listaVehiculosPersona()==null){
+        }else{
+            List<VehiculoGeneradoDTO> vehiculos = listaVehiculosPersona();
+            for (VehiculoGeneradoDTO vehiculo : vehiculos) {
+                modeloComboBox.addElement(vehiculo);
+            }
+        }
+    }
+    
+    public void cargarComboBoxPersona(){
+        
+        DefaultComboBoxModel modeloComboBox = new DefaultComboBoxModel();
+        cbxPersona.setModel(modeloComboBox);
+        List<PersonaGeneradaDTO> personas = listaPersonasNombre();
+        for (PersonaGeneradaDTO persona : personas) {
+            modeloComboBox.addElement(persona);
+        }
+        
+    }
+    
+    public List<PersonaGeneradaDTO> listaPersonasNombre(){
+        
+        PersonaConsulta personaConsulta = new PersonaConsulta();
+        return personaConsulta.listaPersonasNombre(txtNombrePersona.getText());
+        
+    }
+    
+    public List<VehiculoGeneradoDTO> listaVehiculosPersona(){
+        
+        VehiculoConsulta vehiculoConsulta = new VehiculoConsulta();
+        PersonaGeneradaDTO personaGeneradaDTO = (PersonaGeneradaDTO)cbxPersona.getSelectedItem();
+        if(personaGeneradaDTO==null){
+            
+            return null;
+            
+        }else{
+            
+            return vehiculoConsulta.listaVehiculosPersona(personaGeneradaDTO.getCurp());
+            
+        }
+       
+        
+    }
+    
+    private void txtNombrePersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePersonaKeyReleased
+        // TODO add your handling code here:
+        cargarComboBoxPersona();
+        if(cbxPersona.getSelectedItem()== null){
+            
+            JOptionPane.showMessageDialog(this, "No hay personas con ese nombre", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            txtNombrePersona.setText("");
+            cargarComboBoxVehiculo();
+            cbxVehiculo.setEnabled(false);
+            
+        }
+//        if(!sinCaracteresEspeciales(txtNombrePersona.getText())){
+//
+//            JOptionPane.showMessageDialog(this, "Solo se permiten letras", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+//            txtNombrePersona.setText("");
+//
+//        }
+
+    }//GEN-LAST:event_txtNombrePersonaKeyReleased
+
+    private void cbxPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPersonaActionPerformed
+
+    private void cbxPersonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxPersonaFocusGained
+        // TODO add your handling code here:
+        
+        
+//        cargarComboBoxVehiculo();
+//        cbxVehiculo.setEnabled(true);
+        
+    }//GEN-LAST:event_cbxPersonaFocusGained
+
+    private void cbxPersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxPersonaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPersonaKeyReleased
+
+    private void cbxPersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxPersonaFocusLost
+        // TODO add your handling code here:
+        
+        if(listaPersonasNombre()==null){
+            
+            JOptionPane.showMessageDialog(this, "No existe ese nombre", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            txtNombrePersona.setText("");
+            
+        }
+        
+    }//GEN-LAST:event_cbxPersonaFocusLost
+
+    private void btnSeleccionarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarPersonaActionPerformed
+        // TODO add your handling code here:
+
+       if(cbxPersona.getSelectedItem()==null){
+           
+           JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+           
+       }else{
+           
+           cbxVehiculo.setEnabled(true);
+           cargarComboBoxVehiculo();
+           
+       }
+    }//GEN-LAST:event_btnSeleccionarPersonaActionPerformed
+
+    private void btnSeleccionarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarAutoActionPerformed
+        // TODO add your handling code here:
+
+        if(cbxVehiculo.getSelectedItem()==null){
+            
+            JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+           
+       }else{
+           
+           cbxVehiculo.setEnabled(true);
+           
+       }
+    }//GEN-LAST:event_btnSeleccionarAutoActionPerformed
+
+     public boolean sinCaracteresEspeciales(String texto){
+        
+        if(!texto.matches("^[a-zA-Z ]+$")){
+            
+            return false;
+            
+        }else{
+            
+            return true;
+            
+        }
+        
+    }
+    
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -121,14 +342,19 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSeleccionarAuto;
+    private javax.swing.JButton btnSeleccionarPersona;
+    private javax.swing.JComboBox<String> cbxPersona;
+    private javax.swing.JComboBox<String> cbxVehiculo;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField txtNombrePersona;
     // End of variables declaration//GEN-END:variables
 }
