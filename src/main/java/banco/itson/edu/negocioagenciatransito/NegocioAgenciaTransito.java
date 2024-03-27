@@ -8,6 +8,7 @@ import DAOS.IPersonaDAO;
 import DAOS.PersonaDAO;
 import DTO.PersonaGeneradaDTO;
 import DTO.PersonaNuevaDTO;
+import DTO.VehiculoGeneradoDTO;
 import DTO.VehiculoNuevoDTO;
 import entidades.PersonaEntidad;
 //import Entidades.PersonaEntidad;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import negocio.PersonaConsulta;
+import negocio.PersonaVehiculoAgregar;
 
 /**
  *
@@ -26,6 +28,12 @@ public class NegocioAgenciaTransito {
 
     public static void main(String[] args) {
         
+        PersonaConsulta personaConsulta = new PersonaConsulta();
+        PersonaVehiculoAgregar pervehagr = new PersonaVehiculoAgregar();
+        PersonaGeneradaDTO personaGeneradaDTO = personaConsulta.personaPorID(1L);
+        VehiculoNuevoDTO vehiculoNuevoDTO = new VehiculoNuevoDTO("Morado", "Lancer EVO", "Mitsubishi", "2000", "AXDASK2");
+        VehiculoGeneradoDTO vehiculoGeneradoDTO = pervehagr.agregarVehiculoAPersona(personaGeneradaDTO, vehiculoNuevoDTO);
+        System.out.println(vehiculoGeneradoDTO.getNumSerie());
         
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistencia");
 //        EntityManager em = emf.createEntityManager();
@@ -39,10 +47,10 @@ public class NegocioAgenciaTransito {
 //        PersonaGeneradaDTO personaGeneradaDTO = personaConsulta.agregarPersona(personaNueva);
 //        System.out.println(personaGeneradaDTO.getNombre());
         
-        PersonaConsulta personaConsulta = new PersonaConsulta();
-        PersonaGeneradaDTO persona = personaConsulta.personaPorID(1L);
-        VehiculoNuevoDTO vehiculoDTO = new VehiculoNuevoDTO("Acero inoxidable", "DeLorean", "DMC DeLorean", "1982", "ANJYWS6");
-        personaConsulta.agregarVehiculo(vehiculoDTO, persona);
+//        PersonaConsulta personaConsulta = new PersonaConsulta();
+//        PersonaGeneradaDTO persona = personaConsulta.personaPorID(1L);
+//        VehiculoNuevoDTO vehiculoDTO = new VehiculoNuevoDTO("Acero inoxidable", "DeLorean", "DMC DeLorean", "1982", "ANJYWS6");
+//        personaConsulta.agregarVehiculo(vehiculoDTO, persona);
         
         //AGREGAR VEHICULO A PERSONA EXIXSTENTE
 //        PersonaEntidad persona = em.find(PersonaEntidad.class, 1L);
