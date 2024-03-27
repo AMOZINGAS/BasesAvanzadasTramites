@@ -4,18 +4,18 @@
  */
 package DAOS;
 
-//import Entidades.PlacaEntidad;
-//import Entidades.VehiculoEntidad;
+import entidades.PersonaEntidad;
 import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
-import java.util.List;
 
 /**
  *
- * @author elimo
+ * @author PC
  */
-public interface IPlacaDAO {
+public interface IVehiculoDAO {
     
-    public PlacaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PlacaEntidad placaEntidad);
+    public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad);
+    
+    public VehiculoEntidad agregarPlaca(PlacaEntidad placaEntidad, VehiculoEntidad vehiculoEntidad);
     
 }

@@ -162,9 +162,7 @@ public class PersonaDAO implements IPersonaDAO {
         
         List<VehiculoEntidad> listaVehiculos = new ArrayList<>();
         listaVehiculos.add(vehiculoEntidad);
-        vehiculoEntidad.setPersona(personEntidad);
         personEntidad.setVehiculo(listaVehiculos);
-        actualizarPersona(personEntidad);
         return personEntidad;
         
     }
