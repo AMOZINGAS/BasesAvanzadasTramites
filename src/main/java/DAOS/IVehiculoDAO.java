@@ -16,6 +16,8 @@ public interface IVehiculoDAO {
     
     public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad);
     
+    public VehiculoEntidad buscarPorNumeroSerie(String numeroSerie);
+    
     public VehiculoEntidad agregarPlaca(PlacaEntidad placaEntidad, VehiculoEntidad vehiculoEntidad);
     
 }

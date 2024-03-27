@@ -7,7 +7,16 @@ package DAOS;
 import entidades.PersonaEntidad;
 import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -15,11 +24,42 @@ import java.util.List;
  */
 public class VehiculoDAO implements IVehiculoDAO{
     
+    private final IConexionBD conexionBD = new ConexionBD();
+    private EntityManager entityManager;
+
+    public VehiculoDAO() {
+        try {
+
+            entityManager = conexionBD.crearConexion();
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        }
+    }
+    
     @Override
     public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad) {
     
         vehiculoEntidad.setPersona(personaEntidad);
         return vehiculoEntidad;
+        
+    }
+    
+    @Override
+    public VehiculoEntidad buscarPorNumeroSerie(String numeroSerie){
+        
+        try{
+                CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+                CriteriaQuery<VehiculoEntidad> consulta = criteria.createQuery(VehiculoEntidad.class);
+                Root<VehiculoEntidad> root = consulta.from(VehiculoEntidad.class);
+                consulta = consulta.select(root).where(criteria.equal(root.get("numSerie"), numeroSerie));
+                TypedQuery<VehiculoEntidad> query = entityManager.createQuery(consulta);
+                return query.getSingleResult();
+            }catch(NoResultException nre){
+                Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
+                return null;
+            }
         
     }
     

@@ -136,6 +136,11 @@ public class PersonaDAO implements IPersonaDAO {
             
             transaction = entityManager.getTransaction();
             transaction.begin();
+            for(int i = 0; i< personaEntidad.getVehiculo().size(); i ++){
+                
+                System.out.println(personaEntidad.getVehiculo().get(i).getNumSerie());
+                
+            }
             entityManager.merge(personaEntidad);
             transaction.commit();
             return personaEntidad;
