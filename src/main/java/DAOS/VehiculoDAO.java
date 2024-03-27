@@ -37,6 +37,21 @@ public class VehiculoDAO implements IVehiculoDAO{
 
         }
     }
+
+    @Override
+    public List<VehiculoEntidad> listaVehiculoPersona(PersonaEntidad persona) {
+    
+        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+        CriteriaQuery<VehiculoEntidad> consulta = criteria.createQuery(VehiculoEntidad.class);
+        Root<VehiculoEntidad> root = consulta.from(VehiculoEntidad.class);
+        consulta = consulta.select(root).where(criteria.equal(root.get("persona"), persona));
+        TypedQuery<VehiculoEntidad> query = entityManager.createQuery(consulta);
+        List<VehiculoEntidad> listaVehiculoPersona = query.getResultList();
+        
+        return listaVehiculoPersona;
+        
+    }
+    
     
     @Override
     public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad) {
@@ -50,16 +65,16 @@ public class VehiculoDAO implements IVehiculoDAO{
     public VehiculoEntidad buscarPorNumeroSerie(String numeroSerie){
         
         try{
-                CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
-                CriteriaQuery<VehiculoEntidad> consulta = criteria.createQuery(VehiculoEntidad.class);
-                Root<VehiculoEntidad> root = consulta.from(VehiculoEntidad.class);
-                consulta = consulta.select(root).where(criteria.equal(root.get("numSerie"), numeroSerie));
-                TypedQuery<VehiculoEntidad> query = entityManager.createQuery(consulta);
-                return query.getSingleResult();
-            }catch(NoResultException nre){
-                Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
-                return null;
-            }
+            CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+            CriteriaQuery<VehiculoEntidad> consulta = criteria.createQuery(VehiculoEntidad.class);
+            Root<VehiculoEntidad> root = consulta.from(VehiculoEntidad.class);
+            consulta = consulta.select(root).where(criteria.equal(root.get("numSerie"), numeroSerie));
+            TypedQuery<VehiculoEntidad> query = entityManager.createQuery(consulta);
+            return query.getSingleResult();
+        }catch(NoResultException nre){
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
+            return null;
+        }
         
     }
     

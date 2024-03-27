@@ -7,6 +7,7 @@ package DAOS;
 import entidades.PersonaEntidad;
 import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,8 @@ public interface IVehiculoDAO {
     public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad);
     
     public VehiculoEntidad buscarPorNumeroSerie(String numeroSerie);
+    
+    public List<VehiculoEntidad> listaVehiculoPersona(PersonaEntidad persona);
     
     public VehiculoEntidad agregarPlaca(PlacaEntidad placaEntidad, VehiculoEntidad vehiculoEntidad);
     
