@@ -23,6 +23,8 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
      */
     public JFrameTramitePlacas() {
         initComponents();
+        cargarComboBoxPersona();
+        
     }
 
     /**
@@ -47,7 +49,10 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         cbxPersona = new javax.swing.JComboBox<>();
         cbxVehiculo = new javax.swing.JComboBox<>();
         btnSeleccionarPersona = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
         btnSeleccionarAuto = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnReiniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,9 +146,21 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         });
         jPanel12.add(btnSeleccionarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 105, 25));
 
+        btnConfirmar.setBackground(new java.awt.Color(204, 204, 204));
+        btnConfirmar.setForeground(new java.awt.Color(51, 102, 255));
+        btnConfirmar.setText("Confrimar");
+        btnConfirmar.setEnabled(false);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 105, 25));
+
         btnSeleccionarAuto.setBackground(new java.awt.Color(204, 204, 204));
         btnSeleccionarAuto.setForeground(new java.awt.Color(51, 102, 255));
         btnSeleccionarAuto.setText("Seleccionar");
+        btnSeleccionarAuto.setEnabled(false);
         btnSeleccionarAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarAutoActionPerformed(evt);
@@ -151,11 +168,32 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         });
         jPanel12.add(btnSeleccionarAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 105, 25));
 
+        btnEditar.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditar.setForeground(new java.awt.Color(51, 102, 255));
+        btnEditar.setText("Cancelar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 105, 25));
+
+        btnReiniciar.setBackground(new java.awt.Color(204, 204, 204));
+        btnReiniciar.setForeground(new java.awt.Color(51, 102, 255));
+        btnReiniciar.setText("Reiniciar");
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 105, 25));
+
         jPanel9.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 350));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombrePersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombrePersonaFocusLost
@@ -272,25 +310,60 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
            
        }else{
            
+           cbxPersona.setEnabled(false);
+           btnSeleccionarPersona.setEnabled(false);
            cbxVehiculo.setEnabled(true);
+           btnSeleccionarAuto.setEnabled(true);
            cargarComboBoxVehiculo();
            
        }
     }//GEN-LAST:event_btnSeleccionarPersonaActionPerformed
 
-    private void btnSeleccionarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarAutoActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
 
+        
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnSeleccionarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarAutoActionPerformed
+        // TODO add your handling code here:
+        
         if(cbxVehiculo.getSelectedItem()==null){
-            
-            JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+           
+           JOptionPane.showMessageDialog(this, "No se a seleccionado ningun vehiculo", "ERROR!!", JOptionPane.ERROR_MESSAGE);
            
        }else{
            
-           cbxVehiculo.setEnabled(true);
+           cbxVehiculo.setEnabled(false);
+           btnSeleccionarAuto.setEnabled(false);
+           btnConfirmar.setEnabled(true);
+           cargarComboBoxVehiculo();
            
        }
+        
     }//GEN-LAST:event_btnSeleccionarAutoActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        
+        JFrameTramitar tramitar = new JFrameTramitar();
+        tramitar.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+        // TODO add your handling code here:
+        
+        txtNombrePersona.setText(null);
+        btnConfirmar.setEnabled(false);
+        btnSeleccionarPersona.setEnabled(true);
+        cbxPersona.setEnabled(true);
+        cbxVehiculo.setEnabled(false);
+        cargarComboBoxPersona();
+        
+    }//GEN-LAST:event_btnReiniciarActionPerformed
 
      public boolean sinCaracteresEspeciales(String texto){
         
@@ -342,6 +415,9 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnReiniciar;
     private javax.swing.JButton btnSeleccionarAuto;
     private javax.swing.JButton btnSeleccionarPersona;
     private javax.swing.JComboBox<String> cbxPersona;
