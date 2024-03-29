@@ -37,7 +37,7 @@ public class Convertidor{
                     campoEntity.setAccessible(true);
                     campoEntity.set(entity, valorCampoDto);
                 }catch(NoSuchFieldException nse){
-                    System.out.println("El campo " + nombreCampoDto + " no existe en el DTO.");
+                    
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -73,7 +73,7 @@ public class Convertidor{
                     campoDTO.setAccessible(true);
                     campoDTO.set(dto, valorCampoEntity);
                 } catch (NoSuchFieldException e) {
-                    System.out.println("El campo " + nombreCampoEntity + " no existe en el DTO.");
+                    
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

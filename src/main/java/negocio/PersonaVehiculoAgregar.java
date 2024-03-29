@@ -19,9 +19,10 @@ public class PersonaVehiculoAgregar {
         PersonaConsulta personaConsulta = new PersonaConsulta();
         VehiculoConsulta vehiculoConsulta = new VehiculoConsulta();
         personaGeneradaDTO = personaConsulta.agregarVehiculo(vehiculoNuevoDTO, personaGeneradaDTO);
+        personaConsulta.actualizarPersona(personaGeneradaDTO);
         vehiculoNuevoDTO = vehiculoConsulta.agregarPersona(vehiculoNuevoDTO, personaGeneradaDTO);
-        personaGeneradaDTO = personaConsulta.actualizarPersona(personaGeneradaDTO);
-        return vehiculoConsulta.buscarVehiculoNumeroSerie(vehiculoNuevoDTO.getNumSerie());
+        VehiculoGeneradoDTO vehiculoGeneradoDTO = vehiculoConsulta.actualizarVehiculo(vehiculoConsulta.buscarVehiculoNumeroSerie(vehiculoNuevoDTO.getNumSerie()));
+        return vehiculoConsulta.buscarVehiculoNumeroSerie(vehiculoGeneradoDTO.getNumSerie());
         
     }
     

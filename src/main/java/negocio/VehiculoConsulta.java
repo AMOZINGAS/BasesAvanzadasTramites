@@ -63,6 +63,24 @@ public class VehiculoConsulta {
         
     } 
     
+    public VehiculoGeneradoDTO actualizarVehiculo(VehiculoGeneradoDTO vehiculoGeneradoDTO){
+        
+        try{
+            
+            Convertidor convertidor = new Convertidor();
+            VehiculoEntidad vehiculoEntidad = vehiculoDAO.buscarPorNumeroSerie(vehiculoGeneradoDTO.getNumSerie());
+            vehiculoDAO.actualizarVehiculo(vehiculoEntidad);
+            return convertidor.entityToDTO(vehiculoEntidad, new VehiculoGeneradoDTO());
+            
+        }catch(PersistenceException px){
+            
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al actualizar persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+            
+        }
+        
+    }
+    
     public VehiculoGeneradoDTO buscarVehiculoNumeroSerie(String numeroSerie) throws NoResultException{
         
         try{
@@ -80,6 +98,22 @@ public class VehiculoConsulta {
         }
     }
     
+    public VehiculoGeneradoDTO vehiculoPorPersona(List<VehiculoGeneradoDTO> listaVehiculos, String numeroSerie){
+        
+        for(int i = 0; i < listaVehiculos.size(); i ++){
+            
+            if(listaVehiculos.get(i).getNumSerie().equalsIgnoreCase(numeroSerie)){
+                
+                return listaVehiculos.get(i);
+                
+            }
+            
+        }
+        
+        return null;
+        
+    }
+    
     public VehiculoNuevoDTO agregarPersona(VehiculoNuevoDTO vehiculoNuevoDTO, PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
         
         try{
@@ -87,7 +121,8 @@ public class VehiculoConsulta {
             PersonaDAO personaDAO = new PersonaDAO();
             Convertidor convertidor = new Convertidor();
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
-            VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoNuevoDTO, new VehiculoEntidad());
+            VehiculoEntidad vehiculoEntidad = vehiculoDAO.buscarPorNumeroSerie(vehiculoNuevoDTO.getNumSerie());
+//            VehiculoEntidad vehiculoEntidad = vehiculoDAO.vehiculoPorPersona(vehiculoDAO.listaVehiculoPersona(personaEntidad), vehiculoNuevoDTO.getNumSerie());
             vehiculoDAO.agregarPersona(vehiculoEntidad, personaEntidad);
             return convertidor.entityToDTO(vehiculoEntidad, new VehiculoNuevoDTO());
             
