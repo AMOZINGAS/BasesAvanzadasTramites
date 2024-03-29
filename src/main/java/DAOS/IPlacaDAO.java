@@ -18,4 +18,10 @@ public interface IPlacaDAO {
     
     public PlacaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PlacaEntidad placaEntidad);
     
+    public PlacaEntidad actualizarPlaca(PlacaEntidad placaEntidad);
+    
+    public PlacaEntidad buscarPorNumeroPlaca(String numeroPlaca);
+    
+    public List<PlacaEntidad> listaPlacasVehiculo(VehiculoEntidad vehiculoEntidad);
+    
 }
