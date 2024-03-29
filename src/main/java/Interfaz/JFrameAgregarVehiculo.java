@@ -6,6 +6,7 @@ package Interfaz;
 
 import DTO.PersonaGeneradaDTO;
 import DTO.VehiculoNuevoDTO;
+import controlador.TipoPlaca;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -248,9 +249,8 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
             
             construirVehiculoDTO();
             PersonaGeneradaDTO personaGeneradaDTO = (PersonaGeneradaDTO)cbxPersonas.getSelectedItem();
-            System.out.println(personaGeneradaDTO.getNombres());
             agregarVehiculoAPersona(vehiculoNuevoDTO, personaGeneradaDTO);
-            JFrameTramitePlacas tramitarPlaca = new JFrameTramitePlacas();
+            JFrameTramitePlacas tramitarPlaca = new JFrameTramitePlacas(TipoPlaca.NUEVO);
             tramitarPlaca.setVisible(true);
             this.dispose();
         }

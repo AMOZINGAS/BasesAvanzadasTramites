@@ -4,7 +4,7 @@
  */
 package Interfaz;
 
-import controlador.Tipo;
+import controlador.TipoPlaca;
 
 /**
  *

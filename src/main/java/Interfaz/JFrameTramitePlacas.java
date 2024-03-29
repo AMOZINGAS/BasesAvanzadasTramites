@@ -5,13 +5,18 @@
 package Interfaz;
 
 import DTO.PersonaGeneradaDTO;
+import DTO.PlacaNuevaDTO;
 import DTO.VehiculoGeneradoDTO;
-import controlador.Tipo;
+import controlador.TipoPlaca;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import negocio.PersonaConsulta;
+import negocio.PlacaConsulta;
 import negocio.VehiculoConsulta;
+import negocio.VehiculoPlacaAgregar;
 
 /**
  *
@@ -19,12 +24,20 @@ import negocio.VehiculoConsulta;
  */
 public class JFrameTramitePlacas extends javax.swing.JFrame {
 
+    private int costo;
+    private TipoPlaca tipo;
+    private PlacaNuevaDTO placaNuevaDTO;
+    
     /**
      * Creates new form JFrameTramitePlacas
      */
-    public JFrameTramitePlacas() {
+    public JFrameTramitePlacas(TipoPlaca tipo) {
         initComponents();
+        this.tipo = tipo;
+        costo = tipo.getPrecio();
+        placaNuevaDTO = new PlacaNuevaDTO();
         cargarComboBoxPersona();
+        
         
     }
 
@@ -323,10 +336,40 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_btnSeleccionarPersonaActionPerformed
 
+    
+    public PlacaNuevaDTO inicializarPlaca(){
+        
+        PlacaConsulta placaConsulta = new PlacaConsulta();
+        placaNuevaDTO = new PlacaNuevaDTO(costo, placaConsulta.generarPlaca(), Calendar.getInstance());
+        return placaNuevaDTO;
+        
+    }
+    
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-
+        PersonaGeneradaDTO personaGeneradaDTO = (PersonaGeneradaDTO)cbxPersona.getSelectedItem();
         
+        
+//        if()
+        if(TipoPlaca.NUEVO==tipo){
+            
+            VehiculoPlacaAgregar vehiculoPlacaAgregar = new VehiculoPlacaAgregar();
+            JOptionPane panel = new JOptionPane("El costo de su placa es de: " + tipo.getPrecio(), JOptionPane.INFORMATION_MESSAGE, JOptionPane.OK_CANCEL_OPTION, null, new String[]{"CANCELAR", "OK"});
+            JDialog dialogo = panel.createDialog("Información");
+            dialogo.setVisible(true);
+            if(panel.getValue().equals("CANCELAR")){
+                //CANCELAR
+                this.dispose();
+            }else if(panel.getValue().equals("OK")){
+                //OK
+                VehiculoGeneradoDTO vehiculoGeneradoDTO = (VehiculoGeneradoDTO)cbxVehiculo.getSelectedItem();
+                vehiculoPlacaAgregar.agregarVehiculoAPlaca(vehiculoGeneradoDTO, inicializarPlaca());
+                JOptionPane.showMessageDialog(this, "Se agregó correctamente la placa al vehiculo con serie " + vehiculoGeneradoDTO.getNumSerie(), "EXITO!!", JOptionPane.INFORMATION_MESSAGE);
+                
+            }else{
+                this.dispose();
+            }
+        }
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 

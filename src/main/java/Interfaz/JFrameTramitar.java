@@ -4,6 +4,7 @@
  */
 package Interfaz;
 
+import controlador.TipoPlaca;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -198,7 +199,7 @@ public class JFrameTramitar extends javax.swing.JFrame {
         }else if(panel.getValue().equals("Renovación")){
             
             //RENOVACION
-            JFrameTramitePlacas placas = new JFrameTramitePlacas();
+            JFrameTramitePlacas placas = new JFrameTramitePlacas(TipoPlaca.RENOVADO);
             placas.setVisible(true);
             this.dispose();
             

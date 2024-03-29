@@ -8,8 +8,22 @@ package controlador;
  *
  * @author elimo
  */
-public enum Tipo {
-    NUEVO,
-    RENOVACION
+
     
+public enum TipoPlaca {
+    
+    NUEVO(1500),
+    RENOVADO(1000);
+
+    private int precio;
+
+    private TipoPlaca(int precio) {
+        this.precio = precio;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
 }
+    
+    
