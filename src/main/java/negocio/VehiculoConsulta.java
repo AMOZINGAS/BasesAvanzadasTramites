@@ -40,22 +40,6 @@ public class VehiculoConsulta {
         
     }
     
-    public PlacaGeneradaDTO validarVigenciaPlaca(PlacaGeneradaDTO placaGeneradaDTO){
-        
-        Calendar fechaActual = Calendar.getInstance();
-        if(placaGeneradaDTO.getFechaTramite().get(Calendar.YEAR) == fechaActual.get(Calendar.YEAR)){
-            
-            JOptionPane.showMessageDialog(null, "No puedes renovar la licencia\nLicencia con valida todo este año (" + fechaActual.get(Calendar.YEAR) + ")", "ERROR!!", JOptionPane.ERROR_MESSAGE);
-            return null;
-            
-        }else{
-            
-            return placaGeneradaDTO;
-            
-        }
-        
-    }
-    
     public List<VehiculoGeneradoDTO> listaVehiculosPersona(String curp){
         
         PersonaConsulta personaConsulta = new PersonaConsulta();
@@ -84,8 +68,14 @@ public class VehiculoConsulta {
         try{
             
             Convertidor convertidor = new Convertidor();
-            PlacaEntidad placaEntidad = convertidor.DTOToEntidad(placaNuevaDTO, new PlacaEntidad());
+            PlacaEntidad placaEntidad = new PlacaEntidad();
+            placaEntidad.setCosto(placaNuevaDTO.getCosto());
+            placaEntidad.setFechaTramite(placaNuevaDTO.getFechaTramite());
+            placaEntidad.setNumeroPlaca(placaNuevaDTO.getNumeroPlaca());
             VehiculoEntidad vehiculoEntidad = vehiculoDAO.buscarPorNumeroSerie(vehiculoGeneradoDTO.getNumSerie());
+            placaEntidad.setVehiculo(vehiculoEntidad);
+            placaEntidad.setEstado(1);
+            placaEntidad.setPersona(vehiculoEntidad.getPersona());
             vehiculoEntidad = vehiculoDAO.agregarPlaca(placaEntidad, vehiculoEntidad);
             vehiculoGeneradoDTO = convertidor.entityToDTO(vehiculoEntidad, new VehiculoGeneradoDTO());
             

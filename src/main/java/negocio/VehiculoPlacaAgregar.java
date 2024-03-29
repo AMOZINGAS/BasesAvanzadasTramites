@@ -15,7 +15,7 @@ import DTO.VehiculoNuevoDTO;
  */
 public class VehiculoPlacaAgregar {
     
-    public PlacaGeneradaDTO agregarVehiculoAPersona(VehiculoGeneradoDTO vehiculoGeneradoDTO, PlacaNuevaDTO placaNuevaDTO){
+    public PlacaGeneradaDTO agregarVehiculoAPlaca(VehiculoGeneradoDTO vehiculoGeneradoDTO, PlacaNuevaDTO placaNuevaDTO){
         
         VehiculoConsulta vehiculoConsulta = new VehiculoConsulta();
         PlacaConsulta placaConsulta = new PlacaConsulta();

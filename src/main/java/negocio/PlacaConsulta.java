@@ -14,7 +14,9 @@ import DTO.VehiculoGeneradoDTO;
 import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
@@ -33,6 +35,58 @@ public class PlacaConsulta {
         
         placaDAO = new PlacaDAO();
         
+    }
+    
+    
+    
+     public PlacaGeneradaDTO validarVigenciaPlaca(PlacaGeneradaDTO placaGeneradaDTO){
+        
+        Calendar fechaActual = Calendar.getInstance();
+        if(placaGeneradaDTO.getFechaTramite().get(Calendar.YEAR) == fechaActual.get(Calendar.YEAR)){
+            
+            JOptionPane.showMessageDialog(null, "No puedes renovar la placa\nPlaca valida todo este año (" + fechaActual.get(Calendar.YEAR) + ")", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+            
+        }else{
+            
+            return placaGeneradaDTO;
+            
+        }
+        
+    }
+     
+    public String validarPlacaGenerada(){
+     
+        String placa;
+        
+        do{
+            
+            placa = generarPlaca();
+            
+            
+        }while(buscarPlacaNumeroPlaca(placa)!=null);
+        
+        return placa;
+        
+    }
+     
+    public String generarPlaca(){
+        
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 3; i++) {
+            char letraAleatoria = (char) (random.nextInt(26) + 'A');
+            sb.append(letraAleatoria);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            int numeroAleatorio = random.nextInt(10);
+            sb.append(numeroAleatorio);
+        }
+
+        return sb.toString();
+         
     }
     
     public PlacaNuevaDTO agregarVehiculo(PlacaNuevaDTO placaNuevaDTO, VehiculoGeneradoDTO vehiculoGeneradoDTO){
@@ -74,7 +128,6 @@ public class PlacaConsulta {
     
     public List<PlacaGeneradaDTO> listaPlacaVehiculo(String numeroSerie){
         
-        IPlacaDAO placaDAO = new PlacaDAO();
         IVehiculoDAO vehiculoDAO = new VehiculoDAO();
         VehiculoEntidad vehiculoEntidad = vehiculoDAO.buscarPorNumeroSerie(numeroSerie);
         List<PlacaEntidad> listaEntidad = placaDAO.listaPlacasVehiculo(vehiculoEntidad);

@@ -8,10 +8,12 @@ import DAOS.IPersonaDAO;
 import DAOS.IVehiculoDAO;
 import DAOS.PersonaDAO;
 import DAOS.VehiculoDAO;
+import DTO.LicenciaNuevaDTO;
 import DTO.PersonaGeneradaDTO;
 import DTO.PersonaNuevaDTO;
 import DTO.VehiculoGeneradoDTO;
 import DTO.VehiculoNuevoDTO;
+import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
 import entidades.VehiculoEntidad;
 import java.util.ArrayList;
@@ -208,6 +210,37 @@ public class PersonaConsulta {
         }
         
         
+    }
+    
+    public boolean verificarLicencia(PersonaGeneradaDTO personaGeneradaDTO){
+        
+        PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
+        if(personaEntidad.getLicencia().get(personaEntidad.getLicencia().size()).getEstado()==0){
+            
+            return false;
+            
+        }
+        return true;
+        
+    }
+    
+    public PersonaGeneradaDTO agregarLicencia(LicenciaNuevaDTO licenciaNuevoDTO, PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
+        
+        try{
+            
+            Convertidor convertidor = new Convertidor();
+            LicenciaEntidad licenciaEntidad = convertidor.DTOToEntidad(licenciaNuevoDTO, new LicenciaEntidad());
+            PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
+            personaEntidad = personaDAO.agregarLicencia(licenciaEntidad, personaEntidad);
+            personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
+            
+            return personaGeneradaDTO;
+            
+        }catch(PersistenceException ex){
+            
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al agregar la licencia", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
     
 }
