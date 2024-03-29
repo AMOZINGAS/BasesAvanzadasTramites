@@ -7,11 +7,13 @@ package DAOS;
 import entidades.PersonaEntidad;
 import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
+import excepciones.PersistenciaException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -52,6 +54,47 @@ public class VehiculoDAO implements IVehiculoDAO{
         
     }
     
+    @Override
+    public VehiculoEntidad vehiculoPorPersona(List<VehiculoEntidad> listaVehiculos, String numeroSerie){
+        
+        for(int i = 0; i < listaVehiculos.size(); i ++){
+            
+            if(listaVehiculos.get(i).getNumSerie().equalsIgnoreCase(numeroSerie)){
+                
+                return listaVehiculos.get(i);
+                
+            }
+            
+        }
+        
+        return null;
+        
+    }
+    
+    @Override
+    public VehiculoEntidad actualizarVehiculo(VehiculoEntidad vehiculoEntidad){
+        
+        EntityTransaction transaction = null;
+        
+        try {
+            
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.merge(vehiculoEntidad);
+            transaction.commit();
+            return vehiculoEntidad;
+            
+        } catch (PersistenciaException ex) {
+            
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            
+            return null;
+            
+        }
+        
+    }
     
     @Override
     public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad) {

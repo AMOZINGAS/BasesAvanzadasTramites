@@ -34,4 +34,6 @@ public interface IPersonaDAO {
     
     public PersonaEntidad agregarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personEntidad);
     
+    public PersonaEntidad renovarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personaEntidad);
+    
 }

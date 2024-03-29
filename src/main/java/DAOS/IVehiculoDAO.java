@@ -23,4 +23,8 @@ public interface IVehiculoDAO {
     
     public VehiculoEntidad agregarPlaca(PlacaEntidad placaEntidad, VehiculoEntidad vehiculoEntidad);
     
+    public VehiculoEntidad vehiculoPorPersona(List<VehiculoEntidad> listaVehiculos, String numeroSerie);
+    
+    public VehiculoEntidad actualizarVehiculo(VehiculoEntidad vehicloEntidad);
+    
 }

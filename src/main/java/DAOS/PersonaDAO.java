@@ -4,15 +4,11 @@
  */
 package DAOS;
 
-//import Entidades.LicenciaEntidad;
-//import Entidades.PersonaEntidad;
-//import Entidades.VehiculoEntidad;
 import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
 import entidades.VehiculoEntidad;
 import excepciones.PersistenciaException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -166,7 +162,7 @@ public class PersonaDAO implements IPersonaDAO {
     public PersonaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PersonaEntidad personEntidad) {
         
         List<VehiculoEntidad> listaVehiculos = personEntidad.getVehiculo();
-        vehiculoEntidad.setPersona(personEntidad);
+//        vehiculoEntidad.setPersona(personEntidad);
         listaVehiculos.add(vehiculoEntidad);
         personEntidad.setVehiculo(listaVehiculos);
         return personEntidad;
@@ -205,6 +201,16 @@ public class PersonaDAO implements IPersonaDAO {
      */
     @Override
     public PersonaEntidad agregarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personEntidad) {
+    
+        List<LicenciaEntidad> listaLicencias = personEntidad.getLicencia();
+        listaLicencias.add(licenciaEntidad);
+        personEntidad.setLicencia(listaLicencias);
+        return personEntidad;
+        
+    }
+
+    @Override
+    public PersonaEntidad renovarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personaEntidad) {
     
         return null;
         
