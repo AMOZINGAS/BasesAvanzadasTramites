@@ -31,6 +31,9 @@ public abstract class TramiteEntidad implements Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar fechaTramite;
     
+    @Column(name = "estado", nullable = false)
+    private int estado;
+    
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "idPersona")
     private PersonaEntidad persona;
@@ -38,15 +41,24 @@ public abstract class TramiteEntidad implements Serializable {
     public TramiteEntidad() {
     }
 
-    public TramiteEntidad(int costo, Calendar fechaTramite, PersonaEntidad persona) {
+    public TramiteEntidad(int costo, Calendar fechaTramite, PersonaEntidad persona, int estado) {
         
         this.costo = costo;
         this.fechaTramite = fechaTramite;
         this.persona = persona;
+        this.estado = estado;
     }
 
     public int getCosto() {
         return costo;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public void setCosto(int costo) {

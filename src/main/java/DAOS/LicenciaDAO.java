@@ -17,6 +17,11 @@ import javax.persistence.criteria.Root;
 import DAOS.ILicenciaDAO;
 import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {
 
@@ -35,97 +40,67 @@ public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {
     }
 
     @Override
-    public List<LicenciaEntidad> buscarLicenciaPorCURP(String curp) {
-
-        try {
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<LicenciaEntidad> query = criteriaBuilder.createQuery(LicenciaEntidad.class);
-            Root<LicenciaEntidad> root = query.from(LicenciaEntidad.class);
-
-            Join<LicenciaEntidad, PersonaEntidad> joinPersona = root.join("persona");
-
-            query.select(root).where(criteriaBuilder.equal(joinPersona.get("curp"), curp));
-
-            return entityManager.createQuery(query).getResultList();
-        } catch (PersistenceException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
+    public LicenciaEntidad agregarPersona(PersonaEntidad personaEntidad, LicenciaEntidad licenciaEntidad){
+        
+        licenciaEntidad.setPersona(personaEntidad);
+        return licenciaEntidad;
+    
     }
 
     @Override
-    public List<LicenciaEntidad> buscarLicenciasPorNombre(String nombre) {
-
-       try {
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<LicenciaEntidad> query = criteriaBuilder.createQuery(LicenciaEntidad.class);
-            Root<LicenciaEntidad> root = query.from(LicenciaEntidad.class);
-
-            Join<LicenciaEntidad, PersonaEntidad> joinPersona = root.join("persona");
-
-            query.select(root).where(criteriaBuilder.equal(joinPersona.get("nombres"), nombre));
-
-            return entityManager.createQuery(query).getResultList();
-        } catch (PersistenceException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-    }
-
-    @Override
-    public List<LicenciaEntidad> buscarLicenciasPorFechaNacimiento(Calendar fechaNacimiento) {
-
+    public LicenciaEntidad actualizarLicencia(LicenciaEntidad licenciaEntidad){
+    
+        EntityTransaction transaction = null;
+        
         try {
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<LicenciaEntidad> query = criteriaBuilder.createQuery(LicenciaEntidad.class);
-            Root<LicenciaEntidad> root = query.from(LicenciaEntidad.class);
-
-            Join<LicenciaEntidad, PersonaEntidad> joinPersona = root.join("persona");
-
-            query.select(root).where(criteriaBuilder.equal(joinPersona.get("fechaNacimiento"), fechaNacimiento));
-
-            return entityManager.createQuery(query).getResultList();
-        } catch (PersistenceException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-    }
-
-    @Override
-    public List<LicenciaEntidad> obtenerTodasLasLicencias() {
-        try {
-            CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-            CriteriaQuery<LicenciaEntidad> query = cb.createQuery(LicenciaEntidad.class);
-            Root<LicenciaEntidad> root = query.from(LicenciaEntidad.class);
-
-            query.select(root);
-
-            return entityManager.createQuery(query).getResultList();
-
-        } catch (PersistenciaException es) {
-            es.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public void guardarLicenciaBD(LicenciaEntidad licencia) {
-
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(licencia);
-            entityManager.getTransaction().commit();
-
-        } catch (PersistenciaException e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
+            
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.merge(licenciaEntidad);
+            transaction.commit();
+            return licenciaEntidad;
+            
+        } catch (PersistenciaException ex) {
+            
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
             }
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
+            
+            return null;
+            
         }
+        
     }
+
+    @Override
+    public LicenciaEntidad buscarLicenciaFolio(int folio){
+    
+        try{
+            CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+            CriteriaQuery<LicenciaEntidad> consulta = criteria.createQuery(LicenciaEntidad.class);
+            Root<LicenciaEntidad> root = consulta.from(LicenciaEntidad.class);
+            consulta = consulta.select(root).where(criteria.equal(root.get("folio"), folio));
+            TypedQuery<LicenciaEntidad> query = entityManager.createQuery(consulta);
+            return query.getSingleResult();
+        }catch(NoResultException nre){
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
+            return null;
+        }
+    
+    }
+
+    @Override
+    public List<LicenciaEntidad> listaLicenciaPersona(PersonaEntidad personaEntidad) {
+    
+        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+        CriteriaQuery<LicenciaEntidad> consulta = criteria.createQuery(LicenciaEntidad.class);
+        Root<LicenciaEntidad> root = consulta.from(LicenciaEntidad.class);
+        consulta = consulta.select(root).where(criteria.equal(root.get("personaLicencia"), personaEntidad));
+        TypedQuery<LicenciaEntidad> query = entityManager.createQuery(consulta);
+        List<LicenciaEntidad> listaLicenciaPersona = query.getResultList();
+        
+        return listaLicenciaPersona;
+        
+    }
+    
 }

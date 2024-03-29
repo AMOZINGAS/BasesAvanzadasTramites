@@ -125,6 +125,11 @@ public class VehiculoDAO implements IVehiculoDAO{
     public VehiculoEntidad agregarPlaca(PlacaEntidad placaEntidad, VehiculoEntidad vehiculoEntidad){
         
         List<PlacaEntidad> listaPlacas = vehiculoEntidad.getPlacas();
+        for(int i = 0; i < listaPlacas.size(); i ++){
+            
+            listaPlacas.get(i).setEstado(0);
+            
+        }
         listaPlacas.add(placaEntidad);
         vehiculoEntidad.setPlacas(listaPlacas);
         return vehiculoEntidad;

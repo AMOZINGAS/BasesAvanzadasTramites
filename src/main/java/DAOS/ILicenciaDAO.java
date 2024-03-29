@@ -6,20 +6,20 @@ package DAOS;
 
 //import Entidades.LicenciaEntidad;
 import entidades.LicenciaEntidad;
-import java.util.Calendar;
-import java.util.Date;
+import entidades.PersonaEntidad;
 import java.util.List;
-
 /**
  *
  * @author elimo
  */
 public interface ILicenciaDAO {
     
-    void guardarLicenciaBD(LicenciaEntidad licenciaEntidad);
-    List<LicenciaEntidad> buscarLicenciasPorNombre(String nombre);
-    List<LicenciaEntidad> buscarLicenciaPorCURP(String curp);
-    List<LicenciaEntidad> buscarLicenciasPorFechaNacimiento(Calendar fechaNacimiento);
-    List<LicenciaEntidad> obtenerTodasLasLicencias();
+    public LicenciaEntidad agregarPersona(PersonaEntidad personaEntidad, LicenciaEntidad licenciaEntidad);
+    
+    public LicenciaEntidad actualizarLicencia(LicenciaEntidad licenciaEntidad);
+    
+    public LicenciaEntidad buscarLicenciaFolio(int folio);
+    
+    public List<LicenciaEntidad> listaLicenciaPersona(PersonaEntidad personaEntidad);
     
 }
