@@ -6,6 +6,7 @@ package Interfaz;
 
 import DTO.PersonaGeneradaDTO;
 import DTO.VehiculoGeneradoDTO;
+import controlador.Tipo;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -308,6 +309,9 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
            
            JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
            
+       }else if(cbxPersona==null){//POR MODIFICAR
+           
+           
        }else{
            
            cbxPersona.setEnabled(false);
@@ -331,7 +335,7 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
         
         if(cbxVehiculo.getSelectedItem()==null){
            
-           JOptionPane.showMessageDialog(this, "No se a seleccionado ningun vehiculo", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(this, "No cuentas con ningun vehiculo", "ERROR!!", JOptionPane.ERROR_MESSAGE);
            
        }else{
            

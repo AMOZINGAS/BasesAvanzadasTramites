@@ -9,7 +9,7 @@ package controlador;
  * @author elimo
  */
 public enum Tipo {
-    LICENCIA,
-    PLACA
+    NUEVO,
+    RENOVACION
     
 }
