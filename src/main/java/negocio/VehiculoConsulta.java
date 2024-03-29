@@ -5,16 +5,21 @@
 package negocio;
 
 import DAOS.IPersonaDAO;
+import DAOS.IPlacaDAO;
 import DAOS.IVehiculoDAO;
 import DAOS.PersonaDAO;
+import DAOS.PlacaDAO;
 import DAOS.VehiculoDAO;
 import DTO.PersonaGeneradaDTO;
+import DTO.PlacaGeneradaDTO;
 import DTO.PlacaNuevaDTO;
 import DTO.VehiculoGeneradoDTO;
 import DTO.VehiculoNuevoDTO;
 import entidades.PersonaEntidad;
+import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
@@ -32,6 +37,22 @@ public class VehiculoConsulta {
     public VehiculoConsulta(){
         
         vehiculoDAO = new VehiculoDAO();
+        
+    }
+    
+    public PlacaGeneradaDTO validarVigenciaPlaca(PlacaGeneradaDTO placaGeneradaDTO){
+        
+        Calendar fechaActual = Calendar.getInstance();
+        if(placaGeneradaDTO.getFechaTramite().get(Calendar.YEAR) == fechaActual.get(Calendar.YEAR)){
+            
+            JOptionPane.showMessageDialog(null, "No puedes renovar la licencia\nLicencia con valida todo este año (" + fechaActual.get(Calendar.YEAR) + ")", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+            
+        }else{
+            
+            return placaGeneradaDTO;
+            
+        }
         
     }
     
@@ -57,9 +78,24 @@ public class VehiculoConsulta {
         
     }
     
-    public boolean agregarPlaca(VehiculoGeneradoDTO vehiculoDTO, PlacaNuevaDTO placaDTO){
+    public VehiculoGeneradoDTO agregarPlaca(VehiculoGeneradoDTO vehiculoGeneradoDTO, PlacaNuevaDTO placaNuevaDTO){
         
-        return false;
+        
+        try{
+            
+            Convertidor convertidor = new Convertidor();
+            PlacaEntidad placaEntidad = convertidor.DTOToEntidad(placaNuevaDTO, new PlacaEntidad());
+            VehiculoEntidad vehiculoEntidad = vehiculoDAO.buscarPorNumeroSerie(vehiculoGeneradoDTO.getNumSerie());
+            vehiculoEntidad = vehiculoDAO.agregarPlaca(placaEntidad, vehiculoEntidad);
+            vehiculoGeneradoDTO = convertidor.entityToDTO(vehiculoEntidad, new VehiculoGeneradoDTO());
+            
+            return vehiculoGeneradoDTO;
+            
+        }catch(PersistenceException ex){
+            
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al agregar una placa", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
         
     } 
     
