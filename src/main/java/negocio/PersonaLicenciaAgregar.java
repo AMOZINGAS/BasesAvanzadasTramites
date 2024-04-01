@@ -16,8 +16,6 @@ public class PersonaLicenciaAgregar {
     
     public LicenciaGeneradaDTO agregarLicenciaAPersona(PersonaGeneradaDTO personaGeneradaDTO, LicenciaNuevaDTO licenciaNuevaDTO){
         
-        
-        
         PersonaConsulta personaConsulta = new PersonaConsulta();
         LicenciaConsulta licenciaConsulta = new LicenciaConsulta();
         personaGeneradaDTO = personaConsulta.agregarLicencia(licenciaNuevaDTO, personaGeneradaDTO);

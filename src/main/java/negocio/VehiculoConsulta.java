@@ -40,6 +40,17 @@ public class VehiculoConsulta {
         
     }
     
+    public boolean verificarNuevo(VehiculoGeneradoDTO vehiculoGeneradoDTO){
+        
+        VehiculoEntidad vehiculoEntidad = vehiculoDAO.buscarPorNumeroSerie(vehiculoGeneradoDTO.getNumSerie());
+        if(vehiculoEntidad.getPlacas().size() == 0){
+            
+            return true;
+            
+        }
+        return false;
+    }
+    
     public List<VehiculoGeneradoDTO> listaVehiculosPersona(String curp){
         
         PersonaConsulta personaConsulta = new PersonaConsulta();

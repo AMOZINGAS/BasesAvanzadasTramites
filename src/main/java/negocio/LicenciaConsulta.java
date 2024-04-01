@@ -16,6 +16,7 @@ import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
@@ -44,6 +45,7 @@ public class LicenciaConsulta {
             IPersonaDAO personaDAO = new PersonaDAO();
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
             LicenciaEntidad licenciaEntidad = licenciaDAO.buscarLicenciaFolio(licenciaNuevaDTO.getFolio());
+            System.out.println(licenciaEntidad.getFolio());
             licenciaDAO.agregarPersona(personaEntidad, licenciaEntidad);
             return  convertidor.entityToDTO(licenciaEntidad, new LicenciaNuevaDTO());
             
@@ -56,6 +58,30 @@ public class LicenciaConsulta {
         
     }
     
+    public int generarFolio(){
+        
+        Random random = new Random();
+        int folio = random.nextInt(100000000);
+        System.out.println(folio);
+        return folio;
+        
+    }
+    
+    public int verificarFolio(){
+        
+        int folio;
+        
+        do{
+            
+            folio = generarFolio();
+            System.out.println(folio);
+            
+        }while(buscarLicenciaFolio(folio)!=null);
+        
+        return folio;
+        
+    }
+     
     public LicenciaGeneradaDTO actualizarLicencia(LicenciaGeneradaDTO licenciaGeneradaDTO){
         
         try{
@@ -97,6 +123,11 @@ public class LicenciaConsulta {
         try{
             
             LicenciaEntidad licenicaEntidad = licenciaDAO.buscarLicenciaFolio(folio);
+            if(licenicaEntidad==null){
+                
+                return null;
+                
+            }
             Convertidor convertidor = new Convertidor();
             LicenciaGeneradaDTO licenciaGeneradaDTO = convertidor.entityToDTO(licenicaEntidad, new LicenciaGeneradaDTO());
             return licenciaGeneradaDTO;

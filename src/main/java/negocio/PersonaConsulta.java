@@ -198,8 +198,11 @@ public class PersonaConsulta {
         try{
             
             Convertidor convertidor = new Convertidor();
+            System.out.println("a");
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
+            System.out.println("a");
             personaDAO.actualizarPersona(personaEntidad);
+            System.out.println("a");
             return convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
             
         }catch(PersistenceException px){
@@ -215,7 +218,12 @@ public class PersonaConsulta {
     public boolean verificarLicencia(PersonaGeneradaDTO personaGeneradaDTO){
         
         PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
-        if(personaEntidad.getLicencia().get(personaEntidad.getLicencia().size()).getEstado()==0){
+        if(personaEntidad.getLicencia().size()==0){
+            
+            System.out.println("TAMAÑO 0");
+            return false;
+            
+        }else if(personaEntidad.getLicencia().get(personaEntidad.getLicencia().size()-1).getEstado()==0){
             
             return false;
             
@@ -229,8 +237,14 @@ public class PersonaConsulta {
         try{
             
             Convertidor convertidor = new Convertidor();
-            LicenciaEntidad licenciaEntidad = convertidor.DTOToEntidad(licenciaNuevoDTO, new LicenciaEntidad());
+            LicenciaEntidad licenciaEntidad = new LicenciaEntidad();
+            licenciaEntidad.setCosto(licenciaNuevoDTO.getCosto());
+            licenciaEntidad.setEstado(licenciaNuevoDTO.getEstado());
+            licenciaEntidad.setFechaTramite(licenciaNuevoDTO.getFechaTramite());
+            licenciaEntidad.setVigencia(licenciaNuevoDTO.getVigencia());
+            licenciaEntidad.setFolio(licenciaNuevoDTO.getFolio());
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
+            licenciaEntidad.setPersonaLicencia(personaEntidad);
             personaEntidad = personaDAO.agregarLicencia(licenciaEntidad, personaEntidad);
             personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
             
