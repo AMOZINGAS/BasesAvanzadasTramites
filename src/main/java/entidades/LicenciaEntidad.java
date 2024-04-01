@@ -15,7 +15,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
     @Column(name = "vigencia", nullable = false)
     private int vigencia;
     
-    @Column(name = "folio", nullable = false, unique = true)
+    @Column(name = "folio", nullable = false)
     private int folio;
     
     @ManyToOne(cascade = {CascadeType.MERGE})

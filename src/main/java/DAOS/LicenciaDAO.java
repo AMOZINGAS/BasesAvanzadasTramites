@@ -81,9 +81,13 @@ public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {
             Root<LicenciaEntidad> root = consulta.from(LicenciaEntidad.class);
             consulta = consulta.select(root).where(criteria.equal(root.get("folio"), folio));
             TypedQuery<LicenciaEntidad> query = entityManager.createQuery(consulta);
+            if(query==null){
+                
+                return null;
+                
+            }
             return query.getSingleResult();
         }catch(NoResultException nre){
-            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
             return null;
         }
     

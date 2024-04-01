@@ -198,6 +198,11 @@ public class PersonaDAO implements IPersonaDAO {
     public PersonaEntidad agregarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personEntidad) {
     
         List<LicenciaEntidad> listaLicencias = personEntidad.getLicencia();
+        for(int i = 0; i < listaLicencias.size(); i ++){
+            
+            listaLicencias.get(i).setEstado(0);
+            
+        }
         listaLicencias.add(licenciaEntidad);
         personEntidad.setLicencia(listaLicencias);
         return personEntidad;
