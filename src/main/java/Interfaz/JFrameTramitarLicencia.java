@@ -4,13 +4,18 @@
  */
 package Interfaz;
 
+import DTO.LicenciaGeneradaDTO;
 import DTO.LicenciaNuevaDTO;
 import DTO.PersonaGeneradaDTO;
 import controlador.TipoLicencia;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import negocio.LicenciaConsulta;
 import negocio.PersonaConsulta;
+import negocio.PersonaLicenciaAgregar;
 
 /**
  *
@@ -21,8 +26,13 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
     /**
      * Creates new form JFrameTramitarLicencia
      */
-    public JFrameTramitarLicencia() {
+    
+    LicenciaNuevaDTO licenciaNuevaDTO;
+    
+    public JFrameTramitarLicencia() {    
         initComponents();
+        
+        licenciaNuevaDTO = new LicenciaNuevaDTO();
     }
 
     /**
@@ -43,8 +53,8 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        btnReiniciar = new javax.swing.JButton();
-        btnReiniciar1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnTramitar = new javax.swing.JButton();
         txtNombrePersona = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbxPersona = new javax.swing.JComboBox<>();
@@ -93,25 +103,25 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         jPanel12.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnReiniciar.setBackground(new java.awt.Color(204, 204, 204));
-        btnReiniciar.setForeground(new java.awt.Color(51, 102, 255));
-        btnReiniciar.setText("Cancelar");
-        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        btnCancelar.setForeground(new java.awt.Color(51, 102, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReiniciarActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        jPanel12.add(btnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 105, 25));
+        jPanel12.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 105, 25));
 
-        btnReiniciar1.setBackground(new java.awt.Color(204, 204, 204));
-        btnReiniciar1.setForeground(new java.awt.Color(51, 102, 255));
-        btnReiniciar1.setText("Tramitar");
-        btnReiniciar1.addActionListener(new java.awt.event.ActionListener() {
+        btnTramitar.setBackground(new java.awt.Color(204, 204, 204));
+        btnTramitar.setForeground(new java.awt.Color(51, 102, 255));
+        btnTramitar.setText("Tramitar");
+        btnTramitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReiniciar1ActionPerformed(evt);
+                btnTramitarActionPerformed(evt);
             }
         });
-        jPanel12.add(btnReiniciar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 105, 25));
+        jPanel12.add(btnTramitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 105, 25));
 
         txtNombrePersona.setBackground(new java.awt.Color(204, 204, 204));
         txtNombrePersona.setForeground(new java.awt.Color(0, 0, 0));
@@ -178,7 +188,7 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
 
         txtNombrePersona.setText(null);
@@ -186,7 +196,7 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         cbxPersona.setEnabled(true);
         cargarComboBoxPersona();
 
-    }//GEN-LAST:event_btnReiniciarActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void cargarComboBoxPersona(){
         
@@ -206,30 +216,75 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         
     }
     
-//    public int calcularCosto(){
-//        
-//        
-//        
-//    }
-//    
-//    public LicenciaNuevaDTO inicializarLicencia(){
-//        
-//        LicenciaNuevaDTO licenciaNuevaDTO = new LicenciaNuevaDTO();
-//        licenciaNuevaDTO.setCosto(WIDTH);
-//        licenciaNuevaDTO.setEstado(ERROR);
-//        licenciaNuevaDTO.setFechaTramite(fechaTramite);
-//        licenciaNuevaDTO.setFolio(WIDTH);
-//        licenciaNuevaDTO.setVigencia(WIDTH);
-//        
-//    }
+    public int calcularCosto(){
+        
+        TipoLicencia tipo;
+        
+        if(cbxVigencia.getSelectedIndex()==0){
+            
+            tipo = TipoLicencia.UN_ANIO;
+            
+        }else if(cbxVigencia.getSelectedIndex()==1){
+            
+            tipo = TipoLicencia.DOS_ANIOS;
+            
+        }else{
+            
+            tipo = TipoLicencia.TRES_ANIOS;
+            
+        }
+        
+        PersonaGeneradaDTO persona = (PersonaGeneradaDTO)cbxPersona.getSelectedItem();
+        
+        return tipo.getPrecio(persona.isDiscapacidad());
+        
+    }
     
-    private void btnReiniciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciar1ActionPerformed
+    public void inicializarLicencia(){
+        
+        licenciaNuevaDTO.setCosto(calcularCosto());
+        licenciaNuevaDTO.setEstado(1);
+        licenciaNuevaDTO.setFechaTramite(Calendar.getInstance());
+        licenciaNuevaDTO.setFolio(generarFolio());
+        licenciaNuevaDTO.setVigencia(cbxVigencia.getSelectedIndex()+1);
+        
+        
+    }
+    
+    private void btnTramitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitarActionPerformed
         // TODO add your handling code here:
         
+        PersonaLicenciaAgregar agregar = new PersonaLicenciaAgregar();
+        PersonaGeneradaDTO persona = (PersonaGeneradaDTO)cbxPersona.getSelectedItem();
+        inicializarLicencia();
+        if(licenciaNuevaDTO == null || persona == null){
+            
+            System.out.println("Uno de los dos esta vacio");
+            
+        }else{
+            System.out.println(licenciaNuevaDTO.getCosto());
+            System.out.println(licenciaNuevaDTO.getEstado());
+            System.out.println(licenciaNuevaDTO.getFechaTramite());
+            System.out.println(licenciaNuevaDTO.getFolio());
+            System.out.println(licenciaNuevaDTO.getVigencia());
+            agregar.agregarLicenciaAPersona(persona, licenciaNuevaDTO);
+            JOptionPane.showMessageDialog(this, "Se agregó correctamente la licencia a la persona con curp" + persona.getCurp(), "EXITO!!", JOptionPane.INFORMATION_MESSAGE);
+                
+            
+        }
         
         
-    }//GEN-LAST:event_btnReiniciar1ActionPerformed
+    }//GEN-LAST:event_btnTramitarActionPerformed
 
+    public int generarFolio(){
+        
+        LicenciaConsulta licencia = new LicenciaConsulta();
+        int folio = licencia.verificarFolio();
+        return folio;
+        
+    }
+    
+    
     private void txtNombrePersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombrePersonaFocusLost
         // TODO add your handling code here:
 
@@ -331,9 +386,9 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReiniciar;
-    private javax.swing.JButton btnReiniciar1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSeleccionarPersona;
+    private javax.swing.JButton btnTramitar;
     private javax.swing.JComboBox<String> cbxPersona;
     private javax.swing.JComboBox<String> cbxVigencia;
     private javax.swing.JLabel jLabel10;

@@ -14,7 +14,7 @@ public enum TipoLicencia {
     DOS_ANIOS(900),
     TRES_ANIOS(1100);
 
-    private int descuento;
+    private int descuento = 400;
     private int precio;
 
     private TipoLicencia(int precio) {
