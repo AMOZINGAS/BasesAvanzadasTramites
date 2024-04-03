@@ -19,6 +19,8 @@ public interface ILicenciaDAO {
     public LicenciaEntidad actualizarLicencia(LicenciaEntidad licenciaEntidad);
     
     public LicenciaEntidad buscarLicenciaFolio(int folio);
+
+    public LicenciaEntidad buscarLicenciaId(Long id);
     
     public List<LicenciaEntidad> listaLicenciaPersona(PersonaEntidad personaEntidad);
     

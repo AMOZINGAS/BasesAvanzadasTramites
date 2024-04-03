@@ -21,8 +21,8 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
     public PlacaEntidad() {
     }
 
-    public PlacaEntidad(String numeroPlaca, VehiculoEntidad vehiculo, Calendar fechaTramite, int costo, PersonaEntidad persona, int estado) {
-        super(costo, fechaTramite, persona, estado);
+    public PlacaEntidad(String numeroPlaca, VehiculoEntidad vehiculo, Calendar fechaTramite, int costo, PersonaEntidad persona, int estado, String tipo) {
+        super(costo, fechaTramite, persona, estado, tipo);
         this.numeroPlaca = numeroPlaca;
         this.vehiculo = vehiculo;
     }

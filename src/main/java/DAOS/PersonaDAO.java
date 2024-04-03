@@ -106,6 +106,23 @@ public class PersonaDAO implements IPersonaDAO {
     
     }
 
+    @Override
+    public List<PersonaEntidad> buscarPorNombreCurp(String nombre, String curp) {
+        
+        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+        CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
+        Root<PersonaEntidad> root = consulta.from(PersonaEntidad.class);
+        consulta = consulta.select(root).where(criteria.like(root.get("nombres"), "%" + nombre + "%"));
+        consulta = consulta.select(root).where(criteria.like(root.get("curp"), "%" + curp + "%"));
+        TypedQuery<PersonaEntidad> query = entityManager.createQuery(consulta);
+        List<PersonaEntidad> listaPersonasPorNombre = query.getResultList();
+        
+        return listaPersonasPorNombre;
+    
+    }
+    
+    
+
     /**
      * Metodo que regresa la lista de todas las personas en la base de datos
      * @return llista de personas en la base de datos

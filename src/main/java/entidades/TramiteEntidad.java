@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +18,16 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
 public abstract class TramiteEntidad implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idTramite")
     private Long id;
+    
+    @Column(name = "tipo", insertable = false, updatable = false) // No se inserta ni actualiza en la tabla
+    private String tipo;
     
     @Column(name = "costo", nullable = false)
     private int costo;
@@ -41,12 +46,21 @@ public abstract class TramiteEntidad implements Serializable {
     public TramiteEntidad() {
     }
 
-    public TramiteEntidad(int costo, Calendar fechaTramite, PersonaEntidad persona, int estado) {
+    public TramiteEntidad(int costo, Calendar fechaTramite, PersonaEntidad persona, int estado, String tipo) {
         
         this.costo = costo;
         this.fechaTramite = fechaTramite;
         this.persona = persona;
         this.estado = estado;
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getCosto() {
@@ -78,6 +92,10 @@ public abstract class TramiteEntidad implements Serializable {
         return persona;
     }
 
+    public Long getId() {
+        return id;
+    }
+    
     public void setPersona(PersonaEntidad cliente) {
         this.persona = cliente;
     }

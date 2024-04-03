@@ -40,6 +40,13 @@ public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {
     }
 
     @Override
+    public LicenciaEntidad buscarLicenciaId(Long id) {
+    
+        return entityManager.find(LicenciaEntidad.class, id);
+    
+    }
+    
+    @Override
     public LicenciaEntidad agregarPersona(PersonaEntidad personaEntidad, LicenciaEntidad licenciaEntidad){
         
         licenciaEntidad.setPersona(personaEntidad);
