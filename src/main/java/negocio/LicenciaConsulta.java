@@ -141,4 +141,27 @@ public class LicenciaConsulta {
         
     }
     
+    public LicenciaGeneradaDTO buscarLicenciaId(Long id){
+        
+        try{
+            
+            LicenciaEntidad licenicaEntidad = licenciaDAO.buscarLicenciaId(id);
+            if(licenicaEntidad==null){
+                
+                return null;
+                
+            }
+            Convertidor convertidor = new Convertidor();
+            LicenciaGeneradaDTO licenciaGeneradaDTO = convertidor.entityToDTO(licenicaEntidad, new LicenciaGeneradaDTO());
+            return licenciaGeneradaDTO;
+            
+        }catch(NoResultException nre){
+            
+            JOptionPane.showMessageDialog(null, "No se encontró una placa con ese numero de placa");
+            return null;
+            
+        }
+        
+    }
+    
 }

@@ -1,38 +1,64 @@
 package DTO;
 
+import java.util.Calendar;
+
 public class TramiteDTO {
     
-     private Long idCliente;
-     private Long idTramite;
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
+    Long id;
+    private String tipo;
+    private int estado;
+    private int costo;
+    private Calendar fechaTramite;
 
     public TramiteDTO() {
     }
 
-    public TramiteDTO(Long idCliente, Long idTramite) {
-        this.idCliente = idCliente;
-        this.idTramite = idTramite;
+    public TramiteDTO(Long id, String tipo, int estado, int costo, Calendar fechaTramite) {
+        this.id = id;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.costo = costo;
+        this.fechaTramite = fechaTramite;
     }
 
-    public Long getIdTramite() {
-        return idTramite;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setIdTramite(Long idTramite) {
-        this.idTramite = idTramite;
+    public Long getId() {
+        return id;
     }
 
-    public TramiteDTO(Long idCliente) {
-        this.idCliente = idCliente;
+    public void setId(Long id) {
+        this.id = id;
     }
-     
-     
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public int getCosto() {
+        return costo;
+    }
+
+    public void setCosto(int costo) {
+        this.costo = costo;
+    }
+
+    public Calendar getFechaTramite() {
+        return fechaTramite;
+    }
+
+    public void setFechaTramite(Calendar fechaTramite) {
+        this.fechaTramite = fechaTramite;
+    }
+    
 }

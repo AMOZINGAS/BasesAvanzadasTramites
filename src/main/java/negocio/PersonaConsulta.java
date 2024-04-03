@@ -82,6 +82,22 @@ public class PersonaConsulta {
         
     }
     
+    public List<PersonaGeneradaDTO> listaPersonasNombreCurp(String nombre, String curp){
+        
+        List<PersonaEntidad> listaPersonasNombreCurp = personaDAO.buscarPorNombreCurp(nombre, curp);
+        List<PersonaGeneradaDTO> listaPersonasDTO = new ArrayList<>();
+        for(int i = 0; i < listaPersonasNombreCurp.size(); i ++){
+            
+            PersonaEntidad persona = listaPersonasNombreCurp.get(i);
+            Convertidor convertidor = new Convertidor();
+            PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(persona, new PersonaGeneradaDTO());
+            listaPersonasDTO.add(personaGeneradaDTO);
+            
+        }
+        return listaPersonasDTO;
+        
+    }
+    
     /**
      * Metodo que regresa un dto de una persona buscada por su id
      * @param id
