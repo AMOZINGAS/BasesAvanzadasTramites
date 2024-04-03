@@ -4,7 +4,14 @@
  */
 package Interfaz;
 
-import controlador.TipoPlaca;
+import DTO.PersonaGeneradaDTO;
+import DTO.TramiteDTO;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import negocio.TramiteConsulta;
+
 
 /**
  *
@@ -12,13 +19,28 @@ import controlador.TipoPlaca;
  */
 public class JFrameHistorial extends javax.swing.JFrame {
 
-
+    List<TramiteDTO> listaTramites;
+    
+    PersonaGeneradaDTO personaGeneradaDTO;
+    Calendar fechaDesde;
+    Calendar fechaHasta;
+    private String licencia = "LicenciaEntidad";
+    private String placa = "PlacaEntidad";
+    
     /**
      * Creates new form JFrameHistorial
      */
-    public JFrameHistorial() {
+    public JFrameHistorial(PersonaGeneradaDTO personaGeneradaDTO, Calendar fechaDesde, Calendar fechaHasta) {
         initComponents();
         setLocationRelativeTo(null);
+        
+        this.fechaDesde = fechaDesde;
+        this.fechaHasta = fechaHasta;
+        this.personaGeneradaDTO = personaGeneradaDTO;
+        listaTramites = new ArrayList<>();
+        lblNombre.setText(personaGeneradaDTO.getNombres());
+        tblTramites.setModel(convertirModel(0));
+        
     }
 
     /**
@@ -38,11 +60,13 @@ public class JFrameHistorial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        btnTodos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTramites = new javax.swing.JTable();
+        btnRegresar = new javax.swing.JButton();
+        btnLicencias = new javax.swing.JButton();
+        btnPlacas = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,43 +107,65 @@ public class JFrameHistorial extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton7.setBackground(new java.awt.Color(204, 204, 204));
-        jButton7.setForeground(new java.awt.Color(51, 102, 255));
-        jButton7.setText("Regresar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnTodos.setBackground(new java.awt.Color(204, 204, 204));
+        btnTodos.setForeground(new java.awt.Color(51, 102, 255));
+        btnTodos.setText("Todos");
+        btnTodos.setEnabled(false);
+        btnTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnTodosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 105, 25));
+        jPanel1.add(btnTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 105, 25));
 
-        jLabel6.setText("Nombres");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setToolTipText("");
-        jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, 20));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tipo", "Precio", "Fecha", "Vigencia"
+                "Tipo", "Fecha tramite", "Fecha vencimiento", "Costo", "Estado"
             }
         ));
-        jTable1.setToolTipText("");
-        jTable1.setGridColor(new java.awt.Color(153, 153, 153));
-        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
+        tblTramites.setToolTipText("");
+        tblTramites.setGridColor(new java.awt.Color(153, 153, 153));
+        tblTramites.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(tblTramites);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 130));
+
+        btnRegresar.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegresar.setForeground(new java.awt.Color(51, 102, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 105, 25));
+
+        btnLicencias.setBackground(new java.awt.Color(204, 204, 204));
+        btnLicencias.setForeground(new java.awt.Color(51, 102, 255));
+        btnLicencias.setText("Licencias");
+        btnLicencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLicenciasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 105, 25));
+
+        btnPlacas.setBackground(new java.awt.Color(204, 204, 204));
+        btnPlacas.setForeground(new java.awt.Color(51, 102, 255));
+        btnPlacas.setText("Placas");
+        btnPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlacasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 105, 25));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 230, 20));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
@@ -128,29 +174,146 @@ public class JFrameHistorial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    public void inicializarLista(){
+        
+        TramiteConsulta tramiteConsulta = new TramiteConsulta();
+        listaTramites = tramiteConsulta.listaTramitesPersona(personaGeneradaDTO, fechaHasta, fechaDesde);
+    }
+    
+    public void inicializarListaTipo(String tipo){
+        
+        TramiteConsulta tramiteConsulta = new TramiteConsulta();
+        listaTramites = tramiteConsulta.listaTramitePersonaTipo(personaGeneradaDTO, tipo, fechaHasta, fechaDesde);
+    }
+    
+    private void btnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosActionPerformed
         // TODO add your handling code here:
         
-        JFrameInicio inicio = new JFrameInicio();
-        inicio.setVisible(true);
+        tblTramites.setModel(convertirModel(0));
+        btnTodos.setEnabled(false);
+        btnPlacas.setEnabled(true);
+        btnLicencias.setEnabled(true);
+        
+    }//GEN-LAST:event_btnTodosActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        
+        JFrameBuscar buscar = new JFrameBuscar();
+        buscar.setVisible(true);
         this.dispose();
         
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
+        // TODO add your handling code here:
+        tblTramites.setModel(convertirModel(1));
+        btnTodos.setEnabled(true);
+        btnPlacas.setEnabled(true);
+        btnLicencias.setEnabled(false);
+        
+    }//GEN-LAST:event_btnLicenciasActionPerformed
+
+    private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
+        // TODO add your handling code here:
+        
+        tblTramites.setModel(convertirModel(2));
+        btnTodos.setEnabled(true);
+        btnPlacas.setEnabled(false);
+        btnLicencias.setEnabled(true);
+        
+    }//GEN-LAST:event_btnPlacasActionPerformed
+
+    
+    
+    public DefaultTableModel convertirModel(int tipo){
+        String estado;
+        String fechaVencimiento = "";
+        String descripcionTipo = "";
+        TramiteConsulta tramiteConsulta = new TramiteConsulta();
+            
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Fecha tramite");
+        modelo.addColumn("Fecha vencimiento");
+        modelo.addColumn("Costo");
+        modelo.addColumn("Estado");
+        modelo.setRowCount(0);
+        if(tipo == 0){
+            
+            inicializarLista();
+            
+        }else if(tipo == 1){
+            
+            inicializarListaTipo("LicenciaEntidad");
+            descripcionTipo = "Licencia";
+            
+        }else if(tipo == 2){
+                    
+            inicializarListaTipo("PlacaEntidad");
+            descripcionTipo = "Placa";
+        }
+        for (TramiteDTO tramite: listaTramites) {
+          
+            if(tipo==0){
+                
+                if(tramite.getTipo().equalsIgnoreCase("LicenciaEntidad")){
+                    
+                    descripcionTipo="Licencia";
+                    
+                }else{
+                    
+                    descripcionTipo="Placa";
+                    
+                }
+                
+            }
+            if(tramite.getEstado()==0){
+                
+                estado = "Inactivo";
+                
+            }else{
+                
+                estado = "Activo";
+                
+            }
+            if(tramite.getTipo().equalsIgnoreCase("LicenciaEntidad")){
+                
+                fechaVencimiento="" + tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + tramite.getFechaTramite().get(Calendar.MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.YEAR) + tramiteConsulta.vigenciaLicencia(tramite));
+                
+            }else if(tramite.getTipo().equalsIgnoreCase("PlacaEntidad")){
+                
+                fechaVencimiento="" + tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + tramite.getFechaTramite().get(Calendar.MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.YEAR) + 1);
+                
+            }
+            modelo.addRow(new Object[]{
+                descripcionTipo,
+                tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + tramite.getFechaTramite().get(Calendar.MONTH) + "/" + tramite.getFechaTramite().get(Calendar.YEAR),
+                fechaVencimiento,
+                "$"+tramite.getCosto(),
+                estado
+            });
+        }
+        
+        return modelo;
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btnLicencias;
+    private javax.swing.JButton btnPlacas;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnTodos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JTable tblTramites;
     // End of variables declaration//GEN-END:variables
 }

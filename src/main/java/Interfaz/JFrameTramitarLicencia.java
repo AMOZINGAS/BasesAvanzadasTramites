@@ -4,13 +4,11 @@
  */
 package Interfaz;
 
-import DTO.LicenciaGeneradaDTO;
 import DTO.LicenciaNuevaDTO;
 import DTO.PersonaGeneradaDTO;
 import controlador.TipoLicencia;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import negocio.LicenciaConsulta;
@@ -53,7 +51,7 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        btnCancelar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         btnTramitar = new javax.swing.JButton();
         txtNombrePersona = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -61,6 +59,7 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         btnSeleccionarPersona = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         cbxVigencia = new javax.swing.JComboBox<>();
+        btnCancelar = new javax.swing.JButton();
 
         jTextField2.setText("jTextField1");
 
@@ -103,19 +102,20 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         jPanel12.setPreferredSize(new java.awt.Dimension(393, 267));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
-        btnCancelar.setForeground(new java.awt.Color(51, 102, 255));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditar.setForeground(new java.awt.Color(51, 102, 255));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        jPanel12.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 105, 25));
+        jPanel12.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 105, 25));
 
         btnTramitar.setBackground(new java.awt.Color(204, 204, 204));
         btnTramitar.setForeground(new java.awt.Color(51, 102, 255));
         btnTramitar.setText("Tramitar");
+        btnTramitar.setEnabled(false);
         btnTramitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTramitarActionPerformed(evt);
@@ -178,7 +178,18 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         cbxVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 año", "2 años", "3años" }));
+        cbxVigencia.setEnabled(false);
         jPanel12.add(cbxVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 90, -1));
+
+        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        btnCancelar.setForeground(new java.awt.Color(51, 102, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel12.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 105, 25));
 
         jPanel9.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
 
@@ -188,15 +199,17 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
 
-        txtNombrePersona.setText(null);
+        txtNombrePersona.setText("");
         btnSeleccionarPersona.setEnabled(true);
         cbxPersona.setEnabled(true);
+        cbxVigencia.setEnabled(false);
+        btnTramitar.setEnabled(false);
         cargarComboBoxPersona();
 
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     public void cargarComboBoxPersona(){
         
@@ -269,7 +282,9 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
             System.out.println(licenciaNuevaDTO.getVigencia());
             agregar.agregarLicenciaAPersona(persona, licenciaNuevaDTO);
             JOptionPane.showMessageDialog(this, "Se agregó correctamente la licencia a la persona con curp" + persona.getCurp(), "EXITO!!", JOptionPane.INFORMATION_MESSAGE);
-                
+            JFrameTramitar tramitar = new JFrameTramitar();
+            tramitar.setVisible(true);
+            this.dispose();
             
         }
         
@@ -297,6 +312,8 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "No hay personas con ese nombre", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             txtNombrePersona.setText("");
+            cbxVigencia.setEnabled(false);
+            btnTramitar.setEnabled(false);
 
         }
         //        if(!sinCaracteresEspeciales(txtNombrePersona.getText())){
@@ -342,13 +359,24 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
 
-        }else if(cbxPersona==null){//POR MODIFICAR
-
         }else{
 
+            cbxVigencia.setEnabled(true);
+            btnTramitar.setEnabled(true);
+            btnSeleccionarPersona.setEnabled(false);
+            cbxPersona.setEnabled(false);
 
         }
     }//GEN-LAST:event_btnSeleccionarPersonaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        
+        JFrameInicio inicio = new JFrameInicio();
+        inicio.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -387,6 +415,7 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnSeleccionarPersona;
     private javax.swing.JButton btnTramitar;
     private javax.swing.JComboBox<String> cbxPersona;

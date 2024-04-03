@@ -4,7 +4,6 @@
  */
 package Interfaz;
 
-import controlador.TipoPlaca;
 
 /**
  *
@@ -164,9 +163,11 @@ public class JFrameInicio extends javax.swing.JFrame {
 
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         // TODO add your handling code here:
-        
+        System.out.println("AAAAAAAAAAAAA");
         JFrameAgregarPersona personas = new JFrameAgregarPersona();
+        System.out.println("AAAAAAAAAAAAA");
         personas.setVisible(true);
+        System.out.println("AAAAAAAAAAAAA");
         this.dispose();
         
     }//GEN-LAST:event_btnPersonaActionPerformed

@@ -4,6 +4,17 @@
  */
 package Interfaz;
 
+import DTO.PersonaGeneradaDTO;
+import com.toedter.calendar.JDateChooser;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import negocio.PersonaConsulta;
+
+
 
 /**
  *
@@ -11,9 +22,16 @@ package Interfaz;
  */
 public class JFrameBuscar extends javax.swing.JFrame {
 
+    private JDateChooser dateChooserDesde;
+    private JDateChooser dateChooserHasta;
+    
     public JFrameBuscar() {
         initComponents();
         setLocationRelativeTo(null);
+        inicializarSelectores();
+        limitarFecha();
+        dateChooserHasta.setEnabled(false);
+        
     }
 
     /**
@@ -33,18 +51,20 @@ public class JFrameBuscar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        txtOtroDate = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
+        txtCurp = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txtNombrePersona = new javax.swing.JTextField();
+        cbxPersona = new javax.swing.JComboBox<>();
+        btnSeleccionarPersona = new javax.swing.JButton();
+        lblFechaDesde = new javax.swing.JLabel();
+        lblFechaHasta = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,104 +103,418 @@ public class JFrameBuscar extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(393, 267));
         jPanel1.setMinimumSize(new java.awt.Dimension(393, 267));
         jPanel1.setPreferredSize(new java.awt.Dimension(393, 267));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setForeground(new java.awt.Color(51, 102, 255));
-        jButton6.setText("Buscar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBackground(new java.awt.Color(204, 204, 204));
+        btnBuscar.setEnabled(false);
+        btnBuscar.setForeground(new java.awt.Color(51, 102, 255));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 105, 25));
 
-        jLabel3.setText("hasta");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
+        txtOtroDate.setText(">");
+        txtOtroDate.setBackground(new java.awt.Color(204, 204, 204));
+        txtOtroDate.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtOtroDate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtOtroDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtOtroDateMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setText("RFC");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
-
-        jLabel6.setText("Nombres");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jLabel5.setText("CURP");
 
         jLabel7.setText("Periodo de transaccion");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
 
         jLabel9.setText("De");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 20, -1));
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setToolTipText("");
-        jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 70, 20));
-
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setToolTipText("");
-        jTextField2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 180, 20));
-
-        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setToolTipText("");
-        jTextField3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 180, 20));
-
-        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setToolTipText("");
-        jTextField5.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 70, 20));
-
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 110, -1));
-
-        jButton7.setBackground(new java.awt.Color(204, 204, 204));
-        jButton7.setForeground(new java.awt.Color(51, 102, 255));
-        jButton7.setText("Regresar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+        txtCurp.setBackground(new java.awt.Color(204, 204, 204));
+        txtCurp.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtCurp.setForeground(new java.awt.Color(255, 255, 255));
+        txtCurp.setToolTipText("");
+        txtCurp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCurpKeyReleased(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 105, 25));
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
+        btnRegresar.setText("Regresar");
+        btnRegresar.setBackground(new java.awt.Color(204, 204, 204));
+        btnRegresar.setForeground(new java.awt.Color(51, 102, 255));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Nombre del dueño");
+        jLabel11.setBackground(new java.awt.Color(0, 0, 0));
+
+        txtNombrePersona.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombrePersona.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNombrePersona.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombrePersona.setToolTipText("");
+        txtNombrePersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombrePersonaKeyReleased(evt);
+            }
+        });
+
+        cbxPersona.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbxPersonaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbxPersonaFocusLost(evt);
+            }
+        });
+        cbxPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPersonaActionPerformed(evt);
+            }
+        });
+        cbxPersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cbxPersonaKeyReleased(evt);
+            }
+        });
+
+        btnSeleccionarPersona.setText("Seleccionar");
+        btnSeleccionarPersona.setBackground(new java.awt.Color(204, 204, 204));
+        btnSeleccionarPersona.setForeground(new java.awt.Color(51, 102, 255));
+        btnSeleccionarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarPersonaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("hasta");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel11))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txtNombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel5))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txtCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnSeleccionarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel7))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(170, 170, 170)
+                .addComponent(jLabel6))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(txtOtroDate, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(lblFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel11)
+                .addGap(4, 4, 4)
+                .addComponent(txtNombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel5)
+                .addGap(4, 4, 4)
+                .addComponent(txtCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel7)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel6))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(txtOtroDate, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 400, 267));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        if(dateChooserHasta.getCalendar()==null){
+            
+            JOptionPane.showMessageDialog(this, "No se a seleccionado fecha limite", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+            
+        }else if(dateChooserDesde.getCalendar()==null){
+            
+            JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna fecha inicial", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            
+            JFrameHistorial historial = new JFrameHistorial((PersonaGeneradaDTO)cbxPersona.getSelectedItem(), dateChooserDesde.getCalendar(), dateChooserHasta.getCalendar());
+            historial.setVisible(true);
+            this.dispose();
+            
+            
+        }
+        
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    public void inicializarSelectores(){
+        
+        dateChooserDesde = new JDateChooser();
+        dateChooserDesde.setBounds(lblFechaDesde.getBounds());
+        dateChooserHasta = new JDateChooser();
+        dateChooserHasta.setBounds(lblFechaHasta.getBounds());
+        jPanel1.add(dateChooserDesde);
+        jPanel1.add(dateChooserHasta);
+        
+    }
+    
+    
+    
+    public void limitarFechaHasta(Calendar fecha){
+        
+        Calendar fechaMaxima = Calendar.getInstance();
+        Date maximo = fechaMaxima.getTime();
+        
+        Date minimo = fecha.getTime();
+        dateChooserHasta.setSelectableDateRange(minimo, maximo);
+        
+    }
+    
+    public void limitarFecha(){
+        
+        Calendar fechaMaxima = Calendar.getInstance();
+        fechaMaxima.add(Calendar.DATE, -1);
+        Date maximo = fechaMaxima.getTime();
+        
+        Calendar fechaMinima = Calendar.getInstance();
+        fechaMinima.set(Calendar.YEAR, 1900);
+        Date minimo = fechaMinima.getTime();
+        dateChooserDesde.setSelectableDateRange(minimo, maximo);
+        
+    }
+    
+    private void txtNombrePersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePersonaKeyReleased
+        // TODO add your handling code here:
+        cargarComboBoxPersona();
+        if(cbxPersona.getSelectedItem()== null){
+
+            JOptionPane.showMessageDialog(this, "No hay personas con ese nombre", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            txtNombrePersona.setText("");
+            btnBuscar.setEnabled(false);
+
+        }
+        
+    }//GEN-LAST:event_txtNombrePersonaKeyReleased
+    
+    
+    
+    
+    public void cargarComboBoxPersona(){
+        
+        DefaultComboBoxModel modeloComboBox = new DefaultComboBoxModel();
+        cbxPersona.setModel(modeloComboBox);
+        List<PersonaGeneradaDTO> personas = listaPersonasNombre();
+        for (PersonaGeneradaDTO persona : personas) {
+            modeloComboBox.addElement(persona);
+        }
+        
+    }
+    
+    public List<PersonaGeneradaDTO> listaPersonasNombre(){
+        
+        PersonaConsulta personaConsulta = new PersonaConsulta();
+        return personaConsulta.listaPersonasNombre(txtNombrePersona.getText());
+        
+    }
+    
+    private void cbxPersonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxPersonaFocusGained
+        // TODO add your handling code here:
+
+        //        cargarComboBoxVehiculo();
+        //        cbxVehiculo.setEnabled(true);
+    }//GEN-LAST:event_cbxPersonaFocusGained
+
+    private void cbxPersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbxPersonaFocusLost
+        // TODO add your handling code here:
+
+        if(listaPersonasNombre()==null){
+
+            JOptionPane.showMessageDialog(this, "No existe ese nombre", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            txtNombrePersona.setText("");
+
+        }
+    }//GEN-LAST:event_cbxPersonaFocusLost
+
+    private void cbxPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPersonaActionPerformed
+
+    private void cbxPersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxPersonaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxPersonaKeyReleased
+
+    private void btnSeleccionarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarPersonaActionPerformed
+        // TODO add your handling code here:
+
+        if(cbxPersona.getSelectedItem()==null){
+
+            JOptionPane.showMessageDialog(this, "No se a seleccionado ninguna persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+
+        }else if(btnSeleccionarPersona.getText().equalsIgnoreCase("Seleccionar")){
+
+            btnBuscar.setEnabled(true);
+            cbxPersona.setEnabled(false);
+            txtCurp.setEnabled(false);
+            txtNombrePersona.setEnabled(false);
+            btnSeleccionarPersona.setText("Editar");
+            
+        }else if(btnSeleccionarPersona.getText().equalsIgnoreCase("Editar")){
+            
+            btnBuscar.setEnabled(false);
+            cbxPersona.setEnabled(true);
+            txtCurp.setEnabled(true);
+            txtNombrePersona.setEnabled(true);
+            btnSeleccionarPersona.setText("Seleccionar");
+            
+        }
+    }//GEN-LAST:event_btnSeleccionarPersonaActionPerformed
+
+    private void txtCurpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCurpKeyReleased
         // TODO add your handling code here:
         
-        JFrameHistorial historial = new JFrameHistorial();
-        historial.setVisible(true);
-        this.dispose();
+        cargarComboBoxPersona();
+        if(cbxPersona.getSelectedItem()== null){
 
-    }//GEN-LAST:event_jButton6ActionPerformed
+            JOptionPane.showMessageDialog(this, "No hay personas con ese nombre", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            txtNombrePersona.setText("");
+            btnBuscar.setEnabled(false);
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        }
         
+        List<PersonaGeneradaDTO> listaPersonas = new ArrayList<>();
+        for(int i = 0; i < cbxPersona.getItemCount(); i ++){
+
+            listaPersonas.add((PersonaGeneradaDTO)cbxPersona.getSelectedItem());
+
+        }
+        cargarComboBoxPersonaCurp();
+        if(cbxPersona.getSelectedItem()== null){
+
+        JOptionPane.showMessageDialog(this, "No hay personas con esa curp", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+        txtCurp.setText("");
+        btnBuscar.setEnabled(false);
+        cargarComboBoxPersona();
+
+        }
+        
+        
+    }//GEN-LAST:event_txtCurpKeyReleased
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+
         JFrameInicio inicio = new JFrameInicio();
         inicio.setVisible(true);
         this.dispose();
-        
-    }//GEN-LAST:event_jButton7ActionPerformed
 
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtOtroDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOtroDateMouseClicked
+        // TODO add your handling code here:
+        if(dateChooserDesde.getCalendar()==null){
+            
+            JOptionPane.showMessageDialog(this, "No a seleccionado ninguna fecha", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            
+            if(txtOtroDate.getText().equalsIgnoreCase(">")){
+            
+                txtOtroDate.setText("<");
+                dateChooserDesde.setEnabled(false);
+                dateChooserHasta.setEnabled(true);
+                Calendar fecha = dateChooserDesde.getCalendar();
+                fecha.add(Calendar.DATE, 1);
+                limitarFechaHasta(fecha);
+            
+            }else if(txtOtroDate.getText().equalsIgnoreCase("<")){
+
+                txtOtroDate.setText(">");
+                dateChooserDesde.setEnabled(true);
+                dateChooserHasta.setEnabled(false);
+
+            }
+
+        }
+        
+        
+    }//GEN-LAST:event_txtOtroDateMouseClicked
+
+    public void cargarComboBoxPersonaCurp(){
+        
+        DefaultComboBoxModel modeloComboBox = new DefaultComboBoxModel();
+        cbxPersona.setModel(modeloComboBox);
+        List<PersonaGeneradaDTO> listaPersonasCurp = listaPersonasNombreCurp();
+        for (PersonaGeneradaDTO persona : listaPersonasCurp) {
+            modeloComboBox.addElement(persona);
+        }
+        
+    }
+    
+    public List<PersonaGeneradaDTO> listaPersonasNombreCurp(){
+        
+        PersonaConsulta personaConsulta = new PersonaConsulta();
+        return personaConsulta.listaPersonasNombreCurp(txtNombrePersona.getText(), txtCurp.getText());
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSeleccionarPersona;
+    private javax.swing.JComboBox<String> cbxPersona;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -191,9 +525,10 @@ public class JFrameBuscar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel lblFechaDesde;
+    private javax.swing.JLabel lblFechaHasta;
+    private javax.swing.JTextField txtCurp;
+    private javax.swing.JTextField txtNombrePersona;
+    private javax.swing.JLabel txtOtroDate;
     // End of variables declaration//GEN-END:variables
 }
