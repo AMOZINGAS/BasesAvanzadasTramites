@@ -16,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * 
+ * @author Amós Helí Olguín Quiróz
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo")
@@ -43,9 +47,20 @@ public abstract class TramiteEntidad implements Serializable {
     @JoinColumn(name = "idPersona")
     private PersonaEntidad persona;
     
+    /**
+     * Constructor por defecto
+     */
     public TramiteEntidad() {
     }
 
+    /**
+     * Constructor que inicializa los parametro
+     * @param costo
+     * @param fechaTramite
+     * @param persona
+     * @param estado
+     * @param tipo 
+     */
     public TramiteEntidad(int costo, Calendar fechaTramite, PersonaEntidad persona, int estado, String tipo) {
         
         this.costo = costo;

@@ -14,7 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
+/**
+ * 
+ * @author Amós Helí Olguín Quiróz
+ */
 @Entity
 public class PersonaEntidad implements Serializable {
 
@@ -64,7 +67,7 @@ public class PersonaEntidad implements Serializable {
     }
 
     /**
-     * Metodo que inicializa a persona para utilizar sus datos
+     * Constructor que inicializa a persona para utilizar sus datos
      * @param fechaNacimiento
      * @param rfc
      * @param curp

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOS;
 
 import entidades.LicenciaEntidad;
@@ -22,56 +18,48 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class PersonaDAO implements IPersonaDAO {
 
     private final IConexionBD conexionBD = new ConexionBD();
     private EntityManager entityManager;
 
+    /**
+     * Constructor que inicializa la conexion
+     */
     public PersonaDAO() {
         try {
-
             entityManager = conexionBD.crearConexion();
         } catch (SQLException ex) {
-
             ex.printStackTrace();
-
         }
     }
 
     /**
-     * Metodo que agrega una persona a la base de datos
+     * Metodo que agrega a una persona a la base de datos
      * @param personaEntidad
-     * @return la entidad persistida
-     * @throws PersistenciaException 
+     * @return la persona agregada
      */
     @Override
     public PersonaEntidad agregarPersona(PersonaEntidad personaEntidad) throws PersistenciaException{
-
         try {
-            
             IPersistirDAO persistirDAO = new PersistirDAO();
             persistirDAO.persistirEntidad(personaEntidad);
             return personaEntidad;
-            
         } catch (SQLException ex) {
-            
             Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-            
         }
-
     }
 
     /**
-     * Metodo que regresa la entidad que se encuentre mediante el id
+     * Metodo que busca a una persona por el id enviado como parametro
      * @param id
-     * @return la entidad encontrada, null en caso contrario
+     * @return la persona encontrada, null en caso contrario
      */
     @Override
     public PersonaEntidad buscarPorId(Long id) {
-        
             try{
                 CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
                 CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
@@ -83,32 +71,34 @@ public class PersonaDAO implements IPersonaDAO {
                 Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
                 return null;
             }
-
     }
 
     /**
-     * Metodo que regresa la lista de las personas que coincidan con el 
-     * nombre dado como parametro
+     * Metodo que genera una lista de personas que coincidan con el nombre dado
+     * como parametro
      * @param nombre
-     * @return la lilsta de las personas que coincidan con el nombre
+     * @return lista de personas encontradas
      */
     @Override
     public List<PersonaEntidad> buscarPorNombre(String nombre) {
-    
         CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
         CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
         Root<PersonaEntidad> root = consulta.from(PersonaEntidad.class);
         consulta = consulta.select(root).where(criteria.like(root.get("nombres"), "%" + nombre + "%"));
         TypedQuery<PersonaEntidad> query = entityManager.createQuery(consulta);
         List<PersonaEntidad> listaPersonasPorNombre = query.getResultList();
-        
         return listaPersonasPorNombre;
-    
     }
-
+    
+    /**
+     * Metodo que genera una lista de persona por nombre y una curp dados 
+     * como parametro
+     * @param nombre
+     * @param curp
+     * @return una lista de personas encontradas
+     */
     @Override
     public List<PersonaEntidad> buscarPorNombreCurp(String nombre, String curp) {
-        
         CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
         CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
         Root<PersonaEntidad> root = consulta.from(PersonaEntidad.class);
@@ -116,79 +106,67 @@ public class PersonaDAO implements IPersonaDAO {
         consulta = consulta.select(root).where(criteria.like(root.get("curp"), "%" + curp + "%"));
         TypedQuery<PersonaEntidad> query = entityManager.createQuery(consulta);
         List<PersonaEntidad> listaPersonasPorNombre = query.getResultList();
-        
         return listaPersonasPorNombre;
-    
     }
     
-    
-
     /**
-     * Metodo que regresa la lista de todas las personas en la base de datos
-     * @return llista de personas en la base de datos
+     * Metodo que genera la lista completa de personas que están registradas
+     * @return lista de personas encontradas
      */
     @Override
     public List<PersonaEntidad> listaPersonas() {
-    
         CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
         CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
         Root<PersonaEntidad> root = consulta.from(PersonaEntidad.class);
         TypedQuery<PersonaEntidad> query = entityManager.createQuery(consulta);
         List<PersonaEntidad> listaPersonas = query.getResultList();
-        
         return listaPersonas;
-        
     }
 
+    /**
+     * Metodo que actualiza a la persona enviada como parametro
+     * @param personaEntidad
+     * @return la persona que se actualizó
+     */
     @Override
     public PersonaEntidad actualizarPersona(PersonaEntidad personaEntidad){
-        
         EntityTransaction transaction = null;
-        
         try {
-            
             transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.merge(personaEntidad);
             transaction.commit();
             return personaEntidad;
-            
         } catch (PersistenciaException ex) {
-            
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            
             return null;
-            
         }
     }
     
     /**
-     * Metodo que agrega vehiculo a persona especifica
+     * Metodo que agrega una referencia de un vehiculo a una personas enviada
+     * como parametro
      * @param vehiculoEntidad
      * @param personEntidad
-     * @return personaEntidad
+     * @return la persona con la referencia del vehiculo
      */
     @Override
     public PersonaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PersonaEntidad personEntidad) {
-        
         List<VehiculoEntidad> listaVehiculos = personEntidad.getVehiculo();
-//        vehiculoEntidad.setPersona(personEntidad);
         listaVehiculos.add(vehiculoEntidad);
         personEntidad.setVehiculo(listaVehiculos);
         return personEntidad;
-        
     }
 
     /**
-     * Metodo que busca a una persona por su curp y regresa la entidad encontrada
+     * Metodo que busca una persona por una curp dada como parametro
      * @param curp
-     * @return personaentidad
+     * @return la persona encontrada, null en caso contrario
      */
     @Override
     public PersonaEntidad buscarPorCurp(String curp) {
-
         try{
                 CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
                 CriteriaQuery<PersonaEntidad> consulta = criteria.createQuery(PersonaEntidad.class);
@@ -200,43 +178,24 @@ public class PersonaDAO implements IPersonaDAO {
                 Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
                 return null;
             }
-        
     }
-
-    
     
     /**
-     * Metodo que agrega licencia nueva a persona
+     * Metodo que agrega una referencia de una licencia a una persona dada
+     * como parametro
      * @param licenciaEntidad
      * @param personEntidad
-     * @return personaentidad
+     * @return la persona con la referencia de la licencia
      */
     @Override
     public PersonaEntidad agregarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personEntidad) {
-    
         List<LicenciaEntidad> listaLicencias = personEntidad.getLicencia();
         for(int i = 0; i < listaLicencias.size(); i ++){
-            
             listaLicencias.get(i).setEstado(0);
-            
         }
         listaLicencias.add(licenciaEntidad);
         personEntidad.setLicencia(listaLicencias);
         return personEntidad;
         
-    }
-
-    @Override
-    public PersonaEntidad renovarLicencia(LicenciaEntidad licenciaEntidad, PersonaEntidad personaEntidad) {
-    
-        return null;
-        
-    }
-    
-    
-    
-    
-    
-    
-
+    }    
 }

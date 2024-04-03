@@ -1,27 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package DAOS;
 
-//import Entidades.PlacaEntidad;
-//import Entidades.VehiculoEntidad;
 import entidades.PlacaEntidad;
 import entidades.VehiculoEntidad;
 import java.util.List;
 
 /**
  *
- * @author elimo
+ * @author Amós Helí Olguín Quiróz
  */
 public interface IPlacaDAO {
     
+    /**
+     * Metodo que agrega una referencia de un vehiculo a la placa
+     * @param vehiculoEntidad
+     * @param placaEntidad
+     * @return la placa con la referencia del vehiculo
+     */
     public PlacaEntidad agregarVehiculo(VehiculoEntidad vehiculoEntidad, PlacaEntidad placaEntidad);
     
+    /**
+     * Metodo que actualiza una placa dada como parametro
+     * @param placaEntidad
+     * @return la placa actualizada
+     */
     public PlacaEntidad actualizarPlaca(PlacaEntidad placaEntidad);
     
+    /**
+     * Metodo que busca una placa por un numero de placa dado como parametro
+     * @param numeroPlaca
+     * @return la placa encontrada, null en caso contrario
+     */
     public PlacaEntidad buscarPorNumeroPlaca(String numeroPlaca);
     
+    /**
+     * Metodo que genera una lista de placas de un vehiculo enviado como
+     * parametro
+     * @param vehiculoEntidad
+     * @return lista de las placas del vehiculo
+     */
     public List<PlacaEntidad> listaPlacasVehiculo(VehiculoEntidad vehiculoEntidad);
     
 }

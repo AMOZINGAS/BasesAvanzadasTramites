@@ -12,7 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
+/**
+ * 
+ * @author Amós Helí Olguín Quiróz
+ */
 @Entity
 public class VehiculoEntidad implements Serializable {
 
@@ -50,7 +53,7 @@ public class VehiculoEntidad implements Serializable {
     }
 
     /**
-     * Metodo que inicializa la entidad con los datos necesarios
+     * Constructor que inicializa los parametro
      * @param color
      * @param linea
      * @param marca

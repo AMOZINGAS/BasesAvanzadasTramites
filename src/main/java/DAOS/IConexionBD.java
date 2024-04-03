@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package DAOS;
 
 import java.sql.SQLException;
@@ -9,10 +5,15 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public interface IConexionBD {
  
+    /**
+     * Metodo que regresa una conexion hacia la base de datos
+     * @return EntityMnager para usarlo
+     * @throws SQLException 
+     */
     public EntityManager crearConexion() throws SQLException;
     
 }

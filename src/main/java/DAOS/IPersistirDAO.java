@@ -1,15 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package DAOS;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public interface IPersistirDAO {
     
+    /**
+     * Metodo que persiste una entidad generica a la base de datos
+     * @param <Entidad>
+     * @param entidad
+     * @return Una entidad generica que a sido persistida
+     */
     public <Entidad> boolean persistirEntidad(Entidad entidad);
     
 }

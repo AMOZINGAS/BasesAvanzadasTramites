@@ -8,6 +8,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+/**
+ * 
+ * @author Amós Helí Olguín Quiróz
+ */
 @Entity
 @PrimaryKeyJoinColumn(name = "idTramite")
 public class LicenciaEntidad extends TramiteEntidad implements Serializable {
@@ -29,9 +33,10 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
     }
 
     /**
-     * meotod que inciializa la entidad con los valor necesarios para el mismo
+     * Constructor que inicializa los valores de los parametros
      * @param vigencia
-     * @param folio 
+     * @param folio
+     * @param personaLicencia 
      */
     public LicenciaEntidad(int vigencia, int folio, PersonaEntidad personaLicencia) {
         this.vigencia = vigencia;

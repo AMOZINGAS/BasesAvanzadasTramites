@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOS;
 
 import entidades.PersonaEntidad;
@@ -22,91 +18,100 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class VehiculoDAO implements IVehiculoDAO{
     
     private final IConexionBD conexionBD = new ConexionBD();
     private EntityManager entityManager;
 
+    /**
+     * Constructor que inicializa la conexion
+     */
     public VehiculoDAO() {
         try {
-
             entityManager = conexionBD.crearConexion();
         } catch (SQLException ex) {
-
             ex.printStackTrace();
-
         }
     }
 
+    /**
+     * Metodo que genera una lista de vehiculos de una persona enviada como
+     * parametro
+     * @param persona
+     * @return lista de los vehiculos coincidentes
+     */
     @Override
     public List<VehiculoEntidad> listaVehiculoPersona(PersonaEntidad persona) {
-    
         CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
         CriteriaQuery<VehiculoEntidad> consulta = criteria.createQuery(VehiculoEntidad.class);
         Root<VehiculoEntidad> root = consulta.from(VehiculoEntidad.class);
         consulta = consulta.select(root).where(criteria.equal(root.get("persona"), persona));
         TypedQuery<VehiculoEntidad> query = entityManager.createQuery(consulta);
         List<VehiculoEntidad> listaVehiculoPersona = query.getResultList();
-        
         return listaVehiculoPersona;
-        
     }
     
+    /**
+     * Metodo que busca en una lista dada como parametro un vehiculo 
+     * coincidente con el numero de serie dado como parametro
+     * @param listaVehiculos
+     * @param numeroSerie
+     * @return el vehiculo coincidente, null en caso contrario
+     */
     @Override
     public VehiculoEntidad vehiculoPorPersona(List<VehiculoEntidad> listaVehiculos, String numeroSerie){
-        
-        for(int i = 0; i < listaVehiculos.size(); i ++){
-            
-            if(listaVehiculos.get(i).getNumSerie().equalsIgnoreCase(numeroSerie)){
-                
-                return listaVehiculos.get(i);
-                
+        for(VehiculoEntidad vehiculo: listaVehiculos){
+            if(vehiculo.getNumSerie().equalsIgnoreCase(numeroSerie)){
+                return vehiculo;
             }
-            
         }
-        
         return null;
-        
     }
     
+    /**
+     * Metodo que actualiza a un vehiculo dado como parametro
+     * @param vehicloEntidad
+     * @return el vehiculo actualizado
+     */
     @Override
-    public VehiculoEntidad actualizarVehiculo(VehiculoEntidad vehiculoEntidad){
+    public VehiculoEntidad actualizarVehiculo(VehiculoEntidad vehicloEntidad){
         
         EntityTransaction transaction = null;
-        
         try {
-            
             transaction = entityManager.getTransaction();
             transaction.begin();
-            entityManager.merge(vehiculoEntidad);
+            entityManager.merge(vehicloEntidad);
             transaction.commit();
-            return vehiculoEntidad;
-            
+            return vehicloEntidad;
         } catch (PersistenciaException ex) {
-            
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            
             return null;
-            
         }
-        
     }
     
+    /**
+     * Metodo que agrega una referencia de persona a un vehiculo
+     * @param vehiculoEntidad
+     * @param personaEntidad
+     * @return el vehiculo con la referencia de la persona
+     */
     @Override
     public VehiculoEntidad agregarPersona(VehiculoEntidad vehiculoEntidad, PersonaEntidad personaEntidad) {
-    
         vehiculoEntidad.setPersona(personaEntidad);
         return vehiculoEntidad;
-        
     }
     
+    /**
+     * Metodo que busca un vehiculo por un numero de serie dado como parametro
+     * @param numeroSerie
+     * @return el vehiculo coincidente, null en caso contrario
+     */
     @Override
     public VehiculoEntidad buscarPorNumeroSerie(String numeroSerie){
-        
         try{
             CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
             CriteriaQuery<VehiculoEntidad> consulta = criteria.createQuery(VehiculoEntidad.class);
@@ -118,22 +123,23 @@ public class VehiculoDAO implements IVehiculoDAO{
             Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, nre);
             return null;
         }
-        
     }
     
+    /**
+     * Metodo que agrega una referencia de una placa a un vehiculo dado como
+     * parametro
+     * @param placaEntidad
+     * @param vehiculoEntidad
+     * @return el vehiculo con la referencia de la placa
+     */
     @Override
     public VehiculoEntidad agregarPlaca(PlacaEntidad placaEntidad, VehiculoEntidad vehiculoEntidad){
-        
         List<PlacaEntidad> listaPlacas = vehiculoEntidad.getPlacas();
-        for(int i = 0; i < listaPlacas.size(); i ++){
-            
-            listaPlacas.get(i).setEstado(0);
-            
+        for(PlacaEntidad placa: listaPlacas){
+            placa.setEstado(0);
         }
         listaPlacas.add(placaEntidad);
         vehiculoEntidad.setPlacas(listaPlacas);
         return vehiculoEntidad;
-        
     }
-    
 }

@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * 
+ * @author Amós Helí Olguín Quiróz
+ */
 @Entity
 public class PlacaEntidad extends TramiteEntidad implements Serializable {
     
@@ -18,9 +22,22 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
     @JoinColumn(name = "idVehiculo")
     private VehiculoEntidad vehiculo;
 
+    /**
+     * Constructor por defecto
+     */
     public PlacaEntidad() {
     }
 
+    /**
+     * Constructor que inicializa los parametro
+     * @param numeroPlaca
+     * @param vehiculo
+     * @param fechaTramite
+     * @param costo
+     * @param persona
+     * @param estado
+     * @param tipo 
+     */
     public PlacaEntidad(String numeroPlaca, VehiculoEntidad vehiculo, Calendar fechaTramite, int costo, PersonaEntidad persona, int estado, String tipo) {
         super(costo, fechaTramite, persona, estado, tipo);
         this.numeroPlaca = numeroPlaca;

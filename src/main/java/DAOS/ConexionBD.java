@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAOS;
 
 import DAOS.IConexionBD;
@@ -11,7 +7,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class ConexionBD implements IConexionBD{
     
@@ -19,8 +15,15 @@ public class ConexionBD implements IConexionBD{
     EntityManager entityManager;
     String nombrePersistencia = "persistencia";
     
+    /**
+     * Constructor por defecto
+     */
     public ConexionBD(){}
     
+    /**
+     * Metodo que crea una conexion hacia la base de datos
+     * @return el entityMnager para la conexion
+     */
     @Override
     public EntityManager crearConexion(){
         
