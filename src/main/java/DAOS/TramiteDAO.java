@@ -1,16 +1,22 @@
 package DAOS;
 
+import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
+import entidades.PlacaEntidad;
 import entidades.TramiteEntidad;
+import excepciones.PersistenciaException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +26,7 @@ public class TramiteDAO implements ITramiteDAO{
 
     private final IConexionBD conexionBD = new ConexionBD();
     private EntityManager entityManager;
-
+    
     /**
      * Constructor que inicializa la conexion
      */
@@ -31,6 +37,63 @@ public class TramiteDAO implements ITramiteDAO{
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Metodo que busca un tramite por su id dado como parametro
+     * @param id
+     * @return el tramite encontrado por id
+     */
+    @Override
+    public TramiteEntidad buscaTramitePorId(Long id){
+        
+        System.out.println("ID "+id);
+        return entityManager.find(TramiteEntidad.class, id);
+        
+    }
+    
+    /**
+     * Metodo que genera una lista de todos los tramites existentes sin 
+     * discriminar
+     * @return lista de tramites
+     */
+    @Override
+    public List<TramiteEntidad> listaTramites() {
+    
+        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+        CriteriaQuery<TramiteEntidad> consulta = criteria.createQuery(TramiteEntidad.class);
+        Root<TramiteEntidad> root = consulta.from(TramiteEntidad.class);
+        TypedQuery<TramiteEntidad> query = entityManager.createQuery(consulta);
+        List<TramiteEntidad> listaTramites = query.getResultList();
+        return listaTramites;
+        
+    }
+
+    @Override
+    public String buscarTipoTramite(Long id) {
+    
+        try{
+            
+            entityManager.find(LicenciaEntidad.class, id);
+            return "LicenciaEntidad";
+        }catch(PersistenciaException pex){
+            
+            try{
+                
+                entityManager.find(PlacaEntidad.class, id);
+                return "PlacaEntidad";
+                
+            }catch(PersistenciaException pex2){
+                
+                JOptionPane.showMessageDialog(null, "No se encontro ningun tramite con ese id", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+                return null;
+                
+            }
+            
+        }
+    
+    }
+    
+    
     
     /**
      * Metodo que genera una lista de tramites de una persona en un periodo de 
@@ -90,12 +153,54 @@ public class TramiteDAO implements ITramiteDAO{
      */
     @Override
     public List<TramiteEntidad> listaTramite(String tipo) {
-        CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
-        CriteriaQuery<TramiteEntidad> consulta = criteria.createQuery(TramiteEntidad.class);
-        Root<TramiteEntidad> root = consulta.from(TramiteEntidad.class);
-        consulta = consulta.select(root).where(criteria.like(root.get("tipo"), "%" + tipo + "%"));
-        TypedQuery<TramiteEntidad> query = entityManager.createQuery(consulta);
-        List<TramiteEntidad> listaTramitesPersona = query.getResultList();
-        return listaTramitesPersona;
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<TramiteEntidad> criteriaQuery = criteriaBuilder.createQuery(TramiteEntidad.class);
+    Root<TramiteEntidad> tramiteRoot = criteriaQuery.from(TramiteEntidad.class);
+
+    // Convertir el tipo y el criterio de búsqueda a minúsculas para una búsqueda insensible a mayúsculas/minúsculas
+    String tipoLowerCase = tipo.toLowerCase();
+    Predicate predicate = criteriaBuilder.equal(criteriaBuilder.lower(tramiteRoot.get("tipo")), tipoLowerCase);
+
+    criteriaQuery.select(tramiteRoot).where(predicate);
+
+    TypedQuery<TramiteEntidad> query = entityManager.createQuery(criteriaQuery);
+    return query.getResultList();
     }
+
+    @Override
+    public List<TramiteEntidad> listaTramiterFecha(Calendar fechaDesde, Calendar fechaHasta) {
+    
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<TramiteEntidad> criteriaQuery = criteriaBuilder.createQuery(TramiteEntidad.class);
+    Root<TramiteEntidad> tramiteRoot = criteriaQuery.from(TramiteEntidad.class);
+
+    Predicate condiciones = criteriaBuilder.and(
+        criteriaBuilder.greaterThanOrEqualTo(tramiteRoot.get("fechaTramite"), fechaDesde),
+        criteriaBuilder.lessThanOrEqualTo(tramiteRoot.get("fechaTramite"), fechaHasta)
+    );
+
+    criteriaQuery.select(tramiteRoot).where(condiciones);
+
+    TypedQuery<TramiteEntidad> query = entityManager.createQuery(criteriaQuery);
+    return query.getResultList();
+        
+    }
+
+    @Override
+    public List<TramiteEntidad> listaTramiterNombre(String nombre) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<TramiteEntidad> criteriaQuery = criteriaBuilder.createQuery(TramiteEntidad.class);
+    Root<TramiteEntidad> tramiteRoot = criteriaQuery.from(TramiteEntidad.class);
+
+    IPersonaDAO personaDAO = new PersonaDAO();
+    List<PersonaEntidad> listaPersonas = personaDAO.buscarPorNombre(nombre);
+
+    criteriaQuery.select(tramiteRoot).where(tramiteRoot.get("persona").in(listaPersonas));
+
+    TypedQuery<TramiteEntidad> query = entityManager.createQuery(criteriaQuery);
+    return query.getResultList();
+    }
+    
+    
+    
 }

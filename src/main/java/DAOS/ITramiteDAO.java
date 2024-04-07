@@ -12,6 +12,20 @@ import java.util.List;
 public interface ITramiteDAO {
     
     /**
+     * Metodo que busca un tramite por su id dado como parametro
+     * @param id
+     * @return el tramite encontrado por id
+     */
+    public TramiteEntidad buscaTramitePorId(Long id);
+    
+    /**
+     * Metodo que busca el tipo de tramite mediante el id del mismo
+     * @param id
+     * @return el tipo de tramite
+     */
+    public String buscarTipoTramite(Long id);
+    
+    /**
      * Metodo que genera una lista de tramites de una persona en un periodo de 
      * fechas dados como parametro
      * @param personaEntidad
@@ -20,6 +34,31 @@ public interface ITramiteDAO {
      * @return la lista de los tramites coincidentes
      */
     public List<TramiteEntidad> listaTramiterPersonaFecha(PersonaEntidad personaEntidad, Calendar fechaHasta, Calendar desde);
+    
+    
+    /**
+     * Metodo que genera una lista de tramites en generar en un periodo de 
+     * fechas
+     * @param fechaHasta
+     * @param desde
+     * @return la lista de los tramites coincidentes 
+     */
+    public List<TramiteEntidad> listaTramiterFecha(Calendar fechaDesde, Calendar fechaHasta);
+    
+    /**
+     * Metodo que genera una lista de tramites en general de un nombre 
+     * encontrado
+     * @param nombre
+     * @return la lista de los tramites coincidentes
+     */
+    public List<TramiteEntidad> listaTramiterNombre(String nombre);
+    
+    /**
+     * Metodo que genera una lista de todos los tramites existentes sin 
+     * discriminar
+     * @return lista de tramites
+     */
+    public List<TramiteEntidad> listaTramites();
     
     /**
      * Metod que genera una lista de tramites de una persona en un periodo de 

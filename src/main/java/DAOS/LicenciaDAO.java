@@ -32,7 +32,7 @@ public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {
             ex.printStackTrace();
         }
     }
-
+    
     /**
      * Metodo que busca una licnencia por un id de tipo Long dado como parametro
      * @param id
