@@ -16,9 +16,4 @@ public interface IConexionBD {
      */
     public EntityManager crearConexion() throws SQLException;
     
-    /**
-     * Metodo que cierra la conexion con bases
-     */
-    public void cerrarConexion();
-    
 }

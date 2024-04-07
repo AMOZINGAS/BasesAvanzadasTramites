@@ -35,17 +35,4 @@ public class ConexionBD implements IConexionBD{
         
     }
     
-    @Override
-    public void cerrarConexion(){
-        
-        managerFactory.close();
-        if(entityManager.isOpen()){
-            
-            
-        entityManager.close();
-            
-        }
-        
-    }
-    
 }
