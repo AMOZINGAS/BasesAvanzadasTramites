@@ -5,6 +5,7 @@
 package POJO;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,10 +18,12 @@ public class ReportePDF {
     private Calendar fechaTramite;
     private String tipo;
     private int costo;
+    private Date fechaTramiteDate;
 
     public ReportePDF(String nombres, Calendar fechaTramite, String tipo, int costo) {
         this.nombres = nombres;
         this.fechaTramite = fechaTramite;
+        this.fechaTramiteDate = fechaTramite.getTime();
         this.tipo = tipo;
         this.costo = costo;
     }
@@ -40,10 +43,18 @@ public class ReportePDF {
         return fechaTramite;
     }
 
+    public Date getFechaTramiteDate(){
+        return fechaTramite.getTime();
+    }
+    
+    public void setFechaTramiteDate(Date fechaTramiteDate){
+        this.fechaTramiteDate = fechaTramiteDate;
+    }
+    
     public void setFechaTramite(Calendar fechaTramite) {
         this.fechaTramite = fechaTramite;
     }
-
+    
     public String getTipo() {
         return tipo;
     }
