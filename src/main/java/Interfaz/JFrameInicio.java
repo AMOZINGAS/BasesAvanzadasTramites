@@ -4,6 +4,9 @@
  */
 package Interfaz;
 
+import negocio.ConexionBDConsulta;
+import negocio.LicenciaConsulta;
+
 
 /**
  *
@@ -19,10 +22,8 @@ public class JFrameInicio extends javax.swing.JFrame {
      */
     public JFrameInicio() {
         initComponents();
-        
-
-
-
+        System.out.println("AS");
+        ConexionBDConsulta conexion = new ConexionBDConsulta();
         setLocationRelativeTo(null);
     }
 
@@ -126,6 +127,11 @@ public class JFrameInicio extends javax.swing.JFrame {
         btnReporte.setBackground(new java.awt.Color(204, 204, 204));
         btnReporte.setForeground(new java.awt.Color(51, 102, 255));
         btnReporte.setText("Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 105, 25));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 393, 267));
@@ -136,6 +142,8 @@ public class JFrameInicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         
@@ -171,6 +179,14 @@ public class JFrameInicio extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btnPersonaActionPerformed
+
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // TODO add your handling code here:
+        JFrameEditarModelo editar = new JFrameEditarModelo();
+        editar.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnReporteActionPerformed
 
 //    /**
 //     * @param args the command line arguments

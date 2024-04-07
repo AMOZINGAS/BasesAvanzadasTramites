@@ -4,6 +4,10 @@
  */
 package Interfaz;
 
+import POJO.ReportePDF;
+import java.util.List;
+import negocio.TramiteConsulta;
+
 /**
  *
  * @author PC
