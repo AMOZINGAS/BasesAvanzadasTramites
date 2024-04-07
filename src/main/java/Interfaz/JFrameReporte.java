@@ -149,6 +149,7 @@ public class JFrameReporte extends javax.swing.JFrame {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 350));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     public DefaultTableModel inicializarModel(){
@@ -187,7 +188,7 @@ public class JFrameReporte extends javax.swing.JFrame {
         Map<String, Object> parametros = new HashMap<String, Object>();
         parametros.put("CollectionBeanParam", itemJBbean);
         try {
-            InputStream input = new FileInputStream(new File("C://Users//PC//Documents//Proyecto 2 Individual//Reporte_A4.jrxml"));
+            InputStream input = new FileInputStream(new File("src/main/java/imagenes/Reporte_A4.jrxml"));
             JasperDesign jasperDesigns = JRXmlLoader.load(input);
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesigns);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
