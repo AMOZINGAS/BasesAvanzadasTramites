@@ -13,6 +13,7 @@ import DTO.PersonaNuevaDTO;
 import DTO.TramiteDTO;
 import DTO.VehiculoGeneradoDTO;
 import DTO.VehiculoNuevoDTO;
+import POJO.ReportePDF;
 import entidades.PersonaEntidad;
 import entidades.TramiteEntidad;
 //import Entidades.PersonaEntidad;
@@ -36,6 +37,18 @@ public class NegocioAgenciaTransito {
     public static void main(String[] args) {
         
         
+        
+//        TramiteConsulta tramiteConsulta = new TramiteConsulta();
+//        List<ReportePDF> listaReportes = tramiteConsulta.listaCompletaReporte();
+//        for(ReportePDF reportePDF:listaReportes){
+//            
+//            System.out.println(reportePDF.getCosto());
+//            System.out.println(reportePDF.getFechaTramite());
+//            System.out.println(reportePDF.getNombres());
+//            System.out.println(reportePDF.getTipo());
+//            
+//        }
+        
 //        TramiteConsulta tramiteConsulta = new TramiteConsulta();
 //        PersonaEntidad persona = new PersonaEntidad();
 //        IPersonaDAO personaDAO = new PersonaDAO();
@@ -47,23 +60,23 @@ public class NegocioAgenciaTransito {
 //        fecha1.add(Calendar.DATE, 1);
 //        Calendar fecha2 = Calendar.getInstance();
 //        fecha2.add(Calendar.DATE, -1);
-        ITramiteDAO tramite = new TramiteDAO();
-        List<TramiteEntidad> LISTA = tramite.listaTramite("PlacaEntidad");
-        System.out.println("Antes de la lista");
-        for(TramiteEntidad tramites: LISTA){
-            
-            System.out.println(tramites.getTipo());
-            
-        }
-        
-        TramiteConsulta tramiteConsulta = new TramiteConsulta();
-        List<TramiteDTO> lista = tramiteConsulta.listaTramite("LicenciaEntidad");
-        System.out.println("Antes de la lista");
-        for(TramiteDTO tramites: lista){
-            
-            System.out.println(tramites.getTipo());
-            
-        }
+//        ITramiteDAO tramite = new TramiteDAO();
+//        List<TramiteEntidad> LISTA = tramite.listaTramite("PlacaEntidad");
+//        System.out.println("Antes de la lista");
+//        for(TramiteEntidad tramites: LISTA){
+//            
+//            System.out.println(tramites.getTipo());
+//            
+//        }
+//        
+//        TramiteConsulta tramiteConsulta = new TramiteConsulta();
+//        List<TramiteDTO> lista = tramiteConsulta.listaTramite("LicenciaEntidad");
+//        System.out.println("Antes de la lista");
+//        for(TramiteDTO tramites: lista){
+//            
+//            System.out.println(tramites.getTipo());
+//            
+//        }
 
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistencia");
 //        EntityManager em = emf.createEntityManager();

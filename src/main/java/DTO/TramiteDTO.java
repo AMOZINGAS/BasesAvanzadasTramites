@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class TramiteDTO {
     
-    Long id;
+    Long idTramite;
     private String tipo;
     private int estado;
     private int costo;
@@ -13,8 +13,8 @@ public class TramiteDTO {
     public TramiteDTO() {
     }
 
-    public TramiteDTO(Long id, String tipo, int estado, int costo, Calendar fechaTramite) {
-        this.id = id;
+    public TramiteDTO(Long idTramite, String tipo, int estado, int costo, Calendar fechaTramite) {
+        this.idTramite = idTramite;
         this.tipo = tipo;
         this.estado = estado;
         this.costo = costo;
@@ -25,12 +25,12 @@ public class TramiteDTO {
         return tipo;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdTramite() {
+        return idTramite;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdTramite(Long idTramite) {
+        this.idTramite = idTramite;
     }
 
     public void setTipo(String tipo) {
