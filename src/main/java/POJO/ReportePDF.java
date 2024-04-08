@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package POJO;
 
 import java.util.Calendar;
@@ -10,7 +6,7 @@ import java.util.Objects;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class ReportePDF {
     
@@ -20,6 +16,13 @@ public class ReportePDF {
     private int costo;
     private Date fechaTramiteDate;
 
+    /**
+     * Constructor que inicializa los valores dados como parametro
+     * @param nombres
+     * @param fechaTramite
+     * @param tipo
+     * @param costo 
+     */
     public ReportePDF(String nombres, Calendar fechaTramite, String tipo, int costo) {
         this.nombres = nombres;
         this.fechaTramite = fechaTramite;
@@ -28,49 +31,96 @@ public class ReportePDF {
         this.costo = costo;
     }
 
+    /**
+     * Constructor por default
+     */
     public ReportePDF() {
     }
 
+    /**
+     * metodo que regresa el nombre del autor del tramite
+     * @return 
+     */
     public String getNombres() {
         return nombres;
     }
 
+    /**
+     * metodo que setea el nombre del autor del tramite
+     * @param nombres 
+     */
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
 
+    /**
+     * metodo que regresa la fecha del tramite
+     * @return 
+     */
     public Calendar getFechaTramite() {
         return fechaTramite;
     }
 
+    /**
+     * metodo que regresa la fecha de tipo date para jasperreport
+     * @return 
+     */
     public Date getFechaTramiteDate(){
         return fechaTramite.getTime();
     }
     
+    /**
+     * metodo que setea la fehca de tipo date para jasperreport
+     * @param fechaTramiteDate 
+     */
     public void setFechaTramiteDate(Date fechaTramiteDate){
         this.fechaTramiteDate = fechaTramiteDate;
     }
     
+    /**
+     * metodos setea la fecha del tramite
+     * @param fechaTramite 
+     */
     public void setFechaTramite(Calendar fechaTramite) {
         this.fechaTramite = fechaTramite;
     }
     
+    /**
+     * metodo que regresa el tipo de tramite
+     * @return 
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     * metodo que setea el tipo del tramite
+     * @param tipo 
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * metodo que regresa el costo del tramite
+     * @return 
+     */
     public int getCosto() {
         return costo;
     }
 
+    /**
+     * metodo que setea el costo del tramite
+     * @param costo 
+     */
     public void setCosto(int costo) {
         this.costo = costo;
     }
 
+    /**
+     * metodo que hashea el pdf para poder comparar
+     * @return 
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -81,6 +131,11 @@ public class ReportePDF {
         return hash;
     }
 
+    /**
+     * metodo que compara un ReportePDF con otro
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -104,6 +159,4 @@ public class ReportePDF {
         }
         return Objects.equals(this.fechaTramite, other.fechaTramite);
     }
-    
-    
 }

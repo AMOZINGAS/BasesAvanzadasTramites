@@ -1,24 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package negocio;
 
 import DAOS.IPersonaDAO;
-import DAOS.IVehiculoDAO;
 import DAOS.PersonaDAO;
-import DAOS.VehiculoDAO;
 import DTO.LicenciaNuevaDTO;
 import DTO.PersonaGeneradaDTO;
 import DTO.PersonaNuevaDTO;
-import DTO.VehiculoGeneradoDTO;
 import DTO.VehiculoNuevoDTO;
 import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
 import entidades.VehiculoEntidad;
 import java.util.ArrayList;
-//import Entidades.PersonaEntidad;
-//import Entidades.VehiculoEntidad;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.NoResultException;
@@ -34,7 +25,9 @@ public class PersonaConsulta {
     
     private final IPersonaDAO personaDAO;
     
-    
+    /**
+     * Constructor que inicializa la personaDAO
+     */
     public PersonaConsulta(){
         
         personaDAO = new PersonaDAO();
@@ -46,19 +39,15 @@ public class PersonaConsulta {
      * @return listaPersona
      */
     public List<PersonaGeneradaDTO> listaPersonas(){
-        
         List<PersonaEntidad> listaPersonas = personaDAO.listaPersonas();
         List<PersonaGeneradaDTO> listaPersonasDTO = new ArrayList<>();
         for(int i = 0; i < listaPersonas.size(); i ++){
-            
             PersonaEntidad persona = listaPersonas.get(i);
             Convertidor convertidor = new Convertidor();
             PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(persona, new PersonaGeneradaDTO());
             listaPersonasDTO.add(personaGeneradaDTO);
-            
         }
         return listaPersonasDTO;
-        
     }
     
     /**
@@ -67,35 +56,34 @@ public class PersonaConsulta {
      * @return listaPersonasNombre
      */
     public List<PersonaGeneradaDTO> listaPersonasNombre(String nombres){
-        
         List<PersonaEntidad> listaPersonasNombre = personaDAO.buscarPorNombre(nombres);
         List<PersonaGeneradaDTO> listaPersonasDTO = new ArrayList<>();
         for(int i = 0; i < listaPersonasNombre.size(); i ++){
-            
             PersonaEntidad persona = listaPersonasNombre.get(i);
             Convertidor convertidor = new Convertidor();
             PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(persona, new PersonaGeneradaDTO());
             listaPersonasDTO.add(personaGeneradaDTO);
-            
         }
         return listaPersonasDTO;
-        
     }
     
+    /**
+     * metodo que genera una lista de las persona que coincidan con la curp y
+     * el nombre dados como parametro
+     * @param nombre
+     * @param curp
+     * @return la lista de las personas coincidentes
+     */
     public List<PersonaGeneradaDTO> listaPersonasNombreCurp(String nombre, String curp){
-        
         List<PersonaEntidad> listaPersonasNombreCurp = personaDAO.buscarPorNombreCurp(nombre, curp);
         List<PersonaGeneradaDTO> listaPersonasDTO = new ArrayList<>();
         for(int i = 0; i < listaPersonasNombreCurp.size(); i ++){
-            
             PersonaEntidad persona = listaPersonasNombreCurp.get(i);
             Convertidor convertidor = new Convertidor();
             PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(persona, new PersonaGeneradaDTO());
             listaPersonasDTO.add(personaGeneradaDTO);
-            
         }
         return listaPersonasDTO;
-        
     }
     
     /**
@@ -104,22 +92,15 @@ public class PersonaConsulta {
      * @return personaGeneradaDTO
      */
     public PersonaGeneradaDTO personaPorID(Long id) throws NoResultException{
-        
         try{
-            
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(id);
             Convertidor convertidor = new Convertidor();
             PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
             return personaGeneradaDTO;
-            
         }catch(NoResultException nre){
-            
             JOptionPane.showMessageDialog(null, "No se encontró una persona con ese id");
             return null;
-            
         }
-        
-       
     }
     
     /**
@@ -129,21 +110,15 @@ public class PersonaConsulta {
      * @throws NoResultException 
      */
     public PersonaGeneradaDTO personaPorCurp(String curp) throws NoResultException{
-        
          try{
-            
             PersonaEntidad personaEntidad = personaDAO.buscarPorCurp(curp);
             Convertidor convertidor = new Convertidor();
             PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
             return personaGeneradaDTO;
-            
         }catch(NoResultException nre){
-            
             JOptionPane.showMessageDialog(null, "No se encontró una persona con esa curp");
             return null;
-            
         }
-        
     }
     
     /**
@@ -152,13 +127,11 @@ public class PersonaConsulta {
      * @return personaGeneradaDTO
      */
     public PersonaGeneradaDTO agregarPersona(PersonaNuevaDTO personaNuevaDTO){
-        
         Convertidor convertidor = new Convertidor();
         PersonaEntidad personaEntidad = convertidor.DTOToEntidad(personaNuevaDTO, new PersonaEntidad());
         personaEntidad = personaDAO.agregarPersona(personaEntidad);
         PersonaGeneradaDTO personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
         return personaGeneradaDTO;
-        
     }
     
     /**
@@ -166,7 +139,6 @@ public class PersonaConsulta {
      * ejemplos
      */
     public void agregarMasivoPersonas(){
-        
         Calendar fechaNacimiento = Calendar.getInstance();
         fechaNacimiento.set(2004, 3, 9);
         PersonaEntidad persona1 = new PersonaEntidad(fechaNacimiento, "OUQ090304QF7", "OUQA040309HSRLRMA5", false, "6442621169", "Amos Heli", "Olguin", "Quiroz");
@@ -247,8 +219,6 @@ public class PersonaConsulta {
         fechaNacimiento20.set(1969, 5, 20);
         PersonaEntidad persona20 = new PersonaEntidad(fechaNacimiento20, "ALLAKSIE", "PAOAOSUEUDHBEBCHSA", false, "2893823474", "Michael", "Schumacher", "sin apellido");
         personaDAO.agregarPersona(persona20);
-        
-        
     }
     
     /**
@@ -258,19 +228,14 @@ public class PersonaConsulta {
      * @return persona generada con el vehiculo en su lista
      */
     public PersonaGeneradaDTO agregarVehiculo(VehiculoNuevoDTO vehiculoNuevoDTO, PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
-        
         try{
-            
             Convertidor convertidor = new Convertidor();
             VehiculoEntidad vehiculoEntidad = convertidor.DTOToEntidad(vehiculoNuevoDTO, new VehiculoEntidad());
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
             personaEntidad = personaDAO.agregarVehiculo(vehiculoEntidad, personaEntidad);
             personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
-            
             return personaGeneradaDTO;
-            
         }catch(PersistenceException ex){
-            
             JOptionPane.showMessageDialog(null, "Ocurrió un error al agregar vehiculo", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return null;
         }
@@ -283,9 +248,7 @@ public class PersonaConsulta {
      * @throws PersistenceException 
      */
     public PersonaGeneradaDTO actualizarPersona(PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
-        
         try{
-            
             Convertidor convertidor = new Convertidor();
             System.out.println("a");
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
@@ -293,38 +256,37 @@ public class PersonaConsulta {
             personaDAO.actualizarPersona(personaEntidad);
             System.out.println("a");
             return convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
-            
         }catch(PersistenceException px){
-            
             JOptionPane.showMessageDialog(null, "Ocurrió un error al actualizar persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return null;
-            
         }
-        
-        
     }
     
+    /**
+     * Metodo que verifica que una persona tenga una licencia activa
+     * @param personaGeneradaDTO
+     * @return verdadero en caso de que si cuente con una, falso en caso 
+     * contrario
+     */
     public boolean verificarLicencia(PersonaGeneradaDTO personaGeneradaDTO){
-        
         PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
         if(personaEntidad.getLicencia().size()==0){
-            
-            System.out.println("TAMAÑO 0");
             return false;
-            
         }else if(personaEntidad.getLicencia().get(personaEntidad.getLicencia().size()-1).getEstado()==0){
-            
             return false;
-            
         }
         return true;
-        
     }
     
+    /**
+     * Metodo que agrega una licencia a una persona
+     * @param licenciaNuevoDTO
+     * @param personaGeneradaDTO
+     * @return
+     * @throws PersistenceException 
+     */
     public PersonaGeneradaDTO agregarLicencia(LicenciaNuevaDTO licenciaNuevoDTO, PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
-        
         try{
-            
             Convertidor convertidor = new Convertidor();
             LicenciaEntidad licenciaEntidad = new LicenciaEntidad();
             licenciaEntidad.setCosto(licenciaNuevoDTO.getCosto());
@@ -336,14 +298,10 @@ public class PersonaConsulta {
             licenciaEntidad.setPersonaLicencia(personaEntidad);
             personaEntidad = personaDAO.agregarLicencia(licenciaEntidad, personaEntidad);
             personaGeneradaDTO = convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
-            
             return personaGeneradaDTO;
-            
         }catch(PersistenceException ex){
-            
             JOptionPane.showMessageDialog(null, "Ocurrió un error al agregar la licencia", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
-    
 }

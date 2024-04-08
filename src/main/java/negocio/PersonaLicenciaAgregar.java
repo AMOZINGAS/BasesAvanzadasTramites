@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package negocio;
 
 import DTO.LicenciaGeneradaDTO;
@@ -10,12 +6,18 @@ import DTO.PersonaGeneradaDTO;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class PersonaLicenciaAgregar {
     
+    /**
+     * metodo que agrega a una persona dada como parametro un licencia dada
+     * como parametro y las actualiza
+     * @param personaGeneradaDTO
+     * @param licenciaNuevaDTO
+     * @return 
+     */
     public LicenciaGeneradaDTO agregarLicenciaAPersona(PersonaGeneradaDTO personaGeneradaDTO, LicenciaNuevaDTO licenciaNuevaDTO){
-        
         PersonaConsulta personaConsulta = new PersonaConsulta();
         LicenciaConsulta licenciaConsulta = new LicenciaConsulta();
         personaGeneradaDTO = personaConsulta.agregarLicencia(licenciaNuevaDTO, personaGeneradaDTO);
@@ -23,7 +25,5 @@ public class PersonaLicenciaAgregar {
         licenciaNuevaDTO = licenciaConsulta.agregarPersona(licenciaNuevaDTO, personaGeneradaDTO);
         LicenciaGeneradaDTO licenciaGeneradaDTO = licenciaConsulta.actualizarLicencia(licenciaConsulta.buscarLicenciaFolio(licenciaNuevaDTO.getFolio()));
         return licenciaConsulta.buscarLicenciaFolio(licenciaGeneradaDTO.getFolio());
-        
     }
-    
 }

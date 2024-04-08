@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package negocio;
 
 import DAOS.IPersonaDAO;
@@ -12,10 +8,8 @@ import DTO.LicenciaGeneradaDTO;
 import DTO.PersonaGeneradaDTO;
 import DTO.TramiteDTO;
 import POJO.ReportePDF;
-import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
 import entidades.TramiteEntidad;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -25,24 +19,26 @@ import modificadores.Convertidor;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class TramiteConsulta {
     
     private final ITramiteDAO tramiteDAO;
     
-    
+    /**
+     * Constructor que inicializa el tramite dao
+     */
     public TramiteConsulta(){
-        
         tramiteDAO = new TramiteDAO();
-    
     }
     
+    /**
+     * metodo que genera una lita de todos los tramites existentes
+     * @return 
+     */
     public List<TramiteDTO> listaCompletaTramite(){
-        
         List<TramiteDTO> listaCompletaTramiteDTO = new ArrayList<>();
         for(TramiteEntidad tramite: tramiteDAO.listaTramites()){
-            
             TramiteDTO tramiteDTO = new TramiteDTO();
             tramiteDTO.setIdTramite(tramite.getId());
             if(tramite.getTipo()==null){
@@ -53,142 +49,143 @@ public class TramiteConsulta {
             tramiteDTO.setCosto(tramite.getCosto());
             tramiteDTO.setFechaTramite(tramite.getFechaTramite());
             listaCompletaTramiteDTO.add(tramiteDTO);
-            
         }
-        
         return listaCompletaTramiteDTO;
-        
     }
     
+    /**
+     * metodo que busca un tramite por un id dado como parametro
+     * @param id
+     * @return 
+     */
     public TramiteDTO buscarTramitePorId(Long id){
-        
         TramiteEntidad tramiteEntidad = tramiteDAO.buscaTramitePorId(id);
         Convertidor convertidor= new Convertidor();
         return convertidor.entityToDTO(tramiteEntidad, new TramiteDTO());
-        
     }
     
+    /*+
+    metodo que genera una lista de reporte generados por una lista de tramites
+    */
     public List<ReportePDF> listaCompletaReporte(){
-        
         List<TramiteDTO> listaCompletaDTO = listaCompletaTramite();
         List<ReportePDF> listaCompletaReporte = new ArrayList<>();
-         for(TramiteDTO tramiteDTO: listaCompletaDTO){
-            
+        for(TramiteDTO tramiteDTO: listaCompletaDTO){
             ReportePDF reporte = new ReportePDF();
             reporte.setCosto(tramiteDTO.getCosto());
             reporte.setFechaTramite(tramiteDTO.getFechaTramite());
             TramiteEntidad tramiteEntidad = tramiteDAO.buscaTramitePorId(tramiteDTO.getIdTramite());
             reporte.setNombres(tramiteEntidad.getPersona().getNombres());
-            if(tramiteDTO.getTipo().equalsIgnoreCase("LicenciaEntidad")){
-                
-                reporte.setTipo("Expedicion de Licencia");
-                
+            if(tramiteDTO.getTipo().equalsIgnoreCase("LicenciaEntidad")){                
+                reporte.setTipo("Expedicion de Licencia");                
             }
-            if(tramiteDTO.getTipo().equalsIgnoreCase("PlacaEntidad")){
-                
-                reporte.setTipo("Expedicion de Placa");
-                
+            if(tramiteDTO.getTipo().equalsIgnoreCase("PlacaEntidad")){                
+                reporte.setTipo("Expedicion de Placa");                
             }
-            listaCompletaReporte.add(reporte);
-            
+            listaCompletaReporte.add(reporte);            
         }
-        return listaCompletaReporte;
-        
+        return listaCompletaReporte;        
     }
-    
+
+    /**
+     * metodo que generea una lista de los reportes encontrados coincidentes con
+     * el nombre dado como parametro
+     * @param listaReportes
+     * @param nombre
+     * @return 
+     */
     public List<ReportePDF> buscarTramitesPorNombre(List<ReportePDF> listaReportes, String nombre){
-        
         ITramiteDAO tramiteDAO = new TramiteDAO();
-    List<TramiteEntidad> listaTramiteEntidad = tramiteDAO.listaTramiterNombre(nombre);
-    
-    Set<ReportePDF> setTemp = new HashSet<>();
-    
-    for (TramiteEntidad tramite : listaTramiteEntidad) {
-        ReportePDF reporte = new ReportePDF();
-        reporte.setCosto(tramite.getCosto());
-        reporte.setFechaTramite(tramite.getFechaTramite());
-        
-        // Supongo que tramiteDAO.buscaTramitePorId devuelve un TramiteEntidad
-        TramiteEntidad tramiteEntidad = tramiteDAO.buscaTramitePorId(tramite.getId());
-        reporte.setNombres(tramiteEntidad.getPersona().getNombres());
-        
-        // Mapear el tipo de trámite
-        if(tramite.getTipo()==null){
-                tramite.setTipo(tramiteDAO.buscarTipoTramite(tramite.getId()));
-            }else{
-                tramite.setTipo(tramite.getTipo());
-            }
-        String tipo = tramite.getTipo().equalsIgnoreCase("LicenciaEntidad") ? "Expedicion de Licencia" :
-                     tramite.getTipo().equalsIgnoreCase("PlacaEntidad") ? "Expedicion de Placa" :
-                     tramite.getTipo();  // Si no es ninguno de los anteriores, mantener el tipo original
-        
-        reporte.setTipo(tipo);
-        
-        setTemp.add(reporte);
+        List<TramiteEntidad> listaTramiteEntidad = tramiteDAO.listaTramiterNombre(nombre);
+        Set<ReportePDF> setTemp = new HashSet<>();
+        for (TramiteEntidad tramite : listaTramiteEntidad) {
+            ReportePDF reporte = new ReportePDF();
+            reporte.setCosto(tramite.getCosto());
+            reporte.setFechaTramite(tramite.getFechaTramite());
+            TramiteEntidad tramiteEntidad = tramiteDAO.buscaTramitePorId(tramite.getId());
+            reporte.setNombres(tramiteEntidad.getPersona().getNombres());
+            if(tramite.getTipo()==null){
+                    tramite.setTipo(tramiteDAO.buscarTipoTramite(tramite.getId()));
+                }else{
+                    tramite.setTipo(tramite.getTipo());
+                }
+            String tipo = tramite.getTipo().equalsIgnoreCase("LicenciaEntidad") ? "Expedicion de Licencia" :
+                         tramite.getTipo().equalsIgnoreCase("PlacaEntidad") ? "Expedicion de Placa" :
+                         tramite.getTipo();
+            reporte.setTipo(tipo);
+            setTemp.add(reporte);
+        }
+        return new ArrayList<>(setTemp);
     }
     
-    return new ArrayList<>(setTemp);
-        
-    }
-    
+    /**
+     * metodo que generea una lista de reportes que se encuentren como 
+     * coincidentes entre las fechas dadas como parametro
+     * @param listaReportes
+     * @param fechaDesde
+     * @param fechaHasta
+     * @return 
+     */
     public List<ReportePDF> listaPorPeriodo(List<ReportePDF> listaReportes, Calendar fechaDesde, Calendar fechaHasta){
-        
         ITramiteDAO tramiteDAO = new TramiteDAO();
-    List<TramiteEntidad> listaTramiteEntidad = tramiteDAO.listaTramiterFecha(fechaDesde, fechaHasta);
-
-    List<ReportePDF> listaReportePDF = new ArrayList<>();
-
-    for (TramiteEntidad tramite : listaTramiteEntidad) {
-        ReportePDF reporte = new ReportePDF();
-        reporte.setCosto(tramite.getCosto());
-        reporte.setFechaTramite(tramite.getFechaTramite());
-        reporte.setNombres(tramite.getPersona().getNombres());
-        if(tramite.getTipo()==null){
-                tramite.setTipo(tramiteDAO.buscarTipoTramite(tramite.getId()));
-            }else{
-                tramite.setTipo(tramite.getTipo());
+        List<TramiteEntidad> listaTramiteEntidad = tramiteDAO.listaTramiterFecha(fechaDesde, fechaHasta);
+        List<ReportePDF> listaReportePDF = new ArrayList<>();
+        for (TramiteEntidad tramite : listaTramiteEntidad) {
+            ReportePDF reporte = new ReportePDF();
+            reporte.setCosto(tramite.getCosto());
+            reporte.setFechaTramite(tramite.getFechaTramite());
+            reporte.setNombres(tramite.getPersona().getNombres());
+            if(tramite.getTipo()==null){
+                    tramite.setTipo(tramiteDAO.buscarTipoTramite(tramite.getId()));
+                }else{
+                    tramite.setTipo(tramite.getTipo());
+                }
+            switch (tramite.getTipo()) {
+                case "LicenciaEntidad":
+                    reporte.setTipo("Expedicion de Licencia");
+                    break;
+                case "PlacaEntidad":
+                    reporte.setTipo("Expedicion de Placa");
+                    break;
+                default:
+                    reporte.setTipo(tramite.getTipo());
+                    break;
             }
-        switch (tramite.getTipo()) {
-            case "LicenciaEntidad":
-                reporte.setTipo("Expedicion de Licencia");
-                break;
-            case "PlacaEntidad":
-                reporte.setTipo("Expedicion de Placa");
-                break;
-            default:
-                reporte.setTipo(tramite.getTipo());
-                break;
+            listaReportePDF.add(reporte);
         }
-
-        listaReportePDF.add(reporte);
-    }
-
-    // Filtrar la lista final para mantener solo los elementos que coincidan con la lista dada como parámetros
-    return obtenerElementosComunes(listaReportes, listaReportePDF);
-        
+        return obtenerElementosComunes(listaReportes, listaReportePDF);
     }
     
+    /**
+     * metodo que busca los objetod coincidentes entre las dos listas dadas
+     * como parametro
+     * @param lista1
+     * @param lista2
+     * @return 
+     */
     public List<ReportePDF> obtenerElementosComunes(List<ReportePDF> lista1, List<ReportePDF> lista2) {
-    List<ReportePDF> listaFiltrada = new ArrayList<>();
-    Set<ReportePDF> setTemp = new HashSet<>(lista1);
-
-    for (ReportePDF reporte : lista2) {
-        if (setTemp.contains(reporte)) {
-            listaFiltrada.add(reporte);
+        List<ReportePDF> listaFiltrada = new ArrayList<>();
+        Set<ReportePDF> setTemp = new HashSet<>(lista1);
+        for (ReportePDF reporte : lista2) {
+            if (setTemp.contains(reporte)) {
+                listaFiltrada.add(reporte);
+            }
         }
+        return listaFiltrada;
     }
-
-    return listaFiltrada;
-}
     
+    /**
+     * metodo que generea una lista de reportes que coincidan con el tipo de 
+     * tramite dado como parametro
+     * @param listaReportes
+     * @param tipo
+     * @return 
+     */
     public List<ReportePDF> listaPorTipoTramite(List<ReportePDF> listaReportes, String tipo){
-        
         ITramiteDAO tramiteDAO = new TramiteDAO();
         List<TramiteEntidad> listaTramiteEntidad = tramiteDAO.listaTramite(tipo);
-
         List<ReportePDF> listaReportePDF = new ArrayList<>();
         Set<ReportePDF> setTemp = new HashSet<>();
-
         for (TramiteEntidad tramite : listaTramiteEntidad) {
             ReportePDF reporte = new ReportePDF();
             reporte.setCosto(tramite.getCosto());
@@ -210,23 +207,26 @@ public class TramiteConsulta {
                     reporte.setTipo(tramite.getTipo());
                     break;
             }
-
             listaReportePDF.add(reporte);
-    }
-
-    // Filtrar la lista final para mantener solo los elementos que coincidan con la lista dada como parámetros
-    return obtenerElementosComunes(listaReportes, listaReportePDF);
-        
+        }
+        return obtenerElementosComunes(listaReportes, listaReportePDF);
     }
     
+    /**
+     * metodo que generea una lista de tramites que coincidan con la persona 
+     * dada como parametro y que se encuentre dentro de las fechas dadas como
+     * parametro
+     * @param personaGeneradaDTO
+     * @param fechaHsta
+     * @param fechaDesde
+     * @return 
+     */
     public List<TramiteDTO> listaTramitesPersona(PersonaGeneradaDTO personaGeneradaDTO, Calendar fechaHsta, Calendar fechaDesde){
-        
         IPersonaDAO personaDAO = new PersonaDAO();
         PersonaEntidad persona = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
         List<TramiteEntidad> listaTramites = tramiteDAO.listaTramiterPersonaFecha(persona, fechaHsta, fechaDesde);
         List<TramiteDTO> listaDTO = new ArrayList<>();
         for(int i = 0; i < listaTramites.size(); i ++){
-            
             TramiteEntidad tramiteEntidad = listaTramites.get(i);
             TramiteDTO tramiteDTO = new TramiteDTO();
             tramiteDTO.setIdTramite(tramiteEntidad.getId());
@@ -239,28 +239,36 @@ public class TramiteConsulta {
                 tramiteDTO.setTipo(tramiteEntidad.getTipo());
             }
             listaDTO.add(tramiteDTO);
-            
         }
         return listaDTO;
-        
     }
     
+    /**
+     * metodo que verifica la vigencia de la licencia 
+     * @param tramiteDTO
+     * @return 
+     */
     public int vigenciaLicencia(TramiteDTO tramiteDTO){
-        
         LicenciaConsulta licenciaConsulta = new LicenciaConsulta();
         LicenciaGeneradaDTO licenciaGeneradaDTO = licenciaConsulta.buscarLicenciaId(tramiteDTO.getIdTramite());
         return licenciaGeneradaDTO.getVigencia();
-        
     }
     
+    /**
+     * metodo que generea una lista de tramites que coincidan con la persona,
+     * el tipo y las fechas que se encuentren dentro de lo establecido
+     * @param personaGeneradaDTO
+     * @param tipo
+     * @param fechaHsta
+     * @param fechaDesde
+     * @return 
+     */
     public List<TramiteDTO> listaTramitePersonaTipo(PersonaGeneradaDTO personaGeneradaDTO, String tipo, Calendar fechaHsta, Calendar fechaDesde){
-        
         IPersonaDAO personaDAO = new PersonaDAO();
         PersonaEntidad persona = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
         List<TramiteEntidad> listaTramites = tramiteDAO.listaTramitePersonaTipoFecha(persona, tipo, fechaHsta, fechaDesde);
         List<TramiteDTO> listaDTO = new ArrayList<>();
         for(int i = 0; i < listaTramites.size(); i ++){
-            
             TramiteEntidad tramiteEntidad = listaTramites.get(i);
             TramiteDTO tramiteDTO = new TramiteDTO();
             tramiteDTO.setIdTramite(tramiteEntidad.getId());
@@ -273,18 +281,20 @@ public class TramiteConsulta {
                 tramiteDTO.setTipo(tramiteEntidad.getTipo());
             }
             listaDTO.add(tramiteDTO);
-            
         }
         return listaDTO;
-        
     }
     
+    /**
+     * metodo que generea una lista de tramites que coincidan con el tipo
+     * de tramite dado como parametro
+     * @param tipo
+     * @return 
+     */
     public List<TramiteDTO> listaTramite(String tipo){
-        
         List<TramiteEntidad> listaTramites = tramiteDAO.listaTramite(tipo);
         List<TramiteDTO> listaDTO = new ArrayList<>();
         for(int i = 0; i < listaTramites.size(); i ++){
-            
             TramiteEntidad tramiteEntidad = listaTramites.get(i);
             TramiteDTO tramiteDTO = new TramiteDTO();
             tramiteDTO.setIdTramite(tramiteEntidad.getId());
@@ -297,10 +307,7 @@ public class TramiteConsulta {
                 tramiteDTO.setTipo(tramiteEntidad.getTipo());
             }
             listaDTO.add(tramiteDTO);
-            
         }
         return listaDTO;
-        
     }
-    
 }

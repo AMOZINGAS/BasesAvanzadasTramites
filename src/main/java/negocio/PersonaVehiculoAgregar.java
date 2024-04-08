@@ -10,12 +10,18 @@ import DTO.VehiculoNuevoDTO;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class PersonaVehiculoAgregar {
     
+    /**
+     * Metodo que agrega a una persona dada como parametro un vehiculo dado como
+     * parametro
+     * @param personaGeneradaDTO
+     * @param vehiculoNuevoDTO
+     * @return 
+     */
     public VehiculoGeneradoDTO agregarVehiculoAPersona(PersonaGeneradaDTO personaGeneradaDTO, VehiculoNuevoDTO vehiculoNuevoDTO){
-        
         PersonaConsulta personaConsulta = new PersonaConsulta();
         VehiculoConsulta vehiculoConsulta = new VehiculoConsulta();
         personaGeneradaDTO = personaConsulta.agregarVehiculo(vehiculoNuevoDTO, personaGeneradaDTO);
@@ -23,7 +29,5 @@ public class PersonaVehiculoAgregar {
         vehiculoNuevoDTO = vehiculoConsulta.agregarPersona(vehiculoNuevoDTO, personaGeneradaDTO);
         VehiculoGeneradoDTO vehiculoGeneradoDTO = vehiculoConsulta.actualizarVehiculo(vehiculoConsulta.buscarVehiculoNumeroSerie(vehiculoNuevoDTO.getNumSerie()));
         return vehiculoConsulta.buscarVehiculoNumeroSerie(vehiculoGeneradoDTO.getNumSerie());
-        
     }
-    
 }

@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modificadores;
 
 import java.lang.reflect.Field;
 
 /**
  *
- * @author Laboratorios
+ * @author Amós Helí Olguín Quiróz
  */
 public class Convertidor{
 
@@ -21,13 +17,10 @@ public class Convertidor{
      * @return la entidad convertide de un dto
      */
     public <Entity, DTO> Entity DTOToEntidad(DTO dto, Entity entity) {
-    
         Class<?> claseDTO = dto.getClass();
         Class<?> claseEntity = entity.getClass();
-        Field[] camposDTO = claseDTO.getDeclaredFields();
-        
-        for(Field campoDTO: camposDTO){
-            
+        Field[] camposDTO = claseDTO.getDeclaredFields();   
+        for(Field campoDTO: camposDTO){       
             try {
                 String nombreCampoDto = campoDTO.getName();
                 campoDTO.setAccessible(true);
@@ -42,10 +35,8 @@ public class Convertidor{
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
-        
-        return entity;
-        
+        }   
+        return entity;   
     }
 
     /**
@@ -57,13 +48,10 @@ public class Convertidor{
      * @return el dto convertido de la entidad
      */
     public <Entity, DTO> DTO entityToDTO(Entity entity, DTO dto) {
-    
         Class<?> claseEntity = entity.getClass();
         Class<?> clasesDTO = dto.getClass();
-        Field[] camposEntity = claseEntity.getDeclaredFields();
-        
-        for(Field campoEntity: camposEntity){
-            
+        Field[] camposEntity = claseEntity.getDeclaredFields();   
+        for(Field campoEntity: camposEntity){       
             try {
                 String nombreCampoEntity = campoEntity.getName();
                 campoEntity.setAccessible(true);
@@ -72,18 +60,12 @@ public class Convertidor{
                     Field campoDTO = clasesDTO.getDeclaredField(nombreCampoEntity);
                     campoDTO.setAccessible(true);
                     campoDTO.set(dto, valorCampoEntity);
-                } catch (NoSuchFieldException e) {
-                    
+                } catch (NoSuchFieldException e) {               
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
-        
+        }   
         return dto;
-    
     }
-    
-    
-    
 }

@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package negocio;
 
 import DAOS.ILicenciaDAO;
 import DAOS.IPersonaDAO;
-import DAOS.IVehiculoDAO;
 import DAOS.LicenciaDAO;
 import DAOS.PersonaDAO;
 import DTO.LicenciaGeneradaDTO;
@@ -21,26 +16,32 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 import modificadores.Convertidor;
-import org.eclipse.persistence.jpa.jpql.parser.ConcatExpression;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class LicenciaConsulta {
     
     ILicenciaDAO licenciaDAO;
     
+    /**
+     * Constructor que inicializa la licenciaDAO
+     */
     public LicenciaConsulta(){
         
         licenciaDAO = new LicenciaDAO();
     
     }   
     
-     public LicenciaNuevaDTO agregarPersona(LicenciaNuevaDTO licenciaNuevaDTO, PersonaGeneradaDTO personaGeneradaDTO){
-        
+    /**
+     * Metodo que agrega una persona a la licencia
+     * @param licenciaNuevaDTO
+     * @param personaGeneradaDTO
+     * @return la licencia con la persona enlazada
+     */
+    public LicenciaNuevaDTO agregarPersona(LicenciaNuevaDTO licenciaNuevaDTO, PersonaGeneradaDTO personaGeneradaDTO){
         try{
-            
             Convertidor convertidor = new Convertidor();
             IPersonaDAO personaDAO = new PersonaDAO();
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
@@ -48,16 +49,16 @@ public class LicenciaConsulta {
             System.out.println(licenciaEntidad.getFolio());
             licenciaDAO.agregarPersona(personaEntidad, licenciaEntidad);
             return  convertidor.entityToDTO(licenciaEntidad, new LicenciaNuevaDTO());
-            
-        }catch(PersistenceException px){
-            
+        }catch(PersistenceException px){   
             JOptionPane.showMessageDialog(null, "Ocurrió un error al agregarle un vehiculo a una placa", "ERROR!!", JOptionPane.ERROR_MESSAGE);
-            return null;
-            
+            return null;     
         }
-        
     }
     
+    /**
+     * Metodo que grenera el folio para la licencia
+     * @return un entero con el folio 
+     */
     public int generarFolio(){
         
         Random random = new Random();
@@ -67,101 +68,92 @@ public class LicenciaConsulta {
         
     }
     
+    /**
+     * metodo que verifica que el folio no este repetido
+     * @return un entero con el folio
+     */
     public int verificarFolio(){
-        
         int folio;
-        
-        do{
-            
+        do{ 
             folio = generarFolio();
-            System.out.println(folio);
-            
+            System.out.println(folio); 
         }while(buscarLicenciaFolio(folio)!=null);
-        
         return folio;
-        
     }
      
+    /**
+     * Metodo que actualiza la licencia
+     * @param licenciaGeneradaDTO
+     * @return la licencia actualizada
+     */
     public LicenciaGeneradaDTO actualizarLicencia(LicenciaGeneradaDTO licenciaGeneradaDTO){
-        
         try{
-            
             Convertidor convertidor = new Convertidor();
             LicenciaEntidad licenciaEntidad = licenciaDAO.buscarLicenciaFolio(licenciaGeneradaDTO.getFolio());
             licenciaDAO.actualizarLicencia(licenciaEntidad);
             return convertidor.entityToDTO(licenciaEntidad, new LicenciaGeneradaDTO());
-            
         }catch(PersistenceException px){
-            
             JOptionPane.showMessageDialog(null, "Ocurrió un error al actualizar placa", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             return null;
-            
         }
     }
     
+    /**
+     * Metodo que crea una lista dto de las persona que contengas esa licencia
+     * @param curp
+     * @return la lista de llicencia dto
+     */
     public List<LicenciaGeneradaDTO> listaLicenciaPersona(String curp){
-        
         IPersonaDAO personaDAO = new PersonaDAO();
         PersonaEntidad personaEntidad = personaDAO.buscarPorCurp(curp);
         List<LicenciaEntidad> listaEntidad = licenciaDAO.listaLicenciaPersona(personaEntidad);
         List<LicenciaGeneradaDTO> listaLicenciaDTO = new ArrayList<>();
         for(int i = 0; i < listaEntidad.size(); i ++){
-            
             LicenciaEntidad licencia = listaEntidad.get(i);
             Convertidor convertidor = new Convertidor();
             LicenciaGeneradaDTO licenciaGeneradaDTO = convertidor.entityToDTO(licencia, new LicenciaGeneradaDTO());
             listaLicenciaDTO.add(licenciaGeneradaDTO);
-            
         }
-        
         return listaLicenciaDTO;
-        
     }
     
+    /**
+     * Metodo que busca una licencia por folio dado como parametro
+     * @param folio
+     * @return la licencia encontrada, null en caso contrario
+     */
     public LicenciaGeneradaDTO buscarLicenciaFolio(int folio){
-        
         try{
-            
             LicenciaEntidad licenicaEntidad = licenciaDAO.buscarLicenciaFolio(folio);
             if(licenicaEntidad==null){
-                
                 return null;
-                
             }
             Convertidor convertidor = new Convertidor();
             LicenciaGeneradaDTO licenciaGeneradaDTO = convertidor.entityToDTO(licenicaEntidad, new LicenciaGeneradaDTO());
             return licenciaGeneradaDTO;
-            
         }catch(NoResultException nre){
-            
             JOptionPane.showMessageDialog(null, "No se encontró una placa con ese numero de placa");
             return null;
-            
         }
-        
     }
     
+    /**
+     * Metodo que busca una licencia por su id
+     * @param id
+     * @return la licencia encontrada null en caso contrario
+     */
     public LicenciaGeneradaDTO buscarLicenciaId(Long id){
-        
         try{
-            
             LicenciaEntidad licenicaEntidad = licenciaDAO.buscarLicenciaId(id);
             if(licenicaEntidad==null){
-                
                 return null;
-                
             }
             Convertidor convertidor = new Convertidor();
             LicenciaGeneradaDTO licenciaGeneradaDTO = convertidor.entityToDTO(licenicaEntidad, new LicenciaGeneradaDTO());
             return licenciaGeneradaDTO;
-            
         }catch(NoResultException nre){
-            
             JOptionPane.showMessageDialog(null, "No se encontró una placa con ese numero de placa");
             return null;
-            
         }
-        
     }
-    
 }
