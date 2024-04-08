@@ -271,11 +271,6 @@ public class JFrameTramitarLicencia extends javax.swing.JFrame {
             System.out.println("Uno de los dos esta vacio");
             
         }else{
-            System.out.println(licenciaNuevaDTO.getCosto());
-            System.out.println(licenciaNuevaDTO.getEstado());
-            System.out.println(licenciaNuevaDTO.getFechaTramite());
-            System.out.println(licenciaNuevaDTO.getFolio());
-            System.out.println(licenciaNuevaDTO.getVigencia());
             agregar.agregarLicenciaAPersona(persona, licenciaNuevaDTO);
             JOptionPane.showMessageDialog(this, "Se agregó correctamente la licencia a la persona con curp" + persona.getCurp(), "EXITO!!", JOptionPane.INFORMATION_MESSAGE);
             JFrameTramitar tramitar = new JFrameTramitar();

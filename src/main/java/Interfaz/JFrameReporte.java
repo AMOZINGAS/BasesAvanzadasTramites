@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import negocio.PersonaConsulta;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -147,6 +148,7 @@ public class JFrameReporte extends javax.swing.JFrame {
 
     public DefaultTableModel inicializarModel(){
         
+        PersonaConsulta personaConsulta = new PersonaConsulta();
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Fecha");
@@ -155,7 +157,7 @@ public class JFrameReporte extends javax.swing.JFrame {
         for(ReportePDF reportePDF: listaReporte){
             
             modelo.addRow(new Object[]{
-                reportePDF.getNombres(),
+                personaConsulta.desencriptar(reportePDF.getNombres()),
                 reportePDF.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + reportePDF.getFechaTramite().get(Calendar.MONTH) + "/" + reportePDF.getFechaTramite().get(Calendar.YEAR),
                 reportePDF.getTipo(),
                 reportePDF.getCosto()
