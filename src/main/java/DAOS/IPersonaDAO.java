@@ -12,6 +12,28 @@ import java.util.List;
 public interface IPersonaDAO {
     
     /**
+     * Metodo que regresa la clave de encriptacion
+     * @return clave
+     */
+    public int getClave();
+    
+    /**
+     * metodo que encripta un texto con una clave
+     * @param texto tipo string
+     * @param clave tipo int
+     * @return el nombre encriptado
+     */
+    public String encriptar(String texto, int clave);
+    
+    /**
+     * Metodo que desencripta los nombre
+     * @param textoEncriptado tipo string
+     * @param clave tipo int
+     * @return el texto desencriptado
+     */
+    public String desencriptar(String textoEncriptado, int clave);
+    
+    /**
      * Metodo que agrega a una persona a la base de datos
      * @param personaEntidad tipo persona entidad
      * @return la persona agregada
