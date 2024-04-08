@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 import DTO.PersonaGeneradaDTO;
@@ -15,7 +11,7 @@ import negocio.TramiteConsulta;
 
 /**
  *
- * @author elimo
+ * @author Amós Helí Olguín Quiróz
  */
 public class JFrameHistorial extends javax.swing.JFrame {
 

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 import controlador.TipoPlaca;
@@ -10,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author elimo
+ * @author Amós Helí Olguín Quiróz
  */
 public class JFrameTramitar extends javax.swing.JFrame {
 

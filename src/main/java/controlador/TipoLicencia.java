@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public enum TipoLicencia {
     
@@ -17,22 +13,24 @@ public enum TipoLicencia {
     private int descuento = 400;
     private int precio;
 
+    /**
+     * Metodo que setea el precio
+     * @param precio 
+     */
     private TipoLicencia(int precio) {
         this.precio = precio;
     }
 
+    /**
+     * Metodo que regresa el precio de la licencia
+     * @param dispacitado
+     * @return 
+     */
     public int getPrecio(boolean dispacitado) {
-        
         if(dispacitado){
-            
             return precio-descuento;
-            
         }else{
-            
             return precio;
-            
         }
-    
     }
-
 }

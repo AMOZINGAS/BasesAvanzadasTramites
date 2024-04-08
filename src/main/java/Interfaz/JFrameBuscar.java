@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 import DTO.PersonaGeneradaDTO;
@@ -14,11 +10,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import negocio.PersonaConsulta;
 
-
-
 /**
  *
- * @author elimo
+ * @author Amós Helí Olguín Quiróz
  */
 public class JFrameBuscar extends javax.swing.JFrame {
 

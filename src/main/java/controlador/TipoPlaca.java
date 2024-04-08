@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package controlador;
 
 /**
  *
- * @author elimo
+ * @author Amós Helí Olguín Quiróz
  */
-
-    
 public enum TipoPlaca {
     
     NUEVO(1500),
@@ -17,10 +11,18 @@ public enum TipoPlaca {
 
     private int precio;
 
+    /**
+     * Metodo que setea el precio de la placa
+     * @param precio 
+     */
     private TipoPlaca(int precio) {
         this.precio = precio;
     }
 
+    /**
+     * metodo que regresa el presio de la placa
+     * @return 
+     */
     public int getPrecio() {
         return precio;
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 import POJO.ReportePDF;
@@ -12,11 +8,10 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import negocio.TramiteConsulta;
-import org.apache.commons.collections4.list.AbstractLinkedList;
 
 /**
  *
- * @author PC
+ * @author Amós Helí Olguín Quiróz
  */
 public class JFrameEditarModelo extends javax.swing.JFrame {
 
