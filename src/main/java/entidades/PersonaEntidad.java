@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * 
+ * Clase de las personas entidad
  * @author Amós Helí Olguín Quiróz
  */
 @Entity

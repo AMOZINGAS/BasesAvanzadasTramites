@@ -16,7 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- * 
+ * Clase de la placa dao
  * @author Amós Helí Olguín Quiróz
  */
 public class PlacaDAO implements IPlacaDAO {

@@ -17,7 +17,7 @@ import javax.persistence.criteria.Root;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase del tramite dao
  * @author Amós Helí Olguín Quiróz
  */
 public class TramiteDAO implements ITramiteDAO{

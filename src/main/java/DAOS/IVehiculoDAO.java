@@ -6,7 +6,7 @@ import entidades.VehiculoEntidad;
 import java.util.List;
 
 /**
- *
+ * Clase de la Interfaz del vehiculo
  * @author Amós Helí Olguín Quiróz
  */
 public interface IVehiculoDAO {

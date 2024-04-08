@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- *
+ * Clase de la conexion a la base de datos
  * @author Amós Helí Olguín Quiróz
  */
 public class ConexionBD implements IConexionBD{

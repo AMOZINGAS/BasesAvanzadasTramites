@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase del vehiculo dao
  * @author Amós Helí Olguín Quiróz
  */
 public class VehiculoDAO implements IVehiculoDAO{

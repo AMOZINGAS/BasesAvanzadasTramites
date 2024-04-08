@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * 
+ * Clase de vehiculo entidad
  * @author Amós Helí Olguín Quiróz
  */
 @Entity

@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- *
+ * Clase de la persistir dao
  * @author Amós Helí Olguín Quiróz
  */
 public class PersistirDAO implements IPersistirDAO{

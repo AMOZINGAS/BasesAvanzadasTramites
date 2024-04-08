@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase de la persona dao
  * @author Amós Helí Olguín Quiróz
  */
 public class PersonaDAO implements IPersonaDAO {

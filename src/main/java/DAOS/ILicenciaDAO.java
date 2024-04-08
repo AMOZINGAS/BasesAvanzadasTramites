@@ -4,7 +4,7 @@ import entidades.LicenciaEntidad;
 import entidades.PersonaEntidad;
 import java.util.List;
 /**
- *
+ * Clase de la Interfaz de la licencia
  * @author Amós Helí Olguín Quiróz
  */
 public interface ILicenciaDAO {

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import javax.persistence.EntityManager;
 
 /**
- *
+ * Interfaz de la conexion
  * @author Amós Helí Olguín Quiróz
  */
 public interface IConexionBD {

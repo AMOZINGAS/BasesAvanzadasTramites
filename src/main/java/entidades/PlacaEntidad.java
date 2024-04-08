@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
- * 
+ * Clase de las placas entidad
  * @author Amós Helí Olguín Quiróz
  */
 @Entity

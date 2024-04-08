@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- *
+ * Clase de la Interfaz del tramite
  * @author Amós Helí Olguín Quiróz
  */
 public interface ITramiteDAO {

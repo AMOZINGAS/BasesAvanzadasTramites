@@ -1,7 +1,7 @@
 package DAOS;
 
 /**
- *
+ * Clase de la Interfaz de la Persistir
  * @author Amós Helí Olguín Quiróz
  */
 public interface IPersistirDAO {

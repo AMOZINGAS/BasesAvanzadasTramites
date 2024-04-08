@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
- * 
+ * Clase de las licencias entidad
  * @author Amós Helí Olguín Quiróz
  */
 @Entity

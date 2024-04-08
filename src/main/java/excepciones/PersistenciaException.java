@@ -1,5 +1,9 @@
 package excepciones;
 
+/**
+ * Clase para la persistencia
+ * @author Amós Helí Olguín Quiróz
+ */
 public class PersistenciaException extends RuntimeException{
 
     /**

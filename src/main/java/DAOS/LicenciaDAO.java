@@ -14,7 +14,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 /**
- * 
+ * Clase de la licencia dao
  * @author Amós Helí Olguín Quiróz
  */
 public class LicenciaDAO extends PersistenciaException implements ILicenciaDAO {

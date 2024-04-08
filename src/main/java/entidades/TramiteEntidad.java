@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * 
+ * Clase de Tramite entidad
  * @author Amós Helí Olguín Quiróz
  */
 @Entity
