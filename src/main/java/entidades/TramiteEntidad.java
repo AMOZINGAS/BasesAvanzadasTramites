@@ -55,11 +55,11 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * Constructor que inicializa los parametro
-     * @param costo
-     * @param fechaTramite
-     * @param persona
-     * @param estado
-     * @param tipo 
+     * @param costo tipo int
+     * @param fechaTramite tipo calendar
+     * @param persona tipo persona entidad
+     * @param estado tipo int
+     * @param tipo tipo string
      */
     public TramiteEntidad(int costo, Calendar fechaTramite, PersonaEntidad persona, int estado, String tipo) {
         
@@ -72,7 +72,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que regresa el tipo de tramite
-     * @return 
+     * @return tipo
      */
     public String getTipo() {
         return tipo;
@@ -80,7 +80,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que setea el tipo de tramite
-     * @param tipo 
+     * @param tipo tipo string
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
@@ -88,7 +88,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que regresa el costo del tramite
-     * @return 
+     * @return costo
      */
     public int getCosto() {
         return costo;
@@ -96,7 +96,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que regresa el estado del tramite
-     * @return 
+     * @return estado
      */
     public int getEstado() {
         return estado;
@@ -104,7 +104,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que setea el estado del tramite
-     * @param estado 
+     * @param estado tipo int
      */
     public void setEstado(int estado) {
         this.estado = estado;
@@ -112,7 +112,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que setea el costo del tramite
-     * @param costo 
+     * @param costo tipo int
      */
     public void setCosto(int costo) {
         this.costo = costo;
@@ -120,7 +120,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que regresa la fecha del tramite
-     * @return 
+     * @return fechatramite
      */
     public Calendar getFechaTramite() {
         return fechaTramite;
@@ -128,7 +128,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * meotod que setea la fecha del tramite
-     * @param fechaTramite 
+     * @param fechaTramite tipo calendar
      */
     public void setFechaTramite(Calendar fechaTramite) {
         this.fechaTramite = fechaTramite;
@@ -136,7 +136,7 @@ public abstract class TramiteEntidad implements Serializable {
     
     /**
      * metodo que regresa la persona que realizó el tramite
-     * @return 
+     * @return persona
      */
     public PersonaEntidad getPersona() {
         return persona;
@@ -144,7 +144,7 @@ public abstract class TramiteEntidad implements Serializable {
 
     /**
      * metodo que regresa el id del tramite
-     * @return 
+     * @return id
      */
     public Long getId() {
         return id;
@@ -152,7 +152,7 @@ public abstract class TramiteEntidad implements Serializable {
     
     /**
      * metodo que setea la persona que realizó el tramite
-     * @param cliente 
+     * @param cliente tipo cliente
      */
     public void setPersona(PersonaEntidad cliente) {
         this.persona = cliente;
@@ -160,7 +160,7 @@ public abstract class TramiteEntidad implements Serializable {
     
     /**
      * metodo que regresa una lista de cadenas con los valores de cada atrbuto
-     * @return 
+     * @return string
      */
     @Override
     public String toString() {

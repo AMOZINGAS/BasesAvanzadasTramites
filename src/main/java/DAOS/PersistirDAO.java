@@ -27,8 +27,8 @@ public class PersistirDAO implements IPersistirDAO{
     
     /**
      * Metodo que persiste una entidad generica a la base de datos
-     * @param <Entidad>
-     * @param entidad
+     * @param <Entidad> tipo generico
+     * @param entidad tipo generico
      * @return Una entidad generica que a sido persistida
      */
     @Override

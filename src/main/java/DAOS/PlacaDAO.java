@@ -44,8 +44,8 @@ public class PlacaDAO implements IPlacaDAO {
     
     /**
      * Metodo que agrega una referencia de un vehiculo a la placa
-     * @param vehiculoEntidad
-     * @param placaEntidad
+     * @param vehiculoEntidad tipo vehiculo entidad
+     * @param placaEntidad tipo placa entidad
      * @return la placa con la referencia del vehiculo
      */
     @Override
@@ -56,7 +56,7 @@ public class PlacaDAO implements IPlacaDAO {
 
     /**
      * Metodo que actualiza una placa dada como parametro
-     * @param placaEntidad
+     * @param placaEntidad tipo placa entidad
      * @return la placa actualizada
      */
     @Override
@@ -78,7 +78,7 @@ public class PlacaDAO implements IPlacaDAO {
 
     /**
      * Metodo que busca una placa por un numero de placa dado como parametro
-     * @param numeroPlaca
+     * @param numeroPlaca tipo string
      * @return la placa encontrada, null en caso contrario
      */
     @Override
@@ -96,10 +96,10 @@ public class PlacaDAO implements IPlacaDAO {
         }
     }
 
-    /**
+     /**
      * Metodo que genera una lista de placas de un vehiculo enviado como
      * parametro
-     * @param vehiculoEntidad
+     * @param vehiculoEntidad tipo vehiculo entidad
      * @return lista de las placas del vehiculo
      */
     @Override

@@ -12,7 +12,7 @@ public interface IConexionBD {
     /**
      * Metodo que regresa una conexion hacia la base de datos
      * @return EntityMnager para usarlo
-     * @throws SQLException 
+     * @throws SQLException regresa un throw
      */
     public EntityManager crearConexion() throws SQLException;
     

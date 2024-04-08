@@ -30,13 +30,13 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Constructor que inicializa los parametro
-     * @param numeroPlaca
-     * @param vehiculo
-     * @param fechaTramite
-     * @param costo
-     * @param persona
-     * @param estado
-     * @param tipo 
+     * @param numeroPlaca tipo string
+     * @param vehiculo tipo vehiculo entidad
+     * @param fechaTramite tipo calendar
+     * @param costo tipo int
+     * @param persona tipo persona entdiad
+     * @param estado tipo int
+     * @param tipo tipo string
      */
     public PlacaEntidad(String numeroPlaca, VehiculoEntidad vehiculo, Calendar fechaTramite, int costo, PersonaEntidad persona, int estado, String tipo) {
         super(costo, fechaTramite, persona, estado, tipo);
@@ -46,7 +46,7 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Metodo que regresa el vehiculo de la placa
-     * @return 
+     * @return  vehiculo
      */
     public VehiculoEntidad getVehiculo() {
         return vehiculo;
@@ -54,7 +54,7 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * metodo que setea el vehiculo de la placa
-     * @param vehiculo 
+     * @param vehiculo tipo vehiculo entidad
      */
     public void setVehiculo(VehiculoEntidad vehiculo) {
         this.vehiculo = vehiculo;
@@ -62,7 +62,7 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * metodo que regresa el numero de placa
-     * @return 
+     * @return numeroplaca
      */
     public String getNumeroPlaca() {
         return numeroPlaca;
@@ -70,7 +70,7 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * metodo que setea el numero de la placa
-     * @param numeroPlaca 
+     * @param numeroPlaca tipo string
      */
     public void setNumeroPlaca(String numeroPlaca) {
         this.numeroPlaca = numeroPlaca;
@@ -78,7 +78,7 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
     
     /**
      * metodo que regresa una lista de cadenas con los datso de cada atributo
-     * @return 
+     * @return string
      */
     @Override
     public String toString() {

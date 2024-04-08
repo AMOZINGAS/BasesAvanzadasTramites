@@ -68,13 +68,14 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Constructor que inicializa a persona para utilizar sus datos
-     * @param fechaNacimiento
-     * @param rfc
-     * @param curp
-     * @param telefono
-     * @param nombres
-     * @param apellidoPaterno
-     * @param apellidoMaterno 
+     * @param fechaNacimiento tipo calendar
+     * @param rfc tipo string
+     * @param curp tipo string
+     * @param discapacidad tipo boolean
+     * @param telefono tipo string
+     * @param nombres tipo string
+     * @param apellidoPaterno tipo string
+     * @param apellidoMaterno tipo string
      */
     public PersonaEntidad(Calendar fechaNacimiento, String rfc, String curp, boolean discapacidad, String telefono, String nombres, String apellidoPaterno, String apellidoMaterno) {
         this.fechaNacimiento = fechaNacimiento;
@@ -97,7 +98,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que regresa la discapacidad de la persona
-     * @return 
+     * @return  discapacidad
      */
     public boolean isDiscapacidad() {
         return discapacidad;
@@ -105,7 +106,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que setea la discapacidad de la persona
-     * @param discapacidad 
+     * @param discapacidad tipo boolean
      */
     public void setDiscapacidad(boolean discapacidad) {
         this.discapacidad = discapacidad;
@@ -113,7 +114,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que stetea el apellido paterno de la persona 
-     * @param apellidoPaterno 
+     * @param apellidoPaterno tipo string
      */
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
@@ -121,7 +122,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que regresa el apellido materno de la persona
-     * @return 
+     * @return apellido materno
      */
     public String getApellidoMaterno() {
         return apellidoMaterno;
@@ -129,7 +130,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que setea el apellido materno de la persona
-     * @param apellidoMaterno 
+     * @param apellidoMaterno tipo string
      */
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
@@ -137,7 +138,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que regresa las licencia de la persona 
-     * @return 
+     * @return licencia entidad
      */
     public List<LicenciaEntidad> getLicencia() {
         return licencia;
@@ -145,7 +146,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que setea las licencia de la persona
-     * @param licencia 
+     * @param licencia tipo licencia entidad
      */
     public void setLicencia(List<LicenciaEntidad> licencia) {
         this.licencia = licencia;
@@ -153,7 +154,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que regresa los tramites de la persona
-     * @return 
+     * @return tramite
      */
     public List<TramiteEntidad> getTramites() {
         return tramites;
@@ -161,7 +162,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que setea los tramites de las personas
-     * @param tramites 
+     * @param tramites tipo tramite entidad 
      */
     public void setTramites(List<TramiteEntidad> tramites) {
         this.tramites = tramites;
@@ -169,7 +170,7 @@ public class PersonaEntidad implements Serializable {
     
     /**
      * Metodo que regresa los vehiculos de la persona
-     * @return 
+     * @return vehiculo
      */
     public List<VehiculoEntidad> getVehiculo() {
         return vehiculo;
@@ -177,7 +178,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * Metodo que setea los vehiculos de la persona
-     * @param vehiculo 
+     * @param vehiculo tipo vehiculo entidad
      */
     public void setVehiculo(List<VehiculoEntidad> vehiculo) {
         this.vehiculo = vehiculo;
@@ -185,7 +186,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      *Metodo que regresa el id de la persona
-     * @return 
+     * @return idpersona
      */
     public Long getIdPersona() {
         return idPersona;
@@ -193,7 +194,7 @@ public class PersonaEntidad implements Serializable {
     
     /**
      * Metodo que regresa el rfc de la persona
-     * @return 
+     * @return rfc
      */
     public String getRfc() {
         return rfc;
@@ -201,7 +202,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que regresa el curp de la persona
-     * @return 
+     * @return curp
      */
     public String getCurp() {
         return curp;
@@ -209,7 +210,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que setea el curp de la persona
-     * @param curp 
+     * @param curp tipo string
      */
     public void setCurp(String curp) {
         this.curp = curp;
@@ -217,7 +218,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que setea el rfc de la persona
-     * @param rfc 
+     * @param rfc tipo string
      */
     public void setRfc(String rfc) {
         this.rfc = rfc;
@@ -225,7 +226,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que regresa el telefono de la persona
-     * @return 
+     * @return telefono
      */
     public String getTelefono() {
         return telefono;
@@ -233,7 +234,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que setea el telefono de la persoona
-     * @param telefono 
+     * @param telefono tipo string
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
@@ -241,7 +242,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que regresa la fecha de nacimiento de la persona
-     * @return 
+     * @return fechanacimiento
      */
     public Calendar getFechaNacimiento() {
         return fechaNacimiento;
@@ -249,7 +250,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que setea la fecha de nacimiento de la persona
-     * @param fechaNacimiento 
+     * @param fechaNacimiento tipo calendar
      */
     public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
@@ -257,7 +258,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que regresa los nombres de la persona
-     * @return 
+     * @return nombres
      */
     public String getNombres() {
         return nombres;
@@ -265,7 +266,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que setea los nombres de la persona
-     * @param nombres 
+     * @param nombres tipo string
      */
     public void setNombres(String nombres) {
         this.nombres = nombres;
@@ -273,7 +274,7 @@ public class PersonaEntidad implements Serializable {
     
     /**
      * metodo que regresa el hash de esta entidad
-     * @return hash
+     * @return hash 
      */
     @Override
     public int hashCode() {
@@ -284,7 +285,7 @@ public class PersonaEntidad implements Serializable {
 
     /**
      * metodo que compra objetos e identifica si son el mismo
-     * @param obj
+     * @param obj tipo object
      * @return true en caso de ser diferentes false en caso contrario
      */
     @Override

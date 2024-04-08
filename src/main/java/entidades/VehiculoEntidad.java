@@ -54,11 +54,11 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * Constructor que inicializa los parametro
-     * @param color
-     * @param linea
-     * @param marca
-     * @param modelo
-     * @param numSerie 
+     * @param color tipo string
+     * @param linea tipo string
+     * @param marca tipo string
+     * @param modelo tipo string
+     * @param numSerie tipo string
      */
     public VehiculoEntidad(String color, String linea, String marca, String modelo, String numSerie) {
         this.color = color;
@@ -70,7 +70,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que rergresa el color del vehiculo
-     * @return 
+     * @return color
      */
     public String getColor() {
         return color;
@@ -78,7 +78,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea el color del vehiculo
-     * @param color 
+     * @param color tipo string
      */
     public void setColor(String color) {
         this.color = color;
@@ -86,7 +86,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que regresa la linea dle vehiculo
-     * @return 
+     * @return linea
      */
     public String getLinea() {
         return linea;
@@ -94,7 +94,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea la linea del vehiculo
-     * @param linea 
+     * @param linea tipo string
      */
     public void setLinea(String linea) {
         this.linea = linea;
@@ -102,7 +102,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metro que regresa la marca del vehiculo
-     * @return 
+     * @return marca
      */
     public String getMarca() {
         return marca;
@@ -110,7 +110,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea la marca del vehiculo
-     * @param marca 
+     * @param marca tipo string
      */
     public void setMarca(String marca) {
         this.marca = marca;
@@ -118,7 +118,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que regresa el modelo del vehiculo 
-     * @return 
+     * @return modelo
      */
     public String getModelo() {
         return modelo;
@@ -126,7 +126,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea el modleo del vehciulo
-     * @param modelo 
+     * @param modelo tipo string
      */
     public void setModelo(String modelo) {
         this.modelo = modelo;
@@ -134,7 +134,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que regresa el numero de serie
-     * @return 
+     * @return numserie
      */
     public String getNumSerie() {
         return numSerie;
@@ -142,7 +142,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea el numero de serie
-     * @param numSerie 
+     * @param numSerie tipo string
      */
     public void setNumSerie(String numSerie) {
         this.numSerie = numSerie;
@@ -150,7 +150,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que regresa las placas del vehiculo
-     * @return 
+     * @return placas
      */
     public List<PlacaEntidad> getPlacas() {
         return placas;
@@ -158,7 +158,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea las placas del vehiculo
-     * @param placas 
+     * @param placas tipo placa entidad
      */
     public void setPlacas(List<PlacaEntidad> placas) {
         this.placas = placas;
@@ -166,7 +166,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que regresa la persona dueña del vehiculo
-     * @return 
+     * @return persona
      */
     public PersonaEntidad getPersona() {
         return persona;
@@ -174,7 +174,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que setea la persona dueña del vehiculo
-     * @param persona 
+     * @param persona tipo persona entidad
      */
     public void setPersona(PersonaEntidad persona) {
         this.persona = persona;
@@ -182,7 +182,7 @@ public class VehiculoEntidad implements Serializable {
 
     /**
      * metodo que regresa el id del vehiculo
-     * @return 
+     * @return idvehiculo
      */
     public Long getIdVehiculo() {
         return idVehiculo;

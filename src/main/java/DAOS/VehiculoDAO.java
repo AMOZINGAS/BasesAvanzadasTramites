@@ -36,10 +36,10 @@ public class VehiculoDAO implements IVehiculoDAO{
         }
     }
 
-    /**
+   /**
      * Metodo que genera una lista de vehiculos de una persona enviada como
      * parametro
-     * @param persona
+     * @param persona tipo persona entidad
      * @return lista de los vehiculos coincidentes
      */
     @Override
@@ -56,8 +56,8 @@ public class VehiculoDAO implements IVehiculoDAO{
     /**
      * Metodo que busca en una lista dada como parametro un vehiculo 
      * coincidente con el numero de serie dado como parametro
-     * @param listaVehiculos
-     * @param numeroSerie
+     * @param listaVehiculos tipo lista vehiculo entidad
+     * @param numeroSerie tipo string
      * @return el vehiculo coincidente, null en caso contrario
      */
     @Override
@@ -72,7 +72,7 @@ public class VehiculoDAO implements IVehiculoDAO{
     
     /**
      * Metodo que actualiza a un vehiculo dado como parametro
-     * @param vehicloEntidad
+     * @param vehicloEntidad tipo vehiculo entidad
      * @return el vehiculo actualizado
      */
     @Override
@@ -95,8 +95,8 @@ public class VehiculoDAO implements IVehiculoDAO{
     
     /**
      * Metodo que agrega una referencia de persona a un vehiculo
-     * @param vehiculoEntidad
-     * @param personaEntidad
+     * @param vehiculoEntidad tipo vehiculo entidad
+     * @param personaEntidad tipo persona entidad
      * @return el vehiculo con la referencia de la persona
      */
     @Override
@@ -107,7 +107,7 @@ public class VehiculoDAO implements IVehiculoDAO{
     
     /**
      * Metodo que busca un vehiculo por un numero de serie dado como parametro
-     * @param numeroSerie
+     * @param numeroSerie tipo string
      * @return el vehiculo coincidente, null en caso contrario
      */
     @Override
@@ -128,8 +128,8 @@ public class VehiculoDAO implements IVehiculoDAO{
     /**
      * Metodo que agrega una referencia de una placa a un vehiculo dado como
      * parametro
-     * @param placaEntidad
-     * @param vehiculoEntidad
+     * @param placaEntidad tipo placa entidad
+     * @param vehiculoEntidad tipo vehiculo entidadf
      * @return el vehiculo con la referencia de la placa
      */
     @Override

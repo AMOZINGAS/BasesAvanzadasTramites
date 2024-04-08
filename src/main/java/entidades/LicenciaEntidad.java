@@ -34,9 +34,9 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Constructor que inicializa los valores de los parametros
-     * @param vigencia
-     * @param folio
-     * @param personaLicencia 
+     * @param vigencia tipo int
+     * @param folio tipo int
+     * @param personaLicencia tipo persona entdiad 
      */
     public LicenciaEntidad(int vigencia, int folio, PersonaEntidad personaLicencia) {
         this.vigencia = vigencia;
@@ -46,7 +46,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Metodo que regresa la vigencia de la licencia 
-     * @return 
+     * @return  vigencia
      */
     public int getVigencia() {
         return vigencia;
@@ -54,7 +54,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Metodo que setea la vigencia de la licencia
-     * @param vigencia 
+     * @param vigencia tipo int
      */
     public void setVigencia(int vigencia) {
         this.vigencia = vigencia;
@@ -62,7 +62,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Metodo que setea el folio de la licencia
-     * @param folio 
+     * @param folio tipo int
      */
     public void setFolio(int folio) {
         this.folio = folio;
@@ -70,7 +70,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
     
     /**
      * Metodo que regresa el folio de la licencia
-     * @return 
+     * @return folio
      */
     public int getFolio() {
         return folio;
@@ -78,7 +78,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Metodo que regresa a la persona licencia
-     * @return 
+     * @return persona entidad
      */
     public PersonaEntidad getPersonaLicencia() {
         return personaLicencia;
@@ -86,7 +86,7 @@ public class LicenciaEntidad extends TramiteEntidad implements Serializable {
 
     /**
      * Metodo que setea a la persona licencia
-     * @param personaLicencia 
+     * @param personaLicencia tipo persona entidad
      */
     public void setPersonaLicencia(PersonaEntidad personaLicencia) {
         this.personaLicencia = personaLicencia;

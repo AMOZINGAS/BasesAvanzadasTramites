@@ -38,7 +38,7 @@ public class TramiteDAO implements ITramiteDAO{
 
     /**
      * Metodo que busca un tramite por su id dado como parametro
-     * @param id
+     * @param id tipo long
      * @return el tramite encontrado por id
      */
     @Override
@@ -63,9 +63,9 @@ public class TramiteDAO implements ITramiteDAO{
     }
 
     /**
-     * metod que busca el tipo de tramite por el id del mismo
-     * @param id
-     * @return el tipo del tramite encontrado
+     * Metodo que busca el tipo de tramite mediante el id del mismo
+     * @param id tipo long
+     * @return el tipo de tramite
      */
     @Override
     public String buscarTipoTramite(Long id) {
@@ -88,9 +88,9 @@ public class TramiteDAO implements ITramiteDAO{
     /**
      * Metodo que genera una lista de tramites de una persona en un periodo de 
      * fechas dados como parametro
-     * @param personaEntidad
-     * @param fechaHasta
-     * @param desde
+     * @param personaEntidad tipo persona entidad
+     * @param fechaHasta tipo Calendar
+     * @param fechaDesde tipo calnedar
      * @return la lista de los tramites coincidentes
      */
     @Override
@@ -112,10 +112,10 @@ public class TramiteDAO implements ITramiteDAO{
     /**
      * Metod que genera una lista de tramites de una persona en un periodo de 
      * fehcas y de un tipo de tramite dados como parametros
-     * @param personaEntidad
-     * @param tipo
-     * @param fechaHasta
-     * @param desde
+     * @param personaEntidad tipo persona entidad
+     * @param tipo tipo string
+     * @param fechaHasta tipo calendar
+     * @param fechaDesde tipo calendar
      * @return lista de las personas coincidentes
      */
     @Override
@@ -138,7 +138,7 @@ public class TramiteDAO implements ITramiteDAO{
     /**
      * Metod que genera una lista de los tramites coincidentes con el tipo 
      * dado como parametro
-     * @param tipo
+     * @param tipo tipo string
      * @return la lista de los tramites coincidentes con el tipo
      */
     @Override
@@ -153,6 +153,13 @@ public class TramiteDAO implements ITramiteDAO{
         return query.getResultList();
     }
 
+    /**
+     * Metodo que genera una lista de tramites en generar en un periodo de 
+     * fechas
+     * @param fechaHasta tipo calendar
+     * @param fechaDesde tipo calendar
+     * @return la lista de los tramites coincidentes 
+     */
     @Override
     public List<TramiteEntidad> listaTramiterFecha(Calendar fechaDesde, Calendar fechaHasta) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -168,10 +175,10 @@ public class TramiteDAO implements ITramiteDAO{
     }
 
     /**
-     * metodo que busca la lista de tramites que coincidan con el nombre de la
-     * persona dado como parametro
-     * @param nombre
-     * @return 
+     * Metodo que genera una lista de tramites en general de un nombre 
+     * encontrado
+     * @param nombre tipo string
+     * @return la lista de los tramites coincidentes
      */
     @Override
     public List<TramiteEntidad> listaTramiterNombre(String nombre) {
