@@ -147,21 +147,12 @@ public class LicenciaConsulta {
             LicenciaEntidad licenicaEntidad = licenciaDAO.buscarLicenciaId(id);
             if(licenicaEntidad==null){
                 return null;
-            }
-            LicenciaGeneradaDTO licenciaGeneradaDTO = new LicenciaGeneradaDTO();
-            licenciaGeneradaDTO.setCosto(licenicaEntidad.getCosto());
-            System.out.println("Costo: " + licenciaGeneradaDTO.getCosto());
-            licenciaGeneradaDTO.setEstado(licenicaEntidad.getEstado());
-            System.out.println("Estado: " + licenciaGeneradaDTO.getEstado());
-            licenciaGeneradaDTO.setFechaTramite(licenicaEntidad.getFechaTramite());
-            System.out.println("Fecha: " + licenciaGeneradaDTO.getFechaTramite());
-            licenciaGeneradaDTO.setFolio(licenicaEntidad.getFolio());
-            System.out.println("Folio: " + licenciaGeneradaDTO.getFolio());
-            licenciaGeneradaDTO.setId(licenicaEntidad.getId());
-            System.out.println("Id: " + licenciaGeneradaDTO.getId());
-            licenciaGeneradaDTO.setVigencia(licenicaEntidad.getVigencia());
-            System.out.println("Vigencia: " + licenciaGeneradaDTO.getVigencia());
+            }else{
+                LicenciaGeneradaDTO licenciaGeneradaDTO = new LicenciaGeneradaDTO(licenicaEntidad.getId(), licenicaEntidad.getVigencia(), licenicaEntidad.getFolio(), licenicaEntidad.getCosto(), licenicaEntidad.getFechaTramite(), licenicaEntidad.getEstado());
             return licenciaGeneradaDTO;
+                
+            }
+            
         }catch(NoResultException nre){
             JOptionPane.showMessageDialog(null, "No se encontró una placa con ese numero de placa");
             return null;

@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import modificadores.Convertidor;
 
 /**
@@ -250,16 +251,19 @@ public class TramiteConsulta {
      */
     public int vigenciaLicencia(TramiteDTO tramiteDTO){
         LicenciaConsulta licenciaConsulta = new LicenciaConsulta();
-        LicenciaGeneradaDTO licenciaGeneradaDTO = new LicenciaGeneradaDTO();
-        licenciaGeneradaDTO = licenciaConsulta.buscarLicenciaId(tramiteDTO.getIdTramite());
-        System.out.println("Costo: " + licenciaGeneradaDTO.getCosto());
-        System.out.println("Estado: " + licenciaGeneradaDTO.getEstado());
-        System.out.println("Fecha: " + licenciaGeneradaDTO.getFechaTramite());
-        System.out.println("Folio: " + licenciaGeneradaDTO.getFolio());
-        System.out.println("Id: " + licenciaGeneradaDTO.getId());
-        System.out.println("Vigencia: xxx" + licenciaGeneradaDTO.getVigencia());
-        int vigencia = licenciaGeneradaDTO.getVigencia();
+        LicenciaGeneradaDTO licenciaGeneradaDTO = licenciaConsulta.buscarLicenciaId(tramiteDTO.getIdTramite());
+        if(licenciaGeneradaDTO==null){
+            
+            JOptionPane.showMessageDialog(null, "No se encontró con un tramite", "ADVERTENCIA!!", JOptionPane.INFORMATION_MESSAGE);
+            return 0;
+        }else{
+            
+            LicenciaGeneradaDTO licenciaGeneradaDTO1 = new LicenciaGeneradaDTO(licenciaGeneradaDTO.getId(), licenciaGeneradaDTO.getVigencia(), licenciaGeneradaDTO.getFolio(), licenciaGeneradaDTO.getCosto(), licenciaGeneradaDTO.getFechaTramite(), licenciaGeneradaDTO.getEstado());
+        int vigencia = licenciaGeneradaDTO1.getVigencia();
         return vigencia;
+            
+        }
+        
     }
     
     /**
