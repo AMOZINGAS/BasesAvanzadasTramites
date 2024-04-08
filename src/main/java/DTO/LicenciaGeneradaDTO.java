@@ -46,6 +46,14 @@ public class LicenciaGeneradaDTO {
     public Long getId() {
         return id;
     }
+    
+    /**
+     * Metodo que setea el id
+     * @param id tipo long
+     */
+    public void setId(Long id){
+        this.id = id;
+    }
 
     /**
      * metodo que regresa la vigencia de a licencia

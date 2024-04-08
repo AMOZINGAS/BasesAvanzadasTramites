@@ -23,6 +23,7 @@ import modificadores.Convertidor;
  */
 public class PersonaConsulta {
     
+    private final int clave;
     private final IPersonaDAO personaDAO;
     
     /**
@@ -31,7 +32,7 @@ public class PersonaConsulta {
     public PersonaConsulta(){
         
         personaDAO = new PersonaDAO();
-    
+        clave = personaDAO.getClave();
     }
     
     /**
@@ -250,11 +251,8 @@ public class PersonaConsulta {
     public PersonaGeneradaDTO actualizarPersona(PersonaGeneradaDTO personaGeneradaDTO) throws PersistenceException{
         try{
             Convertidor convertidor = new Convertidor();
-            System.out.println("a");
             PersonaEntidad personaEntidad = personaDAO.buscarPorId(personaGeneradaDTO.getIdPersona());
-            System.out.println("a");
             personaDAO.actualizarPersona(personaEntidad);
-            System.out.println("a");
             return convertidor.entityToDTO(personaEntidad, new PersonaGeneradaDTO());
         }catch(PersistenceException px){
             JOptionPane.showMessageDialog(null, "Ocurrió un error al actualizar persona", "ERROR!!", JOptionPane.ERROR_MESSAGE);
@@ -276,6 +274,24 @@ public class PersonaConsulta {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Metodo que encripta el nombre
+     * @param nombre tipo string
+     * @return nombre encriptado
+     */
+    public String encriptar(String nombre){
+        return personaDAO.encriptar(nombre, clave);
+    }
+    
+    /**
+     * Metodo que regresa un nombre desencriptado
+     * @param nombre tipo string
+     * @return nombre desencriptado
+     */
+    public String desencriptar(String nombre){
+        return personaDAO.desencriptar(nombre, clave);
     }
     
     /**

@@ -250,8 +250,16 @@ public class TramiteConsulta {
      */
     public int vigenciaLicencia(TramiteDTO tramiteDTO){
         LicenciaConsulta licenciaConsulta = new LicenciaConsulta();
-        LicenciaGeneradaDTO licenciaGeneradaDTO = licenciaConsulta.buscarLicenciaId(tramiteDTO.getIdTramite());
-        return licenciaGeneradaDTO.getVigencia();
+        LicenciaGeneradaDTO licenciaGeneradaDTO = new LicenciaGeneradaDTO();
+        licenciaGeneradaDTO = licenciaConsulta.buscarLicenciaId(tramiteDTO.getIdTramite());
+        System.out.println("Costo: " + licenciaGeneradaDTO.getCosto());
+        System.out.println("Estado: " + licenciaGeneradaDTO.getEstado());
+        System.out.println("Fecha: " + licenciaGeneradaDTO.getFechaTramite());
+        System.out.println("Folio: " + licenciaGeneradaDTO.getFolio());
+        System.out.println("Id: " + licenciaGeneradaDTO.getId());
+        System.out.println("Vigencia: xxx" + licenciaGeneradaDTO.getVigencia());
+        int vigencia = licenciaGeneradaDTO.getVigencia();
+        return vigencia;
     }
     
     /**
