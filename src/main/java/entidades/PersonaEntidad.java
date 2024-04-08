@@ -87,114 +87,190 @@ public class PersonaEntidad implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    /**
+     * metodo que regresa el apellido paterno
+     * @return apellidoPaterno
+     */
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
 
+    /**
+     * Metodo que regresa la discapacidad de la persona
+     * @return 
+     */
     public boolean isDiscapacidad() {
         return discapacidad;
     }
 
+    /**
+     * Metodo que setea la discapacidad de la persona
+     * @param discapacidad 
+     */
     public void setDiscapacidad(boolean discapacidad) {
         this.discapacidad = discapacidad;
     }
 
+    /**
+     * Metodo que stetea el apellido paterno de la persona 
+     * @param apellidoPaterno 
+     */
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
 
+    /**
+     * Metodo que regresa el apellido materno de la persona
+     * @return 
+     */
     public String getApellidoMaterno() {
         return apellidoMaterno;
     }
 
+    /**
+     * Metodo que setea el apellido materno de la persona
+     * @param apellidoMaterno 
+     */
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    /**
+     * Metodo que regresa las licencia de la persona 
+     * @return 
+     */
     public List<LicenciaEntidad> getLicencia() {
         return licencia;
     }
 
+    /**
+     * Metodo que setea las licencia de la persona
+     * @param licencia 
+     */
     public void setLicencia(List<LicenciaEntidad> licencia) {
         this.licencia = licencia;
     }
 
+    /**
+     * Metodo que regresa los tramites de la persona
+     * @return 
+     */
     public List<TramiteEntidad> getTramites() {
         return tramites;
     }
 
+    /**
+     * Metodo que setea los tramites de las personas
+     * @param tramites 
+     */
     public void setTramites(List<TramiteEntidad> tramites) {
         this.tramites = tramites;
     }
     
+    /**
+     * Metodo que regresa los vehiculos de la persona
+     * @return 
+     */
     public List<VehiculoEntidad> getVehiculo() {
         return vehiculo;
     }
 
+    /**
+     * Metodo que setea los vehiculos de la persona
+     * @param vehiculo 
+     */
     public void setVehiculo(List<VehiculoEntidad> vehiculo) {
         this.vehiculo = vehiculo;
     }
 
+    /**
+     *Metodo que regresa el id de la persona
+     * @return 
+     */
     public Long getIdPersona() {
         return idPersona;
     }
     
+    /**
+     * Metodo que regresa el rfc de la persona
+     * @return 
+     */
     public String getRfc() {
         return rfc;
     }
 
+    /**
+     * metodo que regresa el curp de la persona
+     * @return 
+     */
     public String getCurp() {
         return curp;
     }
 
+    /**
+     * metodo que setea el curp de la persona
+     * @param curp 
+     */
     public void setCurp(String curp) {
         this.curp = curp;
     }
 
+    /**
+     * metodo que setea el rfc de la persona
+     * @param rfc 
+     */
     public void setRfc(String rfc) {
         this.rfc = rfc;
     }
 
+    /**
+     * metodo que regresa el telefono de la persona
+     * @return 
+     */
     public String getTelefono() {
         return telefono;
     }
 
+    /**
+     * metodo que setea el telefono de la persoona
+     * @param telefono 
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    /**
+     * metodo que regresa la fecha de nacimiento de la persona
+     * @return 
+     */
     public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     * metodo que setea la fecha de nacimiento de la persona
+     * @param fechaNacimiento 
+     */
     public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     * metodo que regresa los nombres de la persona
+     * @return 
+     */
     public String getNombres() {
         return nombres;
     }
 
+    /**
+     * metodo que setea los nombres de la persona
+     * @param nombres 
+     */
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
-
-    public String getApellido_paterno() {
-        return apellidoPaterno;
-    }
-
-    public void setApellido_paterno(String apellido_paterno) {
-        this.apellidoPaterno = apellido_paterno;
-    }
-
-    public String getApellido_materno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellido_materno(String apellido_materno) {
-        this.apellidoMaterno = apellido_materno;
-    }
-
+    
     /**
      * metodo que regresa el hash de esta entidad
      * @return hash

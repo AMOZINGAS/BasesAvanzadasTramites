@@ -44,22 +44,42 @@ public class PlacaEntidad extends TramiteEntidad implements Serializable {
         this.vehiculo = vehiculo;
     }
 
+    /**
+     * Metodo que regresa el vehiculo de la placa
+     * @return 
+     */
     public VehiculoEntidad getVehiculo() {
         return vehiculo;
     }
 
+    /**
+     * metodo que setea el vehiculo de la placa
+     * @param vehiculo 
+     */
     public void setVehiculo(VehiculoEntidad vehiculo) {
         this.vehiculo = vehiculo;
     }
 
+    /**
+     * metodo que regresa el numero de placa
+     * @return 
+     */
     public String getNumeroPlaca() {
         return numeroPlaca;
     }
 
+    /**
+     * metodo que setea el numero de la placa
+     * @param numeroPlaca 
+     */
     public void setNumeroPlaca(String numeroPlaca) {
         this.numeroPlaca = numeroPlaca;
     }
     
+    /**
+     * metodo que regresa una lista de cadenas con los datso de cada atributo
+     * @return 
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

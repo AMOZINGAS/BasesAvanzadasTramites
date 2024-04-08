@@ -68,62 +68,122 @@ public class VehiculoEntidad implements Serializable {
         this.numSerie = numSerie;
     }
 
+    /**
+     * metodo que rergresa el color del vehiculo
+     * @return 
+     */
     public String getColor() {
         return color;
     }
 
+    /**
+     * metodo que setea el color del vehiculo
+     * @param color 
+     */
     public void setColor(String color) {
         this.color = color;
     }
 
+    /**
+     * metodo que regresa la linea dle vehiculo
+     * @return 
+     */
     public String getLinea() {
         return linea;
     }
 
+    /**
+     * metodo que setea la linea del vehiculo
+     * @param linea 
+     */
     public void setLinea(String linea) {
         this.linea = linea;
     }
 
+    /**
+     * metro que regresa la marca del vehiculo
+     * @return 
+     */
     public String getMarca() {
         return marca;
     }
 
+    /**
+     * metodo que setea la marca del vehiculo
+     * @param marca 
+     */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
+    /**
+     * metodo que regresa el modelo del vehiculo 
+     * @return 
+     */
     public String getModelo() {
         return modelo;
     }
 
+    /**
+     * metodo que setea el modleo del vehciulo
+     * @param modelo 
+     */
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
 
+    /**
+     * metodo que regresa el numero de serie
+     * @return 
+     */
     public String getNumSerie() {
         return numSerie;
     }
 
+    /**
+     * metodo que setea el numero de serie
+     * @param numSerie 
+     */
     public void setNumSerie(String numSerie) {
         this.numSerie = numSerie;
     }
 
+    /**
+     * metodo que regresa las placas del vehiculo
+     * @return 
+     */
     public List<PlacaEntidad> getPlacas() {
         return placas;
     }
 
+    /**
+     * metodo que setea las placas del vehiculo
+     * @param placas 
+     */
     public void setPlacas(List<PlacaEntidad> placas) {
         this.placas = placas;
     }
 
+    /**
+     * metodo que regresa la persona dueña del vehiculo
+     * @return 
+     */
     public PersonaEntidad getPersona() {
         return persona;
     }
 
+    /**
+     * metodo que setea la persona dueña del vehiculo
+     * @param persona 
+     */
     public void setPersona(PersonaEntidad persona) {
         this.persona = persona;
     }
 
+    /**
+     * metodo que regresa el id del vehiculo
+     * @return 
+     */
     public Long getIdVehiculo() {
         return idVehiculo;
     }
@@ -144,7 +204,4 @@ public class VehiculoEntidad implements Serializable {
         sb.append('}');
         return sb.toString();
     }
-    
-    
-
 }

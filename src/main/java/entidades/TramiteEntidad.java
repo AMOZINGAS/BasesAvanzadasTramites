@@ -70,85 +70,107 @@ public abstract class TramiteEntidad implements Serializable {
         this.tipo = tipo;
     }
 
+    /**
+     * metodo que regresa el tipo de tramite
+     * @return 
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     * metodo que setea el tipo de tramite
+     * @param tipo 
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * metodo que regresa el costo del tramite
+     * @return 
+     */
     public int getCosto() {
         return costo;
     }
 
+    /**
+     * metodo que regresa el estado del tramite
+     * @return 
+     */
     public int getEstado() {
         return estado;
     }
 
+    /**
+     * metodo que setea el estado del tramite
+     * @param estado 
+     */
     public void setEstado(int estado) {
         this.estado = estado;
     }
 
+    /**
+     * metodo que setea el costo del tramite
+     * @param costo 
+     */
     public void setCosto(int costo) {
         this.costo = costo;
     }
 
+    /**
+     * metodo que regresa la fecha del tramite
+     * @return 
+     */
     public Calendar getFechaTramite() {
         return fechaTramite;
     }
 
+    /**
+     * meotod que setea la fecha del tramite
+     * @param fechaTramite 
+     */
     public void setFechaTramite(Calendar fechaTramite) {
         this.fechaTramite = fechaTramite;
     }
     
-
+    /**
+     * metodo que regresa la persona que realizó el tramite
+     * @return 
+     */
     public PersonaEntidad getPersona() {
         return persona;
     }
 
+    /**
+     * metodo que regresa el id del tramite
+     * @return 
+     */
     public Long getId() {
         return id;
     }
     
+    /**
+     * metodo que setea la persona que realizó el tramite
+     * @param cliente 
+     */
     public void setPersona(PersonaEntidad cliente) {
         this.persona = cliente;
     }
-
-
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (id != null ? id.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof TramiteEntidad)) {
-//            return false;
-//        }
-//        TramiteEntidad other = (TramiteEntidad) object;
-//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-//            return false;
-//        }
-//        return true;
-//    }
-
+    
+    /**
+     * metodo que regresa una lista de cadenas con los valores de cada atrbuto
+     * @return 
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("TramiteEntidad{");
         sb.append("id=").append(id);
         sb.append(", costo=").append(costo);
-//        sb.append(", tipoCobro=").append(tipoCobro);
         sb.append(", fechaNacimiento=").append(fechaTramite);
         sb.append(", cliente=").append(persona);
         sb.append('}');
         return sb.toString();
     }
-
-    
-
 }
