@@ -9,6 +9,7 @@ import DTO.VehiculoNuevoDTO;
 import controlador.TipoPlaca;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import negocio.PersonaConsulta;
@@ -179,11 +180,6 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         txtNombrePersona.setForeground(new java.awt.Color(0, 0, 0));
         txtNombrePersona.setToolTipText("");
         txtNombrePersona.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtNombrePersona.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNombrePersonaFocusLost(evt);
-            }
-        });
         txtNombrePersona.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombrePersonaKeyReleased(evt);
@@ -270,10 +266,16 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnioActionPerformed
 
-    private void txtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioKeyReleased
-        // TODO add your handling code here:
+    public boolean sinCaracteresEspecialesNiLetras(String texto){
         
-        if(!txtAnio.getText().matches("\\d+")){
+        Pattern patron = Pattern.compile("[^0-9]");
+        return !patron.matcher(texto).find();
+        
+    }
+    
+    private void txtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnioKeyReleased
+        // TODO add your handling code here
+        if(!sinCaracteresEspecialesNiLetras(txtAnio.getText())){
             
             JOptionPane.showMessageDialog(this, "Solo se permiten numeros", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             txtAnio.setText("");
@@ -317,14 +319,6 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         
     }
     
-    private void txtNombrePersonaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombrePersonaFocusLost
-        // TODO add your handling code here:
-        
-        System.out.println("a");
-        cargarComboBox();
-        
-    }//GEN-LAST:event_txtNombrePersonaFocusLost
-
     public void agregarVehiculoAPersona(VehiculoNuevoDTO vehiculoNuevoDTO, PersonaGeneradaDTO personaGeneradaDTO){
         
         PersonaVehiculoAgregar personaVehiculoConsulta = new PersonaVehiculoAgregar();
@@ -332,23 +326,27 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         
     }
     
+    public boolean sinCaracteresEspecialesNiNumeros(String texto){
+        
+        String regex = "[^a-zA-Z\\s]";
+        if (texto.matches(".*" + regex + ".*")) {
+            return false;
+        } else {
+            return true;
+        }
+        
+    }
+    
     public boolean sinCaracteresEspeciales(String texto){
         
-        if(!texto.matches("^[a-zA-Z ]+$")){
-            
-            return false;
-            
-        }else{
-            
-            return true;
-            
-        }
+        Pattern patron = Pattern.compile("[^a-zA-Z0-9\\s]");
+        return !patron.matcher(texto).find();
         
     }
     
     private void txtColorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyReleased
         // TODO add your handling code here:
-        if(!sinCaracteresEspeciales(txtColor.getText())){
+        if(!sinCaracteresEspecialesNiNumeros(txtColor.getText())){
             
             JOptionPane.showMessageDialog(this, "Solo se permiten letras", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             txtColor.setText("");
@@ -368,7 +366,7 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
         
         if(!sinCaracteresEspeciales(txtLinea.getText())){
             
-            JOptionPane.showMessageDialog(this, "Solo se permiten letras", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Solo se permiten letras o numeros", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             txtLinea.setText("");
             
         }
@@ -378,7 +376,7 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
     private void txtMarcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyReleased
         // TODO add your handling code here:
         
-        if(!sinCaracteresEspeciales(txtMarca.getText())){
+        if(!sinCaracteresEspecialesNiNumeros(txtMarca.getText())){
             
             JOptionPane.showMessageDialog(this, "Solo se permiten letras", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             txtMarca.setText("");
@@ -390,10 +388,14 @@ public class JFrameAgregarVehiculo extends javax.swing.JFrame {
     private void txtNombrePersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePersonaKeyReleased
         // TODO add your handling code here:
         
-        if(!sinCaracteresEspeciales(txtNombrePersona.getText())){
+        if(!sinCaracteresEspecialesNiNumeros(txtNombrePersona.getText())){
             
             JOptionPane.showMessageDialog(this, "Solo se permiten letras", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             txtNombrePersona.setText("");
+            
+        }else{
+            
+            cargarComboBox();
             
         }
         

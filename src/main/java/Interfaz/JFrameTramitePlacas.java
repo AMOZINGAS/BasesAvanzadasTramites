@@ -340,7 +340,8 @@ public class JFrameTramitePlacas extends javax.swing.JFrame {
     public PlacaNuevaDTO inicializarPlaca(){
         
         PlacaConsulta placaConsulta = new PlacaConsulta();
-        placaNuevaDTO = new PlacaNuevaDTO(costo, placaConsulta.generarPlaca(), Calendar.getInstance());
+        int costoFinal = tipo.getPrecio();
+        placaNuevaDTO = new PlacaNuevaDTO(costoFinal, placaConsulta.generarPlaca(), Calendar.getInstance());
         return placaNuevaDTO;
         
     }
