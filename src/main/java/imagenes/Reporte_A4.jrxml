@@ -33,7 +33,7 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="nombres" class="java.lang.String"/>
+		<field name="nombreDeEncriptado" class="java.lang.String"/>
 		<field name="fechaTramiteDate" class="java.util.Date"/>
 		<field name="tipo" class="java.lang.String"/>
 		<field name="costo" class="java.lang.Integer"/>
@@ -108,7 +108,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="6455f352-7226-4d7c-b356-2725a994da05"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{nombreDeEncriptado}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

@@ -9,7 +9,7 @@ import negocio.PersonaConsulta;
 
 /**
  *
- * @author Amós Helí Olguín Quiróz
+ * @author Amós Hel í Olguín Quiróz
  */
 public class JFrameAgregarPersona extends javax.swing.JFrame {
 
