@@ -69,17 +69,22 @@ public class TramiteDAO implements ITramiteDAO{
      */
     @Override
     public String buscarTipoTramite(Long id) {
-        try{
-            entityManager.find(LicenciaEntidad.class, id);
+        
+        LicenciaEntidad licencia = entityManager.find(LicenciaEntidad.class, id);
+        PlacaEntidad placa = entityManager.find(PlacaEntidad.class, id);
+        if(licencia!=null){
+            
             return "LicenciaEntidad";
-        }catch(PersistenciaException pex){
-            try{
-                entityManager.find(PlacaEntidad.class, id);
-                return "PlacaEntidad";
-            }catch(PersistenciaException pex2){
-                JOptionPane.showMessageDialog(null, "No se encontro ningun tramite con ese id", "ERROR!!", JOptionPane.ERROR_MESSAGE);
-                return null;
-            }
+            
+        }else if(placa!=null){
+            
+            return "PlacaEntidad";
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(null, "No se encontro ningun tramite con ese id", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+            return null;
+            
         }
     }
     
