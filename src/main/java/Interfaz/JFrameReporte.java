@@ -31,7 +31,6 @@ import net.sf.jasperreports.view.JasperViewer;
 public class JFrameReporte extends javax.swing.JFrame {
 
     List<ReportePDF> listaReporte;
-    private final String nombreArchivoSalida = "ReporteTramites.pdf";
     
     /**
      * Creates new form JFrameReporte
@@ -158,7 +157,7 @@ public class JFrameReporte extends javax.swing.JFrame {
             
             modelo.addRow(new Object[]{
                 personaConsulta.desencriptar(reportePDF.getNombres()),
-                reportePDF.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + reportePDF.getFechaTramite().get(Calendar.MONTH) + "/" + reportePDF.getFechaTramite().get(Calendar.YEAR),
+                reportePDF.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + (reportePDF.getFechaTramite().get(Calendar.MONTH)+1) + "/" + reportePDF.getFechaTramite().get(Calendar.YEAR),
                 reportePDF.getTipo(),
                 reportePDF.getCosto()
             });

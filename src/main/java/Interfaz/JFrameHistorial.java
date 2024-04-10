@@ -226,7 +226,6 @@ public class JFrameHistorial extends javax.swing.JFrame {
         String estado;
         String fechaVencimiento = "";
         String descripcionTipo = "";
-        TramiteConsulta tramiteConsulta = new TramiteConsulta();
             
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Tipo");
@@ -253,38 +252,15 @@ public class JFrameHistorial extends javax.swing.JFrame {
           
             if(tipo==0){
                 
-                if(tramite.getTipo().equalsIgnoreCase("LicenciaEntidad")){
-                    
-                    descripcionTipo="Licencia";
-                    
-                }else{
-                    
-                    descripcionTipo="Placa";
-                    
-                }
+                descripcionTipo = saberTipo(tramite);
                 
             }
-            if(tramite.getEstado()==0){
-                
-                estado = "Inactivo";
-                
-            }else{
-                
-                estado = "Activo";
-                
-            }
-            if(tramite.getTipo().equalsIgnoreCase("LicenciaEntidad")){
-                
-                fechaVencimiento="" + tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + tramite.getFechaTramite().get(Calendar.MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.YEAR) + tramiteConsulta.vigenciaLicencia(tramite));
-                
-            }else if(tramite.getTipo().equalsIgnoreCase("PlacaEntidad")){
-                
-                fechaVencimiento="" + tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + tramite.getFechaTramite().get(Calendar.MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.YEAR) + 1);
-                
-            }
+            estado = saberEstado(tramite);
+            fechaVencimiento = saberFechaVencimiento(tramite);
+            String fechaModelada = modelarFecha(tramite);
             modelo.addRow(new Object[]{
                 descripcionTipo,
-                tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + tramite.getFechaTramite().get(Calendar.MONTH) + "/" + tramite.getFechaTramite().get(Calendar.YEAR),
+                fechaModelada,
                 fechaVencimiento,
                 "$"+tramite.getCosto(),
                 estado
@@ -292,6 +268,59 @@ public class JFrameHistorial extends javax.swing.JFrame {
         }
         
         return modelo;
+        
+    }
+    
+    public String modelarFecha(TramiteDTO tramite){
+        
+        return tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.MONTH)+1) + "/" + tramite.getFechaTramite().get(Calendar.YEAR);
+                
+        
+    }
+    
+    public String saberTipo(TramiteDTO tramite){
+        
+        if(tramite.getTipo().equalsIgnoreCase("LicenciaEntidad")){
+                    
+            return "Licencia";
+
+        }else{
+
+            return "Placa";
+
+        }
+        
+    }
+    
+    public String saberEstado(TramiteDTO tramite){
+        
+        if(tramite.getEstado()==0){
+                
+            return "Inactivo";
+
+        }else{
+
+            return "Activo";
+
+        }
+        
+    }
+    
+    public String saberFechaVencimiento(TramiteDTO tramite){
+        
+        TramiteConsulta tramiteConsulta = new TramiteConsulta();
+        
+        if(tramite.getTipo().equalsIgnoreCase("LicenciaEntidad")){
+                
+            return tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.MONTH)+1) + "/" + (tramite.getFechaTramite().get(Calendar.YEAR) + tramiteConsulta.vigenciaLicencia(tramite));
+
+        }
+        if(tramite.getTipo().equalsIgnoreCase("PlacaEntidad")){
+
+            return tramite.getFechaTramite().get(Calendar.DAY_OF_MONTH) + "/" + (tramite.getFechaTramite().get(Calendar.MONTH)+1) + "/" + (tramite.getFechaTramite().get(Calendar.YEAR) + 1);
+
+        }
+        return null;
         
     }
 
