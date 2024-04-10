@@ -3,6 +3,7 @@ package POJO;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import negocio.PersonaConsulta;
 
 /**
  *
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class ReportePDF {
     
     private String nombres;
+    private String nombreDeEncriptado;
     private Calendar fechaTramite;
     private String tipo;
     private int costo;
@@ -24,9 +26,11 @@ public class ReportePDF {
      * @param costo 
      */
     public ReportePDF(String nombres, Calendar fechaTramite, String tipo, int costo) {
+        PersonaConsulta persona = new PersonaConsulta();
         this.nombres = nombres;
         this.fechaTramite = fechaTramite;
         this.fechaTramiteDate = fechaTramite.getTime();
+        this.nombreDeEncriptado = persona.desencriptar(nombres);
         this.tipo = tipo;
         this.costo = costo;
     }
@@ -67,6 +71,23 @@ public class ReportePDF {
      */
     public Date getFechaTramiteDate(){
         return fechaTramite.getTime();
+    }
+
+    /**
+     * metodo que regresa el nombre desencriptado para jasperreport
+     * @return 
+     */
+    public String getNombreDeEncriptado() {
+        PersonaConsulta persona = new PersonaConsulta();
+        return persona.desencriptar(nombres);
+    }
+
+    /**
+     * Metodo que setea el nombre desencriptado del reporte
+     * @param nombreDeEncriptado 
+     */
+    public void setNombreDeEncriptado(String nombreDeEncriptado) {
+        this.nombreDeEncriptado = nombreDeEncriptado;
     }
     
     /**
