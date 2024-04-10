@@ -71,7 +71,7 @@ public class ReportePDF {
      */
     public Date getFechaTramiteDate(){
         return fechaTramite.getTime();
-    }
+    } 
 
     /**
      * metodo que regresa el nombre desencriptado para jasperreport
